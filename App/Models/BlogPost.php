@@ -1,7 +1,5 @@
 <?php
 
-require_once('Error.php');
-
 class BlogPost
 {
     protected $id;
@@ -47,34 +45,48 @@ class BlogPost
         if ( $id > 0 ){
             $this->id = $id;
         } else{
-            // ErrorTest::errorMessage(__FUNCTION__);
-            throw new Exception("Error Processing Request" . $function, 1);
-            die($e->getMessage());
+            throw new Exception('$id must be an integer > 0');
         }
     }
 
-    public function setAuthor($author)
+    public function setAuthor(String $author)
+    {
+        $author = htmlspecialchars($author);
+        if ( strlen($author) <= 100 ){
+            $this->author = $author;
+        }else{
+            throw new Exception('$author must be <= 100 character');
+        }
+    }
+
+    public function setTitle(String $title)
+    {
+        $title = htmlspecialchars($title);
+        if ( strlen($title) <= 100 ){
+            $this->title = $title;
+        }else{
+            throw new Exception('$title must be <= 100 character');
+        }
+    }
+
+    public function setPost(String $post)
+    {
+        $post = htmlspecialchars($post);
+        $this->post = $post;
+    }
+
+    public function setDatePost(Date $DatePost)
     {
 
     }
 
-    public function setTitle($title)
+    public function setBook(String $book)
     {
-
-    }
-
-    public function setPost($post)
-    {
-
-    }
-
-    public function setDatePost($DatePost)
-    {
-
-    }
-
-    public function setBook($book)
-    {
-
+        $book = htmlspecialchars($book);
+        if ( strlen($book) <= 100 ){
+            $this->book = $book;
+        }else{
+            throw new Exception('$book must be <= 100 character');
+        }
     }
 }
