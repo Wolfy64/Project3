@@ -1,10 +1,13 @@
 <?php
 
+require_once('PDOFactory.php');
+require_once('BlogPost.php');
+
 /**
  *
  *
  */
-class PDOManager
+class BlogPostManager
 {
     public $db;
 
@@ -30,9 +33,15 @@ class PDOManager
      */
     public function read()
     {
-        $db = $this->db;
-        $answer = $db->query('SELECT * FROM Blog');
-        $data = $answer->fetch();
+        $blogPost = [];
+        $dbh = $this->db->query('SELECT * FROM Blog'); // Database Handle
+        $dbh->execute();
+
+        while ($data = $dbh->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = new blogPost($data);
+        }
+        return $blogPost;
+
     }
 
     /**

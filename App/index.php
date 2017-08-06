@@ -1,17 +1,22 @@
 <?php
 
-require_once('Models/PDOFactory.php');
-require_once('Models/PDOManager.php');
-
-$manager = new PDOManager;
-$manager->read();
-
 if ( isset($_GET['controller']) && isset($_GET['action']) ){
     $controller = htmlspecialchars($_GET['controller']);
-    $action     = htmlspecialchars($_GET['action']);
+    // $action = htmlspecialchars($_GET['action']);
 } else{
-    $controller = 'page';
-    $action     = 'home';
+    $controller = 'home';
+    // $action = 'home';
 }
 
-require_once('Views/layout.php');
+switch ($controller) {
+    case 'home':
+        require_once('Controllers/Home.php');
+        break;
+
+    case 'admin':
+        require_once('Controllers/Admin.php');
+    
+    default:
+        require_once('Views/404.php');
+        break;
+}

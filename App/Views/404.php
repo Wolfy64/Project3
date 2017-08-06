@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>404</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
     </head>
-    <header>
-        
-    </header>
     <body>
-        <h1>Hello World</h1>
+        <h1>Page 404</h1>    
     </body>
-
-    <footer>
-        
-    </footer>
 </html>
