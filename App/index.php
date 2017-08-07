@@ -15,6 +15,7 @@ switch ($controller) {
 
     case 'admin':
         require_once('Controllers/Admin.php');
+        break;
     
     default:
         require_once('Views/404.php');

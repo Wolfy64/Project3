@@ -5,19 +5,16 @@ class BlogPost
     protected $id;
     protected $author;
     protected $title;
-    protected $post;
+    protected $postBlog;
     protected $datePost;
     protected $book;
 
-    protected $error = [];
-
-    // public function __construct(){ $this->hydrate($data); }
+    public function __construct($data){ $this->hydrate($data); }
 
     public function hydrate(array $data)
     {
         foreach ( $data as $key => $value ){
             $method = 'set' . ucfirst($key);
-    
             if ( method_exists($this, $method) ){
                  $this->$method($value);
             }
@@ -69,15 +66,15 @@ class BlogPost
         }
     }
 
-    public function setPost(String $post)
+    public function setPostBlog(String $postBlog)
     {
-        $post = htmlspecialchars($post);
-        $this->post = $post;
+        $postBlog = htmlspecialchars($postBlog);
+        $this->postBlog = $postBlog;
     }
 
-    public function setDatePost(Date $DatePost)
+    public function setDatePost(String $datePost) // TO CHECK Paramater String OR Date!!!
     {
-
+        $this->datePost = $datePost;
     }
 
     public function setBook(String $book)

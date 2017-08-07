@@ -7,13 +7,30 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <header>
-        
+        <p>
+            <a href="#">Connexion</a>        
+        </p>
     </header>
     <body>
-        <h1>Hello World</h1>
+        <h1>Jean Forteroche's Blog</h1>
+        <div>
+            <p>Presentation Blablabla</p>
+        </div>
+        <div>
+            <p>
+                <a href="#">Book Link</a>
+            </p>
+        </div>
     </body>
 
     <footer>
-        
+        <p>
+            <ul>
+                <li>Contact</li>
+                <li>Facebook</li>
+                <li>Tweeter</li>
+                <li>Infos</li>
+            </ul>
+        </p>
     </footer>
 </html>

@@ -7,7 +7,7 @@ require_once('BlogPost.php');
  *
  *
  */
-class BlogPostManager
+class BlogPostManager extends BlogPost
 {
     public $db;
 
@@ -16,11 +16,11 @@ class BlogPostManager
         $this->db = PDOFactory::getMysqlConnexion();
     }
 
-    // CRUD
+    // CRUD SYSTEM
 
     /**
-     * 
-     *
+     * @param void
+     * @return void
      */
     public function create()
     {
@@ -33,15 +33,12 @@ class BlogPostManager
      */
     public function read()
     {
-        $blogPost = [];
+        $posts = [];
         $dbh = $this->db->query('SELECT * FROM Blog'); // Database Handle
-        $dbh->execute();
-
-        while ($data = $dbh->fetch(PDO::FETCH_ASSOC)) {
-            $data[] = new blogPost($data);
+        while($data = $dbh->fetch(PDO::FETCH_ASSOC)){
+            $posts[] = new BlogPost($data);
         }
-        return $blogPost;
-
+        return $posts;
     }
 
     /**
@@ -61,6 +58,8 @@ class BlogPostManager
     {
 
     }
+
+    // METHOD
 
     public  function count()
     {
