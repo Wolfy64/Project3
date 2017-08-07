@@ -5,9 +5,8 @@ class BlogPost
     protected $id;
     protected $author;
     protected $title;
-    protected $postBlog;
-    protected $datePost;
-    protected $book;
+    protected $contents;
+    protected $dateContents;
 
     public function __construct($data){ $this->hydrate($data); }
 
@@ -29,11 +28,9 @@ class BlogPost
 
     public function getTitle(){ return $this->title; }
 
-    public function getPost(){ return $this->post; }
+    public function getContents(){ return $this->contents; }
 
-    public function getDatePost(){ return $this->post; }
-
-    public function getBook(){ return $this->book; }
+    public function getDateContents(){ return $this->dateContents; }
 
     // SETTERS
 
@@ -66,24 +63,14 @@ class BlogPost
         }
     }
 
-    public function setPostBlog(String $postBlog)
+    public function setcontents(String $contents)
     {
-        $postBlog = htmlspecialchars($postBlog);
-        $this->postBlog = $postBlog;
+        $contents = htmlspecialchars($contents);
+        $this->contents = $contents;
     }
 
-    public function setDatePost(String $datePost) // TO CHECK Paramater String OR Date!!!
+    public function setDateContents(String $dateContents) // TO CHECK Paramater String OR Date!!!
     {
-        $this->datePost = $datePost;
-    }
-
-    public function setBook(String $book)
-    {
-        $book = htmlspecialchars($book);
-        if ( strlen($book) <= 100 ){
-            $this->book = $book;
-        }else{
-            throw new Exception('$book must be <= 100 character');
-        }
+        $this->dateContents = $dateContents;
     }
 }

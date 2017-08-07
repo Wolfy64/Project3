@@ -34,7 +34,7 @@ class BlogPostManager extends BlogPost
     public function read()
     {
         $posts = [];
-        $dbh = $this->db->query('SELECT * FROM Blog'); // Database Handle
+        $dbh = $this->db->query('SELECT * FROM blogAlaska'); // Database Handle
         while($data = $dbh->fetch(PDO::FETCH_ASSOC)){
             $posts[] = new BlogPost($data);
         }
