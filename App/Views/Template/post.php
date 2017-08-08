@@ -1,7 +1,8 @@
-<?php $this->title = 'Mon Blog - '?>
+<?php $this->title = 'Mon Blog - ' . $title ?>
 
 <article>
-    <h1> <?= $post['title'] ?> </h1>
+    <h1> <?= $this->title ?> </h1>
+    <?= $contents ?>
     <time> <?= $post['dateContents'] ?> </time>
     <p> <?= $post['contents'] ?> </p>
 </article>
@@ -11,6 +12,3 @@
     <p> <?= $comment['author'] ?></p>
     <p> <?= $comment['contents'] ?></p>
 <?php endforeach; ?>
-
-
-<?php require_once('layout.php'); ?>

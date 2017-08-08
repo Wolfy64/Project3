@@ -25,7 +25,7 @@
         <p>Presentation Blablabla</p>
     </div>
     <div>
-        <?= $this->contents ?>
+        <?= $contents ?>
     </div>
     <div>
         <p>

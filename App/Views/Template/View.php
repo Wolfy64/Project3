@@ -35,7 +35,6 @@ class View
             ob_start();
             // Inclut le fichier vue
             // Son résultat est placé dans le tampon de sortie
-            var_dump($file);
             require $file;
             // Arrêt de la temporisation et renvoi du tampon de sortie
             return ob_get_clean();

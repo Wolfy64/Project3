@@ -10,7 +10,7 @@ abstract class Model
         if ($params == null) {
             $result = $this->getDb()->query($sql); // exécution directe    
         }else {
-            $result = $this->getDbd()->prepare($sql);  // requête préparée
+            $result = $this->getDb()->prepare($sql);  // requête préparée
             $result->execute($params);
         }
         return $result;
@@ -20,8 +20,8 @@ abstract class Model
     private function getDb() {
         if ($this->db == null) {
         // Création de la connexion
-        $this->bd = PDOFactory::getMysqlConnexion();
+        $this->db = PDOFactory::getMysqlConnexion();
         }
-        return $this->bd;
+        return $this->db;
     }
 }

@@ -15,5 +15,3 @@
 </article>
 
 <?php endforeach; ?>
-
-<?php require_once('Views/Template/layout.php'); ?>
