@@ -1,34 +1,27 @@
 <?php
-require_once('PDOFactory.php');
+require_once('Database/PDOFactory.php');
 
+abstract class Model
+{
+    private $db;
 
-function getPostList(){
-    $database = getDb();
-    $blogPostList = $database->query('SELECT * FROM blogAlaska ');  
-    return $blogPostList;
-}
+    // Exécute une requête SQL éventuellement paramétrée
+    protected function executeRequest($sql, $params = null) {
+        if ($params == null) {
+            $result = $this->getDb()->query($sql); // exécution directe    
+        }else {
+            $result = $this->getDbd()->prepare($sql);  // requête préparée
+            $result->execute($params);
+        }
+        return $result;
+    }
 
-function getDb(){
-    return PDOFactory::getMysqlConnexion();
-}
-
-function getComments($idPost){
-    $database = getDb();
-    $comments = $database->prepare('SELECT * FROM commentsBlogAlaska WHERE id=?');
-    $comments->execute(array($idPost));
-    return $comments;
-}
-
-function getPost($idPost){
-    $database = getDb();
-    $blogPost = $database->prepare('SELECT * FROM blogAlaska WHERE id=?');  
-    $blogPost->execute(array($idPost));
-    if ( $blogPost->rowCount() == 1 ){
-        return $blogPost->fetch();
-    }else{
-        throw new Exception("Aucun billet ne correspond à l'identifiant '$idPost'");
-}
-
-
-
+    // Renvoie un objet de connexion à la BD en initialisant la connexion au besoin
+    private function getDb() {
+        if ($this->db == null) {
+        // Création de la connexion
+        $this->bd = PDOFactory::getMysqlConnexion();
+        }
+        return $this->bd;
+    }
 }

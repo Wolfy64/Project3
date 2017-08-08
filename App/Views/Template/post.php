@@ -1,5 +1,5 @@
-<?php $title = 'Mon Blog - '?>
-<?php ob_start(); ?>
+<?php $this->title = 'Mon Blog - '?>
+
 <article>
     <h1> <?= $post['title'] ?> </h1>
     <time> <?= $post['dateContents'] ?> </time>
@@ -11,6 +11,6 @@
     <p> <?= $comment['author'] ?></p>
     <p> <?= $comment['contents'] ?></p>
 <?php endforeach; ?>
-<?php $contents = ob_get_clean() ?>
+
 
 <?php require_once('layout.php'); ?>
