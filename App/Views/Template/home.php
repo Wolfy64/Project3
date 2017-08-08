@@ -1,10 +1,12 @@
-<?php $title = 'Jean Forteroche\'s Blog'; ?>
+<?php $title = 'Jean Forteroche\'s Blog - '?>
 
 <?php ob_start(); ?>
 
-<?php foreach( $blogPost as $post ): ?>
+<?php foreach( $blogPostList as $post ): ?>
 <article>
-    <h1> <?= $post['title'] ?> </h1>
+    <a href=" <?= 'index.php?action=post&id=' . $post['id'] ?>" >  
+        <h1> <?= $post['title'] ?> </h1>
+    </a> 
     <time> <?= $post['dateContents'] ?> </time>
     <p> <?= $post['contents'] ?> </p>    
 </article>
