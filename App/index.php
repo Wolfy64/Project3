@@ -1,17 +1,14 @@
 <?php
 
 require_once 'Controllers/Router.php';
+require_once 'Views/About.php';
 
 $router = new Router();
 
-$router->add('home');
-$router->add('about');
-$router->add('contact');
+$router->add('home', 'Home');
+$router->add('about', 'About');
+$router->add('contact', 'Contact');
 
-$router->submit();
-
-echo '<pre>';
-print_r($router);
-
+$router->loadPage();
 
 // $router->routerRequest();
