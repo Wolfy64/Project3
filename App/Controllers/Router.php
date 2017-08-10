@@ -3,6 +3,7 @@
 require_once 'Views/About.php';
 require_once 'Views/Contact.php';
 require_once 'Views/Home.php';
+require_once 'Controllers/ControllerHome.php';
 
 class Router
 {
@@ -44,7 +45,8 @@ class Router
             }
 
         }else {
-            new Home;
+            new ControllerHome();
+            echo 'HomePage';
         }
     }
 

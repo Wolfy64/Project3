@@ -12,3 +12,8 @@ $router->add('contact', 'Contact');
 $router->loadPage();
 
 // $router->routerRequest();
+
+// ==== TEST ====
+
+require_once 'Models/SQLRequest.php';
+
