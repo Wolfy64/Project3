@@ -1,5 +1,5 @@
 <?php
-require_once('Database/PDOFactory.php');
+require_once('Databases/PDOFactory.php');
 
 abstract class Model
 {
