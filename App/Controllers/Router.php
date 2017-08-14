@@ -1,9 +1,8 @@
 <?php
 
-require_once 'Views/About.php';
-require_once 'Views/Contact.php';
-require_once 'Views/Home.php';
-require_once 'Controllers/ControllerHome.php';
+require_once 'Controllers/About.php';
+require_once 'Controllers/Contact.php';
+require_once 'Controllers/Home.php';
 
 class Router
 {
@@ -45,8 +44,7 @@ class Router
             }
 
         }else {
-            new ControllerHome();
-            echo 'HomePage';
+            new Home;
         }
     }
 

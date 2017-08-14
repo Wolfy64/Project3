@@ -1,7 +1,6 @@
 <?php
 
 require_once 'Controllers/Router.php';
-require_once 'Views/About.php';
 
 $router = new Router();
 
@@ -15,5 +14,6 @@ $router->loadPage();
 
 // ==== TEST ====
 
-require_once 'Models/SQLRequest.php';
+
+
 

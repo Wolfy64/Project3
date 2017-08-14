@@ -12,7 +12,7 @@ abstract class SQLRequest
      */
     private function getDatabase()
     {
-        if ( $this->$database == NULL ){
+        if ( $this->database == NULL ){
             $this->database = PDOFactory::getMysqlConnexion();
         }
 
@@ -28,10 +28,10 @@ abstract class SQLRequest
     public function executeRequest($sql, $param =  NULL)
     {
         if ( $param != NULL ){
-            $result = $this->$database->prepare($sql, $param);
+            $result = $this->getDatabase()->prepare($sql, $param);
             $result->execute($param);
         } else {
-            $result = $this->$database->query($sql);
+            $result = $this->getDatabase()->query($sql);
         }
 
         return $result;
