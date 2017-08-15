@@ -7,21 +7,22 @@ class Book extends Page
 {
     protected $blogPostManager;
 
-    public function __construct()
+    public function __construct($body ='Views/book.php')
     {
         echo 'This is the ' . __CLASS__ . ' page';
         $this->blogPostManager = new BlogPostManager();
-        parent::__construct();
+        parent::__construct('Views/book.php');
+        $this->view();
     }
 
     public function view()
     {
+        $post = [];
         $dbh = $this->blogPostManager->readAll(); // Database Handle
-        while ($blogPostList = $dbh->fetch(PDO::FETCH_ASSOC)) {
-            echo '<p>' . $blogPostList['title']        . '</p>';
-            echo '<p>' . $blogPostList['author']       . '</p>';
-            echo '<p>' . $blogPostList['dateContents'] . '</p>';
-            echo '<p>' . $blogPostList['contents']     . '</p>';
+        while ($posts = $dbh->fetch(PDO::FETCH_ASSOC)) {
+            $post[] = $posts['title'];
         }
+        var_dump($post);
+        return $post;
     }
 }

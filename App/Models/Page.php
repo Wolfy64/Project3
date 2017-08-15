@@ -2,19 +2,15 @@
 
 class Page
 {
-    protected $head;
-    protected $header;
-    protected $nav;
+    protected $head = 'Views/Template/head.php';
+    protected $header = 'Views/Template/header.php';
+    protected $nav = 'Views/Template/nav.php';
     protected $body;
-    protected $footer;
+    protected $footer = 'Views/Template/footer.php';
 
-    public function __construct()
+    public function __construct($body = 'Views/Template/home.php')
     {
-        $this->head = 'Views/Template/head.php';
-        $this->header = 'Views/Template/header.php';
-        $this->nav = 'Views/Template/nav.php';
-        $this->body = 'Views/Template/body.php';
-        $this->footer = 'Views/Template/footer.php';
+        $this->body = $body;
         $this->template();
     }
 
