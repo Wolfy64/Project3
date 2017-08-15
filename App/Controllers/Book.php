@@ -17,9 +17,11 @@ class Book extends Page
     public function view()
     {
         $dbh = $this->blogPostManager->readAll(); // Database Handle
-        $contents = $dbh->fetch(PDO::FETCH_ASSOC);
-
-        return $contents;
+        while ($blogPostList = $dbh->fetch(PDO::FETCH_ASSOC)) {
+            echo '<p>' . $blogPostList['title']        . '</p>';
+            echo '<p>' . $blogPostList['author']       . '</p>';
+            echo '<p>' . $blogPostList['dateContents'] . '</p>';
+            echo '<p>' . $blogPostList['contents']     . '</p>';
+        }
     }
-
 }
