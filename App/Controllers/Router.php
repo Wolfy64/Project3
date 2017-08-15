@@ -3,6 +3,7 @@
 require_once 'Controllers/About.php';
 require_once 'Controllers/Contact.php';
 require_once 'Controllers/Home.php';
+require_once 'Controllers/Book.php';
 
 class Router
 {

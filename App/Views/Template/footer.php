@@ -3,7 +3,7 @@
         <ul>
             <li>Contact</li>
             <li>Facebook</li>
-            <li>Tweeter</li>
+            <li>Twitter</li>
             <li>Infos</li>
         </ul>
     </p>
