@@ -8,7 +8,7 @@ class Page
     protected $body;
     protected $footer = 'Views/Template/footer.php';
 
-    public function __construct($body = 'Views/Template/home.php')
+    public function __construct($body = 'Views/home.php')
     {
         $this->body = $body;
         $this->template();

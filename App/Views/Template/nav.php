@@ -1,5 +1,7 @@
 <nav>
     <ul>
-        <li>Connexion</li>
+        <li>
+            <a href="#">Connexion</a>   
+        </li>
     </ul>
 </nav>
