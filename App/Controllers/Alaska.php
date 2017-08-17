@@ -7,7 +7,6 @@ require_once 'Models/BlogPostManager.php';
 class Alaska extends Page
 {
     protected $blogPostManager;
-    protected $book;
 
     public function __construct($body ='Views/book.php')
     {

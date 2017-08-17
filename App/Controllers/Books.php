@@ -2,7 +2,7 @@
 
 class Books
 {
-    public function __construct($body ='Views/book.php')
+    public function __construct()
     {
         $this->loadAction();
     }
