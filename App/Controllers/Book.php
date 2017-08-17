@@ -35,10 +35,16 @@ class Book extends Page
         }
     }
 
-    public function dateFormat($date)
+    /**
+     * Change the default date format
+     * @param string $date
+     * @param string $format default = 'd-m-Y'
+     * @return string
+     */
+    public function dateFormat($date, $format = 'd-m-Y')
     {
         $originalDate = $date;
-        return date("d-m-Y", strtotime($originalDate));
+        return date($format, strtotime($originalDate));
     }
 
 }
