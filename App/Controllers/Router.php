@@ -1,6 +1,7 @@
 <?php
 
-require_once 'Controllers/Home.php';
+// require_once 'Controllers/Home.php';
+require_once 'Models/Page.php';
 require_once 'Controllers/Books.php';
 require_once 'Controllers/Alaska.php';
 
@@ -36,13 +37,11 @@ class Router
             if ( file_exists('Controllers/' . $uriPage . '.php') ) { 
                 new $uriPage();
             } else{
-                $this->add('home', 'Home');
-                new Home();
+                new Page();
             }
 
         }else {
-            $this->add('home', 'Home');
-            new Home;
+            new Page();
         }
     }
 }
