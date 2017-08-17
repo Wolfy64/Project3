@@ -16,9 +16,7 @@ class Book extends Page
     public function view()
     {
         $dbh = $this->blogPostManager->readAll(); // Database Handle
-        $result = $dbh->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $result;
+        return $dbh->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -31,10 +29,16 @@ class Book extends Page
     {
         if ( strlen($contents) >= $length ){
             $pos = strpos($contents, ' ', $length); // For not to cut a word
-            echo substr($contents, 0, $pos) . ' ...';
+            return substr($contents, 0, $pos) . ' ...';
         } else {
-            echo $contents;
+            return $contents;
         }
+    }
+
+    public function dateFormat($date)
+    {
+        $originalDate = $date;
+        return date("d-m-Y", strtotime($originalDate));
     }
 
 }
