@@ -9,6 +9,6 @@
 </div>
 <div>
     <p>
-        <a href="book">Book Alaska</a>
+        <a href="books&action=alaska">Book Alaska</a>
     </p>
 </div>

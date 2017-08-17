@@ -10,7 +10,7 @@ class Book extends Page
     public function __construct($body ='Views/book.php')
     {
         $this->blogPostManager = new BlogPostManager();
-        parent::__construct('Views/book.php');
+        $this->loadAction();
     }
 
     public function view()
@@ -45,6 +45,18 @@ class Book extends Page
     {
         $originalDate = $date;
         return date($format, strtotime($originalDate));
+    }
+
+    public function loadAction()
+    {
+        echo 'Hello' . $_GET['post'];
+        if ( isset($_GET['post']) ){
+            echo ' charge l\'action page';
+            include 'Views/bookPost.php';
+        } else {
+            echo ' Ne charge RIEN';
+            parent::__construct('Views/book.php');
+        }
     }
 
 }

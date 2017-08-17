@@ -7,7 +7,7 @@
     <p> <?php echo $value['author']; ?> </p>
     <p> <?php echo $this->readSummary($value['contents']); ?> </p>
     <p>
-        <a href= "post= <?php echo $value['id'] ?>" >Read the post</a>
+        <a href= "book&post= <?php echo $value['id'] ?>" >Read the post</a>
     </p>
 </div>
 <?php } ?>

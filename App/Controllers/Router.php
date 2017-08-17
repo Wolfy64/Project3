@@ -1,9 +1,8 @@
 <?php
 
-require_once 'Controllers/About.php';
-require_once 'Controllers/Contact.php';
 require_once 'Controllers/Home.php';
-require_once 'Controllers/Book.php';
+require_once 'Controllers/Books.php';
+require_once 'Controllers/Alaska.php';
 
 class Router
 {
@@ -26,28 +25,25 @@ class Router
 
     /**
      * Load Page from the uri 
-     * @return void Object
+     * @return new Object
      */
     public function loadPage()
     {
         // Check if the URI page exist otherwise load Home page
         if ( isset($_GET['uri']) ){ 
-            $uriPage = $_GET['uri'];
+            $uriPage = htmlspecialchars($_GET['uri']);
 
-            if ( in_array( $uriPage, $this->uri ) ){ 
-                foreach ($this->uri as $key => $value) {
-                    if ( preg_match( '#^' . $uriPage . '$#', $value ) ){
-                        return new $this->page[$key]();
-                    }
-                }
+            if ( file_exists('Controllers/' . $uriPage . '.php') ) { 
+                new $uriPage();
             } else{
-                new Home;
+                $this->add('home', 'Home');
+                new Home();
             }
 
         }else {
+            $this->add('home', 'Home');
             new Home;
         }
     }
-
 }
 
