@@ -24,14 +24,11 @@ class BlogPostManager extends SQLRequest
      *
      *
      */
-    public function read()
+    public function read($id)
     {
-        $posts = [];
-        $dbh = $this->db->query('SELECT * FROM blogAlaska'); // Database Handle
-        while($data = $dbh->fetch(PDO::FETCH_ASSOC)){
-            $posts[] = new BlogPost($data);
-        }
-        return $posts;
+        $sql = 'SELECT contents FROM blogAlaska WHERE id = :id';
+        
+
     }
 
     /**
@@ -64,4 +61,19 @@ class BlogPostManager extends SQLRequest
         $sql = 'SELECT * FROM blogAlaska';
         return $this->executeRequest($sql);
     }
+
+    public function readSummary()
+    {
+        echo'Hello';
+        $sql = 'SELECT contents FROM blogAlaska WHERE id = :id';
+        $param = [':id' => 1];
+        // $param = [bindParam(':id', 1)];
+        // var_dump($this->executeRequest($sql, $param));
+        return $this->executeRequest($sql, $param);
+    }
 }
+
+    // $q->bindValue(':degats', $perso->degats(), PDO::PARAM_INT);
+    // $q->bindValue(':id', $perso->id(), PDO::PARAM_INT);
+    
+    // $q->execute();
