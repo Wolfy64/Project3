@@ -61,4 +61,32 @@ class BlogPostManager extends SQLRequest
         $sql = 'SELECT * FROM blogAlaska';
         return $this->executeRequest($sql);
     }
+
+    /**
+     * Read a summary of $contents by default 100 characters
+     * @param string $contents
+     * @param integer $length
+     * @return $content
+     */
+    public function readSummary($contents, $length = 100)
+    {
+        if ( strlen($contents) >= $length ){
+            $pos = strpos($contents, ' ', $length); // For not to cut a word
+            return substr($contents, 0, $pos) . ' ...';
+        } else {
+            return $contents;
+        }
+    }
+    
+    /**
+     * Change the default date format
+     * @param string $date
+     * @param string $format default = 'd-m-Y'
+     * @return string
+     */
+    public function dateFormat($date, $format = 'd-m-Y')
+    {
+        $originalDate = $date;
+        return date($format, strtotime($originalDate));
+    }
 }
