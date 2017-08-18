@@ -1,14 +1,14 @@
 <?php
 
-require_once 'Models/Page.php';
 require_once 'Models/BlogPostManager.php';
+require_once 'Models/Page.php';
 
 
 class Alaska extends Page
 {
     protected $blogPostManager;
 
-    public function __construct($body ='Views/book.php')
+    public function __construct()
     {
         $this->blogPostManager = new BlogPostManager();
         $this->loadAction();
