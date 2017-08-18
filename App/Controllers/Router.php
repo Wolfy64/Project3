@@ -1,12 +1,11 @@
 <?php
 
-// require_once 'Controllers/Home.php';
 require_once 'Controllers/Admin.php';
 require_once 'Controllers/Alaska.php';
 require_once 'Controllers/Books.php';
 require_once 'Models/Page.php';
 
-class Router
+abstract class Router
 {
     private $uri = []; // Uniform Resource Identifier
     private $page = [];
@@ -31,7 +30,7 @@ class Router
      */
     public static function loadPage()
     {
-        // Check if the URI page exist otherwise load Home page
+        // Check if the URI page exist otherwise load Page
         if ( isset($_GET['uri']) ){ 
             $uriPage = htmlspecialchars($_GET['uri']);
 
@@ -46,4 +45,3 @@ class Router
         }
     }
 }
-
