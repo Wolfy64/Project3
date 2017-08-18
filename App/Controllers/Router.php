@@ -1,9 +1,10 @@
 <?php
 
 // require_once 'Controllers/Home.php';
-require_once 'Models/Page.php';
-require_once 'Controllers/Books.php';
+require_once 'Controllers/Admin.php';
 require_once 'Controllers/Alaska.php';
+require_once 'Controllers/Books.php';
+require_once 'Models/Page.php';
 
 class Router
 {
