@@ -2,8 +2,11 @@
 
 class Admin
 {
+    protected $blogPostManager;
+
     public function __construct()
     {
+        $this->blogPostManager = new BlogPostManager();
         $this->loadAction();
     }
 

@@ -16,7 +16,7 @@ class Router
      * @param string $uri
      * @param string $page default = NULL
      */
-    public function add($uri, $page = NULL)
+    private function add($uri, $page = NULL)
     {
         $this->uri[] = $uri;
 
@@ -29,7 +29,7 @@ class Router
      * Load Page from the uri 
      * @return new Object
      */
-    public function loadPage()
+    public static function loadPage()
     {
         // Check if the URI page exist otherwise load Home page
         if ( isset($_GET['uri']) ){ 
