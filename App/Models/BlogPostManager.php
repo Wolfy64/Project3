@@ -27,8 +27,7 @@ class BlogPostManager extends SQLRequest
     public function read($id)
     {
         $sql = 'SELECT * FROM blogAlaska WHERE id = :id';
-        $param = true;
-        $dbh = $this->executeRequest($sql, $param);
+        $dbh = $this->executeRequest($sql, TRUE);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
 
