@@ -28,8 +28,9 @@ abstract class SQLRequest
     public function executeRequest($sql, $param =  NULL)
     {
         if ( $param != NULL ){
-            $result = $this->getDatabase()->prepare($sql, $param);
-            $result->execute($param);
+            $result = $this->getDatabase()->prepare($sql);
+            // $result->$param;
+            // $result->execute();
         } else {
             $result = $this->getDatabase()->query($sql);
         }

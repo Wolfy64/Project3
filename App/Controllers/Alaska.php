@@ -17,16 +17,9 @@ class Alaska extends Page
     public function loadAction()
     {
         if ( isset($_GET['post']) ){
-            include 'Views/alaskaPost.php';
+            parent::__construct('Views/alaskaPost.php');
         } else {
             parent::__construct('Views/alaskaList.php');
         }
     }
-
-    public function view()
-    {
-        $dbh = $this->blogPostManager->readAll(); // Database Handle
-        return $dbh->fetchAll(PDO::FETCH_ASSOC);
-    }
-
 }

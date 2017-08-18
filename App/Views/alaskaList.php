@@ -1,13 +1,13 @@
-<?php $posts = $this->view() ?>
+<?php $manager = $this->blogPostManager; ?>
 
-<?php foreach ($posts as $post => $value) { ?>
+<?php foreach ($manager->readAllPost() as $post => $value) { ?>
 <div>
-    <p> <?php echo $value['title']; ?> </p>
-    <p> Published on <?php echo $this->blogPostManager->dateFormat($value['dateContents']); ?> </p>
-    <p> <?php echo $value['author']; ?> </p>
-    <p> <?php echo $this->blogPostManager->readSummary($value['contents']); ?> </p>
+    <p>              <?= $value['title'];                              ?> </p>
+    <p> Published on <?= $manager->dateFormat($value['dateContents']); ?> </p>
+    <p>              <?= $value['author'];                             ?> </p>
+    <p>              <?= $manager->readSummary($value['contents']);    ?> </p>
     <p>
-        <a href= "?post= <?php echo $value['id'] ?>" >Read the post</a>
+        <a href= "?post=<?= $value['id'] ?>" >Read the post</a>
     </p>
 </div>
 <?php } ?>

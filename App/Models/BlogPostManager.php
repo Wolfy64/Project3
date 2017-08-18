@@ -26,9 +26,13 @@ class BlogPostManager extends SQLRequest
      */
     public function read($id)
     {
-        $sql = 'SELECT contents FROM blogAlaska WHERE id = :id';
+        $sql = 'SELECT * FROM blogAlaska WHERE id = :id';
+        $param = true;
+        $dbh = $this->executeRequest($sql, $param);
+        $dbh->bindParam(':id', $id, PDO::PARAM_INT);
+        $dbh->execute();
 
-
+        return $dbh->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -51,15 +55,12 @@ class BlogPostManager extends SQLRequest
 
     // METHOD
 
-    public  function count()
-    {
-        return $this->db->query('SELECT COUNT(*) FROM Blog')->fetchColumn();
-    }
-
-    public function readAll()
+    public function readAllPost()
     {
         $sql = 'SELECT * FROM blogAlaska';
-        return $this->executeRequest($sql);
+        $dbh = $this->executeRequest($sql);
+
+        return $dbh->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -77,7 +78,7 @@ class BlogPostManager extends SQLRequest
             return $contents;
         }
     }
-    
+
     /**
      * Change the default date format
      * @param string $date
