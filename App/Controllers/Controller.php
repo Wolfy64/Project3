@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Models/BlogPostManager.php';
+require_once 'Models/Connection.php';
 require_once 'Models/Page.php';
 
 class Controller extends Page
@@ -25,13 +26,18 @@ class Controller extends Page
         }
     }
 
-    public function admin()
+    public function admin($param =  FALSE)
     {
-        if ( isset($_POST['']) ){
-            echo 'connection';
-        }else{
-            echo '<h1>Page Admin</h1>';
+        if( $param === TRUE ){
+            parent::__construct('Views/admin.php'); 
+        } else {
             parent::__construct('Views/connection.php');
-        }        
+        }
     }
+
+    public function connection()
+    {
+        Connection::verifyPassword();
+    }
+
 }

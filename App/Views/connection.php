@@ -1,4 +1,4 @@
-<form action="Models/admin.php" method="POST">
+<form action="connection" method="POST">
     <label for="user">User</label>
     <input type="text" name="user" value="">
     <label for="password">Password</label>
