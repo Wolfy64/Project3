@@ -1,5 +1,7 @@
 <?php
 
+include_once 'Controllers/Controller.php';
+
 class Connection
 {
     public static function verifyPassword()

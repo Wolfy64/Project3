@@ -37,7 +37,11 @@ class Controller extends Page
 
     public function connection()
     {
-        Connection::verifyPassword();
+        if ( isset($_POST['user'], $_POST['password']) ){
+            Connection::verifyPassword();
+        } else{
+            parent::__construct('Views/connection.php');
+        }
     }
 
 }
