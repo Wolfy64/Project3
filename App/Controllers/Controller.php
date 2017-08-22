@@ -7,11 +7,13 @@ require_once 'Models/Page.php';
 class Controller extends Page
 {
     protected $blogPostManager;
+    protected $connection;
     protected $page;
 
     public function __construct($method = 'index')
     {
         $this->blogPostManager = new BlogPostManager();
+        $this->connection = new Connection();
         $this->$method();
     }
 
@@ -38,7 +40,7 @@ class Controller extends Page
     public function connection()
     {
         if ( isset($_POST['user'], $_POST['password']) ){
-            Connection::verifyPassword();
+            $this->connection->verifyPassword();
         } else{
             parent::__construct('Views/connection.php');
         }
