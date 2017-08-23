@@ -1,54 +1,65 @@
 <?php
 
 include_once 'SQLRequest.php';
-include_once 'Controllers/Controller.php';
 
 class Connection extends SQLRequest
 {
-    public function verifyPassword()
+    /**
+     * Check if user and password are correct
+     * @return bool
+     */
+    public function verifyAccount(string $user, string $password)
     {
-        if ( isset($_POST['user']) && isset($_POST['password']) ){
-            $user = htmlspecialchars($_POST['user']);
-            $password = htmlspecialchars($_POST['password']);
+        $userId =     $this->dbUser($user);
+        $dbPassword = $this->dbPassword($userId, $password);
 
-            if ( $this->readUser($user) === TRUE && $this->readPassword($password) === TRUE){
-                echo 'tu es connecté';
-            } else {
-                echo 'user ou mdp incorrect';
-            }
-        } else {
-            echo 'ERREUR';
-        }
+        return password_verify($password, $dbPassword);
     }
 
     /**
      * Check if user exist in database
      * @param $user string
-     * @return bool
+     * @return $userId or FALSE;
      */
-    public function readUser(string $user)
+    public function dbUser(string $user)
     {
-        $sql = 'SELECT user FROM usersBlog WHERE user = :user';
+        $sql = 'SELECT id, user FROM usersBlog WHERE user = :user';
         $dbh = $this->executeRequest($sql, TRUE);
         $dbh->bindParam(':user', $user, PDO::PARAM_STR);
         $dbh->execute();
 
-        return $dbh->rowCount() === 1;
+        return $dbh->fetchColumn(0);
     }
 
     /**
-     * Check if password exist in database
-     * @param $passwor string
-     * @return bool
+     * If user exist read password in database
+     * @param $password string
+     * @return $password or FALSE
      */
-    public function readPassword(string $password)
+    public function dbPassword($userId, string $password) // Pourquoi le type mixed ne marche pas pour $userId ?
     {
-        $sql = 'SELECT password FROM usersBlog WHERE password = :password';
-        $dbh = $this->executeRequest($sql, TRUE);
-        $dbh->bindParam(':password', $password, PDO::PARAM_STR);
-        $dbh->execute();
+        if ( $userId != FALSE ){
+            $sql = 'SELECT password FROM usersBlog WHERE id = :id';
+            $dbh = $this->executeRequest($sql, TRUE);
+            $dbh->bindParam(':id', $userId, PDO::PARAM_INT);
+            $dbh->execute();
 
-        return $dbh->rowCount() === 1;
+            return $dbh->fetchColumn(0);
+
+        } else {
+            return FALSE;
+        }
     }
 
+    /**
+     * Creates a password hash in database
+     * @param $password
+     */
+    public function passHach(string $password)
+    {
+        $passwordHach = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12 ]);
+        $sql = 'INSERT INTO password FROM userBlog';
+        $dbh = $this->executeRequest($sql);
+        // A finir pour creer ou modifier le mdp de l'écrivain;
+    }
 }
