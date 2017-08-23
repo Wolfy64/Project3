@@ -10,7 +10,7 @@ abstract class Router
      */
     public static function loadPage()
     {
-        // Check if the URI page exist otherwise load Page
+        // Check if that URI page exist otherwise load the default Index page
         if ( isset($_GET['uri']) ){ 
             $uriPage = htmlspecialchars($_GET['uri']);
 

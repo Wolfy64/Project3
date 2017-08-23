@@ -14,6 +14,9 @@ class Page
         $this->template();
     }
 
+    /**
+     * Build the Template of the page
+     */
     public function template()
     {
         require_once $this->head;
