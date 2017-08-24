@@ -10,6 +10,7 @@
     <p> Published on <?php echo $manager->dateFormat($post['dateContents']) ?> </p>
     <p>              <?php echo $post['author']                             ?> </p>
     <p>              <?php echo $post['contents']                           ?> </p>
+    <p><a href="#">Add Comment</a></p>
     <p>
         <form>
             

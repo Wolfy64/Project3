@@ -15,7 +15,7 @@ class Page
     }
 
     /**
-     * Build the Template of the page
+     * Build the template of the page
      */
     public function template()
     {

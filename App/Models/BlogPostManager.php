@@ -2,10 +2,6 @@
 
 require_once 'SQLRequest.php';
 
-/**
- *
- *
- */
 class BlogPostManager extends SQLRequest
 {
 
@@ -21,10 +17,10 @@ class BlogPostManager extends SQLRequest
     }
 
     /**
-     *
-     *
+     * @param $id
+     * @return array
      */
-    public function read($id)
+    public function read(int $id)
     {
         $sql = 'SELECT * FROM blogAlaska WHERE id = :id';
         $dbh = $this->executeRequest($sql, TRUE);
@@ -54,6 +50,10 @@ class BlogPostManager extends SQLRequest
 
     // METHOD
 
+    /**
+     * @param void
+     * @return array
+     */
     public function readAllPost()
     {
         $sql = 'SELECT * FROM blogAlaska';
@@ -65,10 +65,10 @@ class BlogPostManager extends SQLRequest
     /**
      * Read a summary of $contents by default 100 characters
      * @param string $contents
-     * @param integer $length
+     * @param integer $length by default 100
      * @return $content
      */
-    public function readSummary($contents, $length = 100)
+    public function readSummary(string $contents, int $length = 100)
     {
         if ( strlen($contents) >= $length ){
             $pos = strpos($contents, ' ', $length); // For not to cut a word
@@ -82,9 +82,9 @@ class BlogPostManager extends SQLRequest
      * Change the default date format
      * @param string $date
      * @param string $format default = 'd-m-Y'
-     * @return string
+     * @return string $date
      */
-    public function dateFormat($date, $format = 'd-m-Y')
+    public function dateFormat(string $date, string $format = 'd-m-Y')
     {
         $originalDate = $date;
         return date($format, strtotime($originalDate));

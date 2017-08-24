@@ -25,7 +25,7 @@ abstract class SQLRequest
      * @param string $param default = NULL
      * @return dabase request
      */
-    public function executeRequest($sql, $prepare =  FALSE)
+    public function executeRequest(string $sql, bool $prepare =  FALSE)
     {
         if ( $prepare === TRUE ){
             $result = $this->getDatabase()->prepare($sql);
