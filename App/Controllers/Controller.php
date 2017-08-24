@@ -1,8 +1,8 @@
 <?php
 
+require_once 'Controllers/Page.php';
 require_once 'Models/BlogPostManager.php';
 require_once 'Models/Connection.php';
-require_once 'Models/Page.php';
 
 class Controller extends Page
 {
@@ -15,12 +15,16 @@ class Controller extends Page
         $this->blogPostManager = new BlogPostManager();
         $this->connection = new Connection();
         $this->$method();
+        
     }
 
     /**
      * Built the index page by default
      */
-    public function index(){ parent::__construct(); }
+    public function index()
+    { 
+        $this->template('home');
+    }
 
     /**
      * Built the page of Alaska book
@@ -28,9 +32,9 @@ class Controller extends Page
     public function alaska()
     {
         if ( isset($_GET['post']) ){
-            parent::__construct('Views/alaskaPost.php');
+            $this->template('alaskaPost');
         } else {
-            parent::__construct('Views/alaskaList.php');
+            $this->template('alaskaList');
         }
     }
 
@@ -40,9 +44,9 @@ class Controller extends Page
     public function admin(bool $param =  FALSE)
     {
         if( $param === TRUE ){
-            parent::__construct('Views/admin.php'); 
+            $this->template('admin'); 
         } else {
-            parent::__construct('Views/connection.php');
+            $this->template('connection');
         }
     }
 
@@ -58,7 +62,7 @@ class Controller extends Page
             $this->admin($this->connection->verifyAccount($user, $password));
 
         } else{
-            parent::__construct('Views/connection.php');
+            $this->template('connection');
         }
     }
 }

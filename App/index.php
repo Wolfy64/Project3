@@ -4,8 +4,8 @@ require_once 'Controllers/Router.php';
 
 Router::loadPage();
 
-require_once 'Models/CommentsPostManager.php';
+// require_once 'Models/CommentsPostManager.php';
 
-$comments = new CommentsPostManager();
+// $comments = new CommentsPostManager();
 
-var_dump($comments->read(1));
+// var_dump($comments->read(1));
