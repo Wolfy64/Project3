@@ -19,7 +19,7 @@ class BlogPostManager extends SQLRequest
 
     /**
      * @param $id
-     * @return array
+     * @return object BlogPost
      */
     public function read(int $id)
     {
@@ -49,7 +49,7 @@ class BlogPostManager extends SQLRequest
 
     }
 
-    // METHOD
+    // OTHER METHODS
 
     /**
      * @param void
@@ -57,25 +57,15 @@ class BlogPostManager extends SQLRequest
      */
     public function readAllPost()
     {
+        $postList = [];
         $sql = 'SELECT * FROM blogAlaska';
         $dbh = $this->executeRequest($sql);
+        $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
-        return $dbh->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * Read a summary of $contents by default 100 characters
-     * @param string $contents
-     * @param integer $length by default 100
-     * @return $content
-     */
-    public function readSummary(string $contents, int $length = 100)
-    {
-        if ( strlen($contents) >= $length ){
-            $pos = strpos($contents, ' ', $length); // For not to cut a word
-            return substr($contents, 0, $pos) . ' ...';
-        } else {
-            return $contents;
+        foreach ( $data as $post ) {
+            $postList[] = new Blogpost($post);
         }
+
+        return $postList;
     }
 }
