@@ -1,5 +1,6 @@
 <?php
 
+require_once 'BlogPost.php';
 require_once 'SQLRequest.php';
 
 class BlogPostManager extends SQLRequest
@@ -27,7 +28,7 @@ class BlogPostManager extends SQLRequest
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
 
-        return $dbh->fetch(PDO::FETCH_ASSOC);
+        return new BlogPost($dbh->fetch(PDO::FETCH_ASSOC));
     }
 
     /**
@@ -76,17 +77,5 @@ class BlogPostManager extends SQLRequest
         } else {
             return $contents;
         }
-    }
-
-    /**
-     * Change the default date format
-     * @param string $date
-     * @param string $format default = 'd-m-Y'
-     * @return string $date
-     */
-    public function dateFormat(string $date, string $format = 'd-m-Y')
-    {
-        $originalDate = $date;
-        return date($format, strtotime($originalDate));
     }
 }

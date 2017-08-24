@@ -8,7 +8,10 @@ class BlogPost
     protected $contents;
     protected $dateContents;
 
-    public function __construct($data){ $this->hydrate($data); }
+    public function __construct($data)
+    { 
+        $this->hydrate($data); 
+    }
 
     public function hydrate(array $data)
     {
@@ -69,8 +72,16 @@ class BlogPost
         $this->contents = $contents;
     }
 
-    public function setDateContents(String $dateContents) // TO CHECK Paramater String OR Date!!!
+    /**
+     * Change the default date format to d-m-Y
+     * @param string $dateContents
+     * @return string $date
+     */
+    public function setDateContents(String $dateContents)
     {
-        $this->dateContents = $dateContents;
+        $originalDate = $dateContents;
+        $format = 'd-m-Y';
+        
+        $this->dateContents = date($format, strtotime($originalDate));
     }
 }

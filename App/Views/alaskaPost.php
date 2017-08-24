@@ -1,15 +1,15 @@
-<?php 
-    $manager = $this->blogPostManager;
-    $post = $this->blogPostManager->read(1); 
+<?php
+    $idPost = htmlspecialchars($_GET['post']);
+    $post = $this->blogPostManager->read($idPost);
 ?>
 
 <h1>Page de l'article !!!!</h1>
 
 <div>
-    <p>              <?php echo $post['title']                              ?> </p>
-    <p> Published on <?php echo $manager->dateFormat($post['dateContents']) ?> </p>
-    <p>              <?php echo $post['author']                             ?> </p>
-    <p>              <?php echo $post['contents']                           ?> </p>
+    <p>              <?= $post->getTitle();       ?> </p>
+    <p> Published on <?= $post->getDateContents() ?> </p>
+    <p>              <?= $post->getAuthor();      ?> </p>
+    <p>              <?= $post->getContents();    ?> </p>
     <p><a href="#">Add Comment</a></p>
     <p>
         <form>

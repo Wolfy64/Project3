@@ -34,5 +34,4 @@ class Page
             $this->body = 'Views/404.php';
         }      
     }
-
 }
