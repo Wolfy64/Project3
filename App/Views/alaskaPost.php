@@ -17,3 +17,13 @@
         </form>
     </p>
 </div>
+
+<?php
+
+require_once 'Models/CommentsPostManager.php';
+
+$comments = new CommentsPostManager();
+
+var_dump($comments->read($idPost));
+
+?>

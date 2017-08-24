@@ -1,6 +1,6 @@
 <?php
 
-require_once 'SQLRequest.php';
+require_once 'Models/SQLRequest.php';
 
 class CommentsPostManager extends SQLRequest
 {

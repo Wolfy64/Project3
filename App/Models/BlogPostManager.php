@@ -1,7 +1,7 @@
 <?php
 
-require_once 'BlogPost.php';
-require_once 'SQLRequest.php';
+require_once 'Models/BlogPost.php';
+require_once 'Models/SQLRequest.php';
 
 class BlogPostManager extends SQLRequest
 {

@@ -1,5 +1,5 @@
 <header>
     <p>
-        <a href="index.php">Home</a>        
+        <a href="/index.php">Home</a>        
     </p>
 </header>

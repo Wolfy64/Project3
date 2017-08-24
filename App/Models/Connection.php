@@ -1,6 +1,6 @@
 <?php
 
-include_once 'SQLRequest.php';
+include_once 'Models/SQLRequest.php';
 
 class Connection extends SQLRequest
 {
