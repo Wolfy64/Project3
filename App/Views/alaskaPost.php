@@ -1,6 +1,7 @@
 <?php
     $idPost = htmlspecialchars($_GET['post']);
     $post = $this->blogPostManager->read($idPost);
+
 ?>
 
 <h1>Page de l'article !!!!</h1>
@@ -11,19 +12,17 @@
     <p>              <?= $post->getAuthor();      ?> </p>
     <p>              <?= $post->getContents();    ?> </p>
     <p><a href="#">Add Comment</a></p>
-    <p>
-        <form>
-            
-        </form>
-    </p>
 </div>
 
-<?php
+<!-- Show Comments -->
 
-require_once 'Models/CommentsPostManager.php';
+    <?php foreach ($post->getCommentsList() as $comment) { ?>
 
-$comments = new CommentsPostManager();
+<div>
+    <p><?= $comment->getTitle() ?></p>
+    <p><?= $comment->getDateContents() ?></p>
+    <p><?= $comment->getAuthor() ?></p>
+    <p><?= $comment->getContents() ?></p>
+</div>
 
-var_dump($comments->read($idPost));
-
-?>
+    <?php } ?>

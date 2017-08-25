@@ -1,5 +1,6 @@
 <?php
 
+require_once 'Models/CommentsPost.php';
 require_once 'Models/SQLRequest.php';
 
 class CommentsPostManager extends SQLRequest
@@ -10,6 +11,7 @@ class CommentsPostManager extends SQLRequest
      */
     public function read(int $postId)
     {
+        $commentsList = [];
         $sql = 'SELECT *
                 FROM blogAlaska
                 INNER JOIN commentsBlogAlaska
@@ -18,7 +20,11 @@ class CommentsPostManager extends SQLRequest
         $dbh = $this->executeRequest($sql, TRUE);
         $dbh->bindParam(':id', $postId, PDO::PARAM_INT);
         $dbh->execute();
+        $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
-        return $dbh->fetchAll(PDO::FETCH_ASSOC);
+        foreach ( $data as $post ) {
+            $commentsList[] = new CommentsPost($post);
+        }
+        return $commentsList;
     }
 }
