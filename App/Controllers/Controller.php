@@ -31,10 +31,21 @@ class Controller extends Page
      */
     public function alaska()
     {
-        if ( isset($_GET['post']) ){
-            $this->template('alaskaPost');
+        if ( !isset($_GET['post']) ){
+            $data = $this->blogPostManager->readAllPost();
+            $this->template('alaskaList', $data);
+
+        } elseif ( !is_numeric($_GET['post']) ){
+            $this->template('404');
+
         } else {
-            $this->template('alaskaList');
+            $data = $this->blogPostManager->read($_GET['post']);
+
+            if ( $data === FALSE ){
+                $this->template('404');
+            } else {
+                $this->template('alaskaPost', $data);
+            }
         }
     }
 

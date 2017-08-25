@@ -7,14 +7,16 @@ class Page
     protected $nav    = 'Views/Template/nav.php';
     protected $body;
     protected $footer = 'Views/Template/footer.php';
+    protected $data = [];
 
     /**
      * Build the template of the page
      * @param string $body
      */
-    public function template(string $body)
+    public function template(string $body, $data = null)
     {
         $this->setBody($body);
+        $this->addData($data);
         require_once $this->head;
         require_once $this->header;
         require_once $this->nav;
@@ -33,5 +35,10 @@ class Page
         } else{
             $this->body = 'Views/404.php';
         }      
+    }
+
+    public function addData($data)
+    {
+        return $this->data[] = $data;
     }
 }

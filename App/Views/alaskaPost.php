@@ -1,31 +1,25 @@
-<?php
-    $idPost = htmlspecialchars($_GET['post']);
-    $post = $this->blogPostManager->read($idPost);
-
-?>
-
 <h1>Page de l'article !!!!</h1>
 
 <div>
-    <p>              <?= $post->getTitle();       ?> </p>
-    <p> Published on <?= $post->getDateContents() ?> </p>
-    <p>              <?= $post->getAuthor();      ?> </p>
-    <p>              <?= $post->getContents();    ?> </p>
-    <p> <a href="#comment">Add Comment</a></p>
+    <p>              <?= $data->getTitle();       ?> </p>
+    <p> Published on <?= $data->getDateContents() ?> </p>
+    <p>              <?= $data->getAuthor();      ?> </p>
+    <p>              <?= $data->getContents();    ?> </p>
+    <p> <a href="#comment">Add Comment</a>           </p>
 </div>
 
 <!-- Show Comments -->
 
-    <?php foreach ($post->getCommentsList() as $comment) { ?>
+<?php foreach ($data->getCommentsList() as $comment) { ?>
 
-<div>
-    <p> <?= $comment->getTitle()        ?> </p>
-    <p> <?= $comment->getDateContents() ?> </p>
-    <p> <?= $comment->getAuthor()       ?> </p>
-    <p> <?= $comment->getContents()     ?> </p>
-</div>
+    <div>
+        <p> <?= $comment->getTitle()        ?> </p>
+        <p> <?= $comment->getDateContents() ?> </p>
+        <p> <?= $comment->getAuthor()       ?> </p>
+        <p> <?= $comment->getContents()     ?> </p>
+    </div>
 
-    <?php } ?>
+<?php } ?>
 
 <!-- Add Comments -->
 

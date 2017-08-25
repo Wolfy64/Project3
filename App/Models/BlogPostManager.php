@@ -27,8 +27,13 @@ class BlogPostManager extends SQLRequest
         $dbh = $this->executeRequest($sql, TRUE);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
-
-        return new BlogPost($dbh->fetch(PDO::FETCH_ASSOC));
+        $data = $dbh->fetch(PDO::FETCH_ASSOC);
+        
+        if ( $data != FALSE){
+            return new BlogPost($data);
+        } else {
+            return FALSE;
+        }
     }
 
     /**
