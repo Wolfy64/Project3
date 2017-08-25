@@ -17,7 +17,7 @@ class CommentsPostManager extends SQLRequest
                 INNER JOIN commentsBlogAlaska
                 ON commentsBlogAlaska.idBlogAlaska = blogAlaska.id
                 WHERE blogAlaska.id = :id';
-        $dbh = $this->executeRequest($sql, TRUE);
+        $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $postId, PDO::PARAM_INT);
         $dbh->execute();
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);

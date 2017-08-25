@@ -24,7 +24,7 @@ class BlogPostManager extends SQLRequest
     public function read(int $id)
     {
         $sql = 'SELECT * FROM blogAlaska WHERE id = :id';
-        $dbh = $this->executeRequest($sql, TRUE);
+        $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
         $data = $dbh->fetch(PDO::FETCH_ASSOC);
@@ -63,8 +63,8 @@ class BlogPostManager extends SQLRequest
     public function readAllPost()
     {
         $postList = [];
-        $sql = 'SELECT * FROM blogAlaska';
-        $dbh = $this->executeRequest($sql);
+        $sql  = 'SELECT * FROM blogAlaska';
+        $dbh  = $this->getDatabase()->query($sql);
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ( $data as $post ) {
