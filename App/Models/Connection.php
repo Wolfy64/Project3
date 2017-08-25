@@ -10,7 +10,7 @@ class Connection extends SQLRequest
      */
     public function verifyAccount(string $user, string $password)
     {
-        $userId =     $this->dbUser($user);
+        $userId     = $this->dbUser($user);
         $dbPassword = $this->dbPassword($userId, $password);
 
         return password_verify($password, $dbPassword);
@@ -24,7 +24,7 @@ class Connection extends SQLRequest
     public function dbUser(string $user)
     {
         $sql = 'SELECT id, user FROM usersBlog WHERE user = :user';
-        $dbh = $this->executeRequest($sql, TRUE);
+        $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':user', $user, PDO::PARAM_STR);
         $dbh->execute();
 
@@ -40,7 +40,7 @@ class Connection extends SQLRequest
     {
         if ( $userId != FALSE ){
             $sql = 'SELECT password FROM usersBlog WHERE id = :id';
-            $dbh = $this->executeRequest($sql, TRUE);
+            $dbh = $this->getDatabase()->prepare($sql);
             $dbh->bindParam(':id', $userId, PDO::PARAM_INT);
             $dbh->execute();
 
@@ -59,7 +59,7 @@ class Connection extends SQLRequest
     {
         $passwordHach = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12 ]);
         $sql = 'INSERT INTO password FROM userBlog';
-        $dbh = $this->executeRequest($sql);
+        $dbh = $this->getDatabase()->prepare($sql);
         // A finir pour creer ou modifier le mdp de l'écrivain;
     }
 }
