@@ -1,21 +1,21 @@
 <?php
 
 require_once 'Controllers/Page.php';
-require_once 'Models/BlogPostManager.php';
-require_once 'Models/CommentsPostManager.php';
+require_once 'Models/PostManager.php';
+require_once 'Models/CommentsManager.php';
 require_once 'Models/Connection.php';
 
 class Controller extends Page
 {
-    protected $blogPostManager;
-    protected $commentsPostManager;
+    protected $postManager;
+    protected $commentsManager;
     protected $connection;
     protected $page;
 
     public function __construct(string $method = 'index')
     {
-        $this->blogPostManager = new BlogPostManager();
-        $this->commentsPostManager = new CommentsPostManager();
+        $this->postManager = new PostManager();
+        $this->commentsManager = new CommentsManager();
         $this->connection = new Connection();
         $this->$method();
         
@@ -35,14 +35,14 @@ class Controller extends Page
     public function alaska()
     {
         if ( !isset($_GET['post']) ){
-            $data = $this->blogPostManager->readAllPost();
+            $data = $this->postManager->readAllPost();
             $this->template('alaskaList', $data);
 
         } elseif ( !is_numeric($_GET['post']) ){
             $this->template('404');
 
         } else {
-            $data = $this->blogPostManager->read($_GET['post']);
+            $data = $this->postManager->read($_GET['post']);
 
             if ( $data === FALSE ){
                 $this->template('404');
@@ -83,18 +83,18 @@ class Controller extends Page
     /**
      * @param array from $_POST
      */
-    public function addComment() // Commet déclarer le type de ma variable pour un Array $_POST
+    public function addComment()
     {
-        // var_dump($_POST);
+        var_dump($_POST);
         if ( isset($_POST['comment']) ){
 
-            $data = []; // Est ce bien utile de créer un Objet ? ou juste un simple array est nécéssaire ?
+            $data = [];
             foreach ($_POST['comment'] as $key => $value) {
                 $data += [$key => htmlspecialchars($value)];
             }
 
-            $this->commentsPostManager->create( $comment = new CommentsPost($data) );
-            header('Location: http://projet-3.dev/alaska?post=' . $data['idBlogAlaska']); // Bricolage maison non ?
+            $this->commentsManager->create( $comment = new Comments($data) );
+            header('Location: /alaska?post=' . $data['idBlogAlaska']);
         }
     }
 }

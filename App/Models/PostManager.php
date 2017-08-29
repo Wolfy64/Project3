@@ -1,9 +1,9 @@
 <?php
 
-require_once 'Models/BlogPost.php';
+require_once 'Models/Post.php';
 require_once 'Models/SQLRequest.php';
 
-class BlogPostManager extends SQLRequest
+class PostManager extends SQLRequest
 {
 
     // CRUD SYSTEM
@@ -19,7 +19,7 @@ class BlogPostManager extends SQLRequest
 
     /**
      * @param $id
-     * @return object BlogPost
+     * @return object Post
      */
     public function read(int $id)
     {
@@ -30,7 +30,7 @@ class BlogPostManager extends SQLRequest
         $data = $dbh->fetch(PDO::FETCH_ASSOC);
         
         if ( $data != FALSE){
-            return new BlogPost($data);
+            return new Post($data);
         } else {
             return FALSE;
         }
@@ -68,7 +68,7 @@ class BlogPostManager extends SQLRequest
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ( $data as $post ) {
-            $postList[] = new Blogpost($post);
+            $postList[] = new Post($post);
         }
 
         return $postList;

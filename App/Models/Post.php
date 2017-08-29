@@ -1,17 +1,17 @@
 <?php
 
-require_once 'Models/CommentsPostManager.php';
+require_once 'Models/CommentsManager.php';
 require_once 'Models/Data.php';
 
-class BlogPost extends Data
+class Post extends Data
 {
     protected $commentsList;
-    protected $commentsPostManager;
+    protected $commentsManager;
 
     public function __construct($data)
     { 
         parent::__construct($data);
-        $this->commentsPostManager = new CommentsPostManager();
+        $this->commentsManager = new CommentsManager();
         $this->setCommentsList(); 
     }    
 
@@ -23,7 +23,7 @@ class BlogPost extends Data
 
     public function setCommentsList()
     {
-        $this->commentsList = $this->commentsPostManager->read($this->id);
+        $this->commentsList = $this->commentsManager->read($this->id);
     }
 
     /**

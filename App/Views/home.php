@@ -1,6 +1,6 @@
-<h1>Jean Forteroche's Blog</h1>
-<div>
-    <h2>Billet simple pour l'Alaska</h2>
+<h1 >Jean Forteroche's Blog</h1>
+<div class="jumbotron">
+    <h2 class="display-3">Billet simple pour l'Alaska</h2>
     <p>
         Presentation de mon livre
         <br>

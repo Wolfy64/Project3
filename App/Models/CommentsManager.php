@@ -1,9 +1,9 @@
 <?php
 
-require_once 'Models/CommentsPost.php';
+require_once 'Models/Comments.php';
 require_once 'Models/SQLRequest.php';
 
-class CommentsPostManager extends SQLRequest
+class CommentsManager extends SQLRequest
 {
     /**
      *
@@ -23,12 +23,12 @@ class CommentsPostManager extends SQLRequest
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ( $data as $post ) {
-            $commentsList[] = new CommentsPost($post);
+            $commentsList[] = new Comments($post);
         }
         return $commentsList;
     }
 
-    public function create(CommentsPost $data)
+    public function create(Comments $data)
     {
         $author = $data->getAuthor(); // Notice: Only variables should be passed by reference...
         $title = $data->getTitle();

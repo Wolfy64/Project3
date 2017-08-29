@@ -1,7 +1,7 @@
 <h1>Page de l'article !!!!</h1>
 
 <article class="border border-secondary bg-light rounded m-3 p-2">
-    <p>              <?= $data->getTitle();       ?> </p>
+    <h3>             <?= $data->getTitle();       ?> </h3>
     <p> Published on <?= $data->getDateContents() ?> </p>
     <p>              <?= $data->getAuthor();      ?> </p>
     <p>              <?= $data->getContents();    ?> </p>
@@ -34,7 +34,6 @@
         <label>Your message</label><br>
         <textarea rows="5" cols="40" name="comment[contents]" placeholder="e.g My name is Jean" required></textarea>
     </p>
-    <input type="hidden" name="comment[title]" value="<?= $data->getTitle() ?>">
     <input type="hidden" name="comment[idBlogAlaska]" value="<?= $data->getID() ?>">
     
     <button type="submit">Add your comment</button>

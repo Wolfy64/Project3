@@ -5,7 +5,7 @@ class Page
     protected $head   = 'Views/Template/head.php';
     protected $header = 'Views/Template/header.php';
     protected $nav    = 'Views/Template/nav.php';
-    protected $body;
+    protected $body   = 'Views/404.php';
     protected $footer = 'Views/Template/footer.php';
     protected $data = [];
 
