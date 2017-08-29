@@ -5,6 +5,8 @@ require_once 'Models/PostManager.php';
 require_once 'Models/CommentsManager.php';
 require_once 'Models/Connection.php';
 
+require_once 'Models/Utils.php';
+
 class Controller extends Page
 {
     protected $postManager;
@@ -69,7 +71,7 @@ class Controller extends Page
      */
     public function connection()
     {
-        if ( isset($_POST['user'], $_POST['password']) ){
+        if ( Utils::checkRequest($_POST, ['user', 'password']) ){
             $user = htmlspecialchars($_POST['user']);
             $password = htmlspecialchars($_POST['password']);
             
@@ -85,8 +87,8 @@ class Controller extends Page
      */
     public function addComment()
     {
-        var_dump($_POST);
-        if ( isset($_POST['comment']) ){
+
+        if ( Utils::checkRequest($_POST['comment'], ['idBlogAlaska', 'author', 'contents']) ){
 
             $data = [];
             foreach ($_POST['comment'] as $key => $value) {
@@ -95,6 +97,8 @@ class Controller extends Page
 
             $this->commentsManager->create( $comment = new Comments($data) );
             header('Location: /alaska?post=' . $data['idBlogAlaska']);
+        } else {
+            $this->template('404');
         }
     }
 }
