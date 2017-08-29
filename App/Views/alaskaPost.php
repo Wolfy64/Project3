@@ -28,13 +28,16 @@
     <legend>Something to say?</legend>
     <p>
         <label>Nickname</label><br>
-        <input type="text" name="nickname" placeholder="e.g Alex" required>
+        <input type="text" name="comment[author]" placeholder="e.g Jean" required>
     </p>
     <p>
         <label>Your message</label><br>
-        <textarea rows="5" cols="40" placeholder="e.g My name is Alex" required></textarea>
+        <textarea rows="5" cols="40" name="comment[contents]" placeholder="e.g My name is Jean" required></textarea>
     </p>
-    <button type="submitt">Add your comment</button>
+    <input type="hidden" name="comment[title]" value="<?= $data->getTitle() ?>">
+    <input type="hidden" name="comment[idBlogAlaska]" value="<?= $data->getID() ?>">
+    
+    <button type="submit">Add your comment</button>
     <button type="reset">Reset</button>
   </fieldset>
 </form>

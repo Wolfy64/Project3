@@ -2,17 +2,20 @@
 
 require_once 'Controllers/Page.php';
 require_once 'Models/BlogPostManager.php';
+require_once 'Models/CommentsPostManager.php';
 require_once 'Models/Connection.php';
 
 class Controller extends Page
 {
     protected $blogPostManager;
+    protected $commentsPostManager;
     protected $connection;
     protected $page;
 
     public function __construct(string $method = 'index')
     {
         $this->blogPostManager = new BlogPostManager();
+        $this->commentsPostManager = new CommentsPostManager();
         $this->connection = new Connection();
         $this->$method();
         
@@ -74,6 +77,24 @@ class Controller extends Page
 
         } else{
             $this->template('connection');
+        }
+    }
+
+    /**
+     * @param array from $_POST
+     */
+    public function addComment() // Commet déclarer le type de ma variable pour un Array $_POST
+    {
+        // var_dump($_POST);
+        if ( isset($_POST['comment']) ){
+
+            $data = []; // Est ce bien utile de créer un Objet ? ou juste un simple array est nécéssaire ?
+            foreach ($_POST['comment'] as $key => $value) {
+                $data += [$key => htmlspecialchars($value)];
+            }
+
+            $this->commentsPostManager->create( $comment = new CommentsPost($data) );
+            header('Location: http://projet-3.dev/alaska?post=' . $data['idBlogAlaska']); // Bricolage maison non ?
         }
     }
 }
