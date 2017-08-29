@@ -1,24 +1,24 @@
 <h1>Page de l'article !!!!</h1>
 
-<div>
+<article class="border border-secondary bg-light rounded m-3 p-2">
     <p>              <?= $data->getTitle();       ?> </p>
     <p> Published on <?= $data->getDateContents() ?> </p>
     <p>              <?= $data->getAuthor();      ?> </p>
     <p>              <?= $data->getContents();    ?> </p>
     <p> <a href="#comment">Add Comment</a>           </p>
-</div>
+</article>
 
 <!-- Show Comments -->
 
 <?php foreach ($data->getCommentsList() as $comment) { ?>
 
-    <div>
+    <div class="border border-light bg-light rounded m-3 p-2">
         <p> <?= $comment->getTitle()        ?> </p>
         <p> <?= $comment->getDateContents() ?> </p>
         <p> <?= $comment->getAuthor()       ?> </p>
         <p> <?= $comment->getContents()     ?> </p>
     </div>
-
+    <div> Report </div>
 <?php } ?>
 
 <!-- Add Comments -->
