@@ -101,4 +101,19 @@ class Controller extends Page
             $this->template('404');
         }
     }
+
+    public function report()
+    {
+        if ( Utils::checkRequest($_POST, ['report', 'idBlogAlaska']) ){
+            $idComment = intval($_POST['report']);
+            $idPost    = intval($_POST['idBlogAlaska']);
+
+            $this->commentsManager->report($idComment);
+            header('Location: /alaska?post=' . $idPost);
+  
+        } else {
+            $this->template('404');
+        }
+        
+    }
 }

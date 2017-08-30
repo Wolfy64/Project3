@@ -17,8 +17,11 @@
         <p> <?= $comment->getDateContents() ?> </p>
         <p> <?= $comment->getAuthor()       ?> </p>
         <p> <?= $comment->getContents()     ?> </p>
+        <form action="/report" method="post">
+            <button value='<?= $comment->getId() ?>' type="submit" name="report"> Report </button>
+            <input type="hidden" name="idBlogAlaska" value="<?= $data->getID() ?>">
+        </form>
     </div>
-    <div> Report </div>
 <?php } ?>
 
 <!-- Add Comments -->

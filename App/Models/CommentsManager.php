@@ -44,4 +44,12 @@ class CommentsManager extends SQLRequest
 
         $dbh->execute();
     }
+
+    public function report(int $idComment)
+    {
+        $sql = 'UPDATE commentsBlogAlaska SET report = true WHERE id = :id';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
+        $dbh->execute();
+    }
 }
