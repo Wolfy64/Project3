@@ -22,6 +22,7 @@ class Page
         require_once $this->nav;
         require_once $this->body;
         require_once $this->footer;
+
     }
 
     /**

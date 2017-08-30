@@ -16,6 +16,7 @@ class Controller extends Page
 
     public function __construct(string $method = 'index')
     {
+        session_start();
         $this->postManager = new PostManager();
         $this->commentsManager = new CommentsManager();
         $this->connection = new Connection();
@@ -57,9 +58,9 @@ class Controller extends Page
     /**
      * Built the Admin page
      */
-    public function admin(bool $param =  FALSE)
+    public function admin()
     {
-        if( $param === TRUE ){
+        if( $this->connection->isAdmin() ){
             $this->template('admin'); 
         } else {
             $this->template('connection');
@@ -71,13 +72,16 @@ class Controller extends Page
      */
     public function connection()
     {
-        if ( Utils::checkRequest($_POST, ['user', 'password']) ){
-            $user = htmlspecialchars($_POST['user']);
+        if ( $this->connection->isAdmin() ){
+            $this->template('admin');
+
+        } elseif( Utils::checkRequest($_POST, ['user', 'password']) ) {
+            $user     = htmlspecialchars($_POST['user']);
             $password = htmlspecialchars($_POST['password']);
             
-            $this->admin($this->connection->verifyAccount($user, $password));
+            $this->admin( $this->connection->verifyAccount($user, $password) );
 
-        } else{
+        } else {
             $this->template('connection');
         }
     }

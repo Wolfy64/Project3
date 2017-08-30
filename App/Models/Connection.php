@@ -13,7 +13,12 @@ class Connection extends SQLRequest
         $userId     = $this->dbUser($user);
         $dbPassword = $this->dbPassword($userId, $password);
 
-        return password_verify($password, $dbPassword);
+        if ( password_verify($password, $dbPassword) ){
+            $this->setAdmin();
+        } else {
+            return FALSE;
+        }
+
     }
 
     /**
@@ -21,7 +26,7 @@ class Connection extends SQLRequest
      * @param $user string
      * @return $userId or FALSE;
      */
-    public function dbUser(string $user)
+    private function dbUser(string $user)
     {
         $sql = 'SELECT id, user FROM usersBlog WHERE user = :user';
         $dbh = $this->getDatabase()->prepare($sql);
@@ -36,7 +41,7 @@ class Connection extends SQLRequest
      * @param $password string
      * @return $password or FALSE
      */
-    public function dbPassword($userId, string $password) // Pourquoi le type mixed ne marche pas pour $userId ?
+    private function dbPassword($userId, string $password) // Pourquoi le type mixed ne marche pas pour $userId ?
     {
         if ( $userId != FALSE ){
             $sql = 'SELECT password FROM usersBlog WHERE id = :id';
@@ -61,5 +66,26 @@ class Connection extends SQLRequest
         $sql = 'INSERT INTO password FROM userBlog';
         $dbh = $this->getDatabase()->prepare($sql);
         // A finir pour creer ou modifier le mdp de l'écrivain;
+    }
+
+    /**
+     * Set Admin
+     * @return $_SESSION
+     */
+    private function setAdmin()
+    {
+        return $_SESSION['admin'] = TRUE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        if ( !isset($_SESSION['admin']) || $_SESSION['admin'] != TRUE ){
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 }
