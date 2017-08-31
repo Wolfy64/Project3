@@ -60,8 +60,9 @@ class Controller extends Page
      */
     public function admin()
     {
-        if( $this->connection->isAdmin() ){
-            $this->template('admin'); 
+        if( $this->connection->isAdmin() ){ // If True
+            $data = $this->commentsManager->reportCount();
+            $this->template('admin', $data); 
         } else {
             $this->template('connection');
         }
@@ -72,17 +73,14 @@ class Controller extends Page
      */
     public function connection()
     {
-        if ( $this->connection->isAdmin() ){
-            $this->template('admin');
-
-        } elseif( Utils::checkRequest($_POST, ['user', 'password']) ) {
+        if ( Utils::checkRequest($_POST, ['user', 'password']) ) { // If True
             $user     = htmlspecialchars($_POST['user']);
             $password = htmlspecialchars($_POST['password']);
             
             $this->admin( $this->connection->verifyAccount($user, $password) );
 
         } else {
-            $this->template('connection');
+            $this->admin();
         }
     }
 

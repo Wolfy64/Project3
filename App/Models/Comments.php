@@ -9,7 +9,7 @@ class Comments extends Data
     // GETTERS
 
     public function getIdBlogAlaska(){ return $this->idBlogAlaska; }
-
+    
     // SETTERS
 
     public function setIdBlogAlaska(Int $idBlogAlaska)

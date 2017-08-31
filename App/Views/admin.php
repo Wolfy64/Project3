@@ -1,9 +1,8 @@
-
-
 <h1>Page admin</h1>
 
-<form method="post">
-    <textarea id="myTextarea">Hello, World!</textarea>
+<p>You have <?= $data ?> comment(s) reported by users</p>
+
+<form method="post" action="/test">
+    <textarea id="myTextarea" name="myTextarea">Hello, World!</textarea>
+    <button type="submmit">Published</button>
 </form>
-
-

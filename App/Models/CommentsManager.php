@@ -6,8 +6,9 @@ require_once 'Models/SQLRequest.php';
 class CommentsManager extends SQLRequest
 {
     /**
-     *
-     *
+     * Read all comments from $postId
+     * @param int $postId
+     * @return array Object Comment
      */
     public function read(int $postId)
     {
@@ -28,6 +29,10 @@ class CommentsManager extends SQLRequest
         return $commentsList;
     }
 
+    /**
+     * @param Object $data
+     * @return Void
+     */
     public function create(Comments $data)
     {
         $author = $data->getAuthor(); // Notice: Only variables should be passed by reference...
@@ -45,11 +50,30 @@ class CommentsManager extends SQLRequest
         $dbh->execute();
     }
 
+    /**
+     * Report comments
+     * @param int $idComment
+     * @return Void
+     */
     public function report(int $idComment)
     {
         $sql = 'UPDATE commentsBlogAlaska SET report = true WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
+    }
+
+    /**
+     * Count numbers of report
+     * @return int
+     */
+    public function reportCount()
+    {
+        $sql = 'SELECT COUNT(*) FROM commentsBlogAlaska WHERE report = 1';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->execute();
+        $result = intval($dbh->fetchColumn());
+
+        return $result;
     }
 }

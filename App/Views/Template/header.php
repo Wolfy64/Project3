@@ -1,5 +1,3 @@
 <header>
-    <p>
-        <a href="/index.php">Home</a>        
-    </p>
+    <h1>Jean Forteroche's Blog</h1>
 </header>
