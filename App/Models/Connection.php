@@ -41,7 +41,7 @@ class Connection extends SQLRequest
      * @param $password string
      * @return $password or FALSE
      */
-    private function dbPassword($userId, string $password) // Pourquoi le type mixed ne marche pas pour $userId ?
+    private function dbPassword($userId, string $password)
     {
         if ( $userId != FALSE ){
             $sql = 'SELECT password FROM usersBlog WHERE id = :id';

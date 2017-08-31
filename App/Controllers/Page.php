@@ -33,7 +33,7 @@ class Page
         if ( file_exists('Views/' . $body . '.php') ){
             $this->body = 'Views/' . $body . '.php';
         } else{
-            $this->body = 'Views/404.php';
+            $this->body = 'Views/Errors/500.php';
         }      
     }
 

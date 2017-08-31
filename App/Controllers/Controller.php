@@ -1,25 +1,29 @@
 <?php
 
 require_once 'Controllers/Page.php';
-require_once 'Models/PostManager.php';
+
+require_once 'Models/Admin.php';
 require_once 'Models/CommentsManager.php';
 require_once 'Models/Connection.php';
+require_once 'Models/PostManager.php';
 
 require_once 'Models/Utils.php';
 
 class Controller extends Page
 {
-    protected $postManager;
+    protected $admin;
     protected $commentsManager;
     protected $connection;
     protected $page;
+    protected $postManager;
 
     public function __construct(string $method = 'index')
     {
         session_start();
-        $this->postManager = new PostManager();
+        $this->admin = new Admin();
         $this->commentsManager = new CommentsManager();
         $this->connection = new Connection();
+        $this->postManager = new PostManager();
         $this->$method();
         
     }
@@ -29,7 +33,7 @@ class Controller extends Page
      */
     public function index()
     { 
-        $this->template('home');
+        $this->template('Frontend/home');
     }
 
     /**
@@ -39,18 +43,18 @@ class Controller extends Page
     {
         if ( !isset($_GET['post']) ){
             $data = $this->postManager->readAllPost();
-            $this->template('alaskaList', $data);
+            $this->template('Frontend/alaskaList', $data);
 
         } elseif ( !is_numeric($_GET['post']) ){
-            $this->template('404');
+            $this->template('Errors/404');
 
         } else {
             $data = $this->postManager->read($_GET['post']);
 
             if ( $data === FALSE ){
-                $this->template('404');
+                $this->template('Errors/404');
             } else {
-                $this->template('alaskaPost', $data);
+                $this->template('Frontend/alaskaPost', $data);
             }
         }
     }
@@ -62,9 +66,9 @@ class Controller extends Page
     {
         if( $this->connection->isAdmin() ){ // If True
             $data = $this->commentsManager->reportCount();
-            $this->template('admin', $data); 
+            $this->template('Backend/admin', $data);
         } else {
-            $this->template('connection');
+            $this->template('Frontend/connection');
         }
     }
 
@@ -110,7 +114,7 @@ class Controller extends Page
             $this->commentsManager->create( $comment = new Comments($data) );
             header('Location: /alaska?post=' . $data['idBlogAlaska']);
         } else {
-            $this->template('404');
+            $this->template('Errors/404');
         }
     }
 
@@ -124,7 +128,7 @@ class Controller extends Page
             header('Location: /alaska?post=' . $idPost);
   
         } else {
-            $this->template('404');
+            $this->template('Errors/404');
         }
         
     }
