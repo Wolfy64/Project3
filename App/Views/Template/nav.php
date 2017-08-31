@@ -2,7 +2,8 @@
     <ul>
         <li>
             <a href="/index.php">Home</a>        
-            <a href="/connection">Administrator</a>
+            <a href="/connection">Admin</a>
+            <a href="/signOut">Sign out</a>
         </li>
     </ul>
 </nav>

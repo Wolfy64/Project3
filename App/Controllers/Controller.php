@@ -85,6 +85,16 @@ class Controller extends Page
     }
 
     /**
+     * Destroy $_SESSION
+     * @return Void
+     */
+    public function signOut()
+    {
+        session_destroy();
+        $this->index();
+    }
+
+    /**
      * @param array from $_POST
      */
     public function addComment()
