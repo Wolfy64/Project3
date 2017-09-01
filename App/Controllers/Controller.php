@@ -18,12 +18,10 @@ class Controller extends Page
 
     public function __construct(string $method = 'index')
     {
-        session_start();
         $this->commentsManager = new CommentsManager();
         $this->connection = new Connection();
         $this->postManager = new PostManager();
         $this->$method();
-        
     }
 
     /**
@@ -70,7 +68,7 @@ class Controller extends Page
     }
 
     /**
-     *  Check that connection to the Admin page is allowed
+     * Check that connection to the Admin page is allowed
      */
     public function connection()
     {
@@ -115,6 +113,10 @@ class Controller extends Page
         }
     }
 
+    /**
+     * Report Comments
+     * @return Void
+     */
     public function report()
     {
         if ( Utils::checkRequest($_POST, ['report', 'idBlogAlaska']) ){
@@ -129,7 +131,11 @@ class Controller extends Page
         }
         
     }
-    
+
+    /**
+     * Cancel comments reports 
+     * @return Void
+     */
     public function cancelReport()
     {
         if ( Utils::checkRequest($_GET[], ['cancel']) ){
@@ -144,33 +150,41 @@ class Controller extends Page
         
     }
 
+    /**
+     * Built the admin page
+     */
     private function adminPage()
     {
-        if ( !Utils::checkRequest($_GET, ['action']) ){
-            $data = $this->commentsManager->reportCount();
-            $this->template('Backend/admin', $data);
-        } else {
-            $action = htmlspecialchars($_GET['action']);
+        if ( isset($_SESSION['admin']) === TRUE ){
 
-            switch ($action) {
-                case 'new':
-                    $this->template('Backend/new');
-                    break;
+            if ( isset($_GET['page']) ){
+                $action = htmlspecialchars($_GET['page']);
 
-                case 'report':
-                    $data = $this->commentsManager->showReport();
-                    $this->template('Backend/report', $data);
-                    break;
+                switch ($action) {
+                    case 'new':
+                        $this->template('Backend/new');
+                        break;
 
-                case 'posts':
+                    case 'posts':
+                        $data = $this->postManager->readAllPost();
+                        $this->template('Backend/posts', $data);
+                        break;
 
-                    $this->template('Backend/posts', $data);
-                    break;
-                
-                default:
-                    $this->template('Errors/404');
-                    break;
+                    case 'report':
+                        $data = $this->commentsManager->showReport();
+                        $this->template('Backend/report', $data);
+                        break;
+                    
+                    default:
+                        $this->template('Errors/404');
+                        break;
+                }
+
+            } else {
+                $data = $this->commentsManager->reportCount();
+                $this->template('Backend/admin', $data);
             }
         }
     }
 }
+
