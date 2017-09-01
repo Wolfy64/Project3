@@ -58,7 +58,7 @@ class PostManager extends SQLRequest
 
     /**
      * @param void
-     * @return array
+     * @return array Object Post
      */
     public function readAllPost()
     {

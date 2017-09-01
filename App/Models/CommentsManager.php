@@ -57,7 +57,20 @@ class CommentsManager extends SQLRequest
      */
     public function report(int $idComment)
     {
-        $sql = 'UPDATE commentsBlogAlaska SET report = true WHERE id = :id';
+        $sql = 'UPDATE commentsBlogAlaska SET report = TRUE WHERE id = :id';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
+        $dbh->execute();
+    }
+
+    /**
+     * Remove report comments
+     * @param int $idComment
+     * @return Void
+     */
+    public function cancelReport(int $idComment)
+    {
+        $sql = 'UPDATE commentsBlogAlaska SET report = FALSE WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
@@ -75,5 +88,23 @@ class CommentsManager extends SQLRequest
         $result = intval($dbh->fetchColumn());
 
         return $result;
+    }
+
+    /**
+     * @param void
+     * @return array Object Comments
+     */
+    public function showReport()
+    {
+        $reportList = [];
+        $sql = 'SELECT id, author, contents, dateContents FROM commentsBlogAlaska WHERE report = 1';
+        $dbh = $this->getDatabase()->query($sql);
+        $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ( $data as $report ) {
+            $reportList[] = new Comments($report);
+        }
+        
+        return $reportList;
     }
 }

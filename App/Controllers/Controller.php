@@ -2,7 +2,6 @@
 
 require_once 'Controllers/Page.php';
 
-require_once 'Models/Admin.php';
 require_once 'Models/CommentsManager.php';
 require_once 'Models/Connection.php';
 require_once 'Models/PostManager.php';
@@ -20,7 +19,6 @@ class Controller extends Page
     public function __construct(string $method = 'index')
     {
         session_start();
-        $this->admin = new Admin();
         $this->commentsManager = new CommentsManager();
         $this->connection = new Connection();
         $this->postManager = new PostManager();
@@ -65,8 +63,7 @@ class Controller extends Page
     public function admin()
     {
         if( $this->connection->isAdmin() ){ // If True
-            $data = $this->commentsManager->reportCount();
-            $this->template('Backend/admin', $data);
+            $this->adminPage();
         } else {
             $this->template('Frontend/connection');
         }
@@ -131,5 +128,49 @@ class Controller extends Page
             $this->template('Errors/404');
         }
         
+    }
+    
+    public function cancelReport()
+    {
+        if ( Utils::checkRequest($_GET[], ['cancel']) ){
+            $idComment = intval($_POST['cancel']);
+
+            $this->commentsManager->cancelReport($idComment);
+            // header('Location: /alaska?post=' . $idPost);
+  
+        } else {
+            $this->template('Errors/404');
+        }
+        
+    }
+
+    private function adminPage()
+    {
+        if ( !Utils::checkRequest($_GET, ['action']) ){
+            $data = $this->commentsManager->reportCount();
+            $this->template('Backend/admin', $data);
+        } else {
+            $action = htmlspecialchars($_GET['action']);
+
+            switch ($action) {
+                case 'new':
+                    $this->template('Backend/new');
+                    break;
+
+                case 'report':
+                    $data = $this->commentsManager->showReport();
+                    $this->template('Backend/report', $data);
+                    break;
+
+                case 'posts':
+
+                    $this->template('Backend/posts', $data);
+                    break;
+                
+                default:
+                    $this->template('Errors/404');
+                    break;
+            }
+        }
     }
 }

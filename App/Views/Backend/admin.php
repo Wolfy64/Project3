@@ -1,13 +1,25 @@
 <h1>Page admin</h1>
 
 <!-- Report Comments -->
-<p>You have <?= $data ?> comment(s) reported by users</p>
+<p>
+    <a href="admin/report">
+        You have <?= $data ?> comment(s) reported by users
+    </a>
+</p>
+
+<!-- New Post -->
+<p>
+    <a href="admin/new">
+        Do you want publish a post today?
+    </a>
+</p>
+
+<!-- Show Post -->
+<p>
+    <a href="admin/posts">
+        You have XX published posts on your blog
+    </a>
+</p>
 
 
 
-
-<!-- TinyMce -->
-<form method="post" action="/test">
-    <textarea id="myTextarea" name="myTextarea">Hello, World!</textarea>
-    <button type="submmit">Published</button>
-</form>
