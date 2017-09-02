@@ -1,14 +1,17 @@
-<form action="/connection" method="POST">
-    <fieldset>
-        <legend>Space Administrators</legend>
-        <p>
-            <label for="user">User</label>
-            <input type="text" name="user" required>
-        </p>
-        <p>
-            <label for="password">Password</label>
-            <input type="password" name="password" required>
-        </p>
-        <button type="submit">Connection</button>
-    </fieldset>
-</form>
+<div class="col-lg">
+    <form action="/connection" method="POST">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="user" placeholder="User" class="form-control" required >
+            </div>
+
+            <div class="col input-group">
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="submit">Enter</button>
+                </span>
+            </div>
+            <!-- <button type="submit">Connection</button> -->
+        </div>
+    </form>
+</div>

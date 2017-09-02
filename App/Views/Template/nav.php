@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <ul>
-        <li>
-            <a href="/index.php">Home</a>        
-            <a href="/admin">Admin</a>
-            <a href="/signOut">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<div class="row">
+    <nav class="col-lg-1">
+        <ul class="list-inline">
+            <li> <a href="/index.php"> Home     </a> </li>      
+            <li> <a href="/admin">     Admin    </a> </li>
+            <li> <a href="/signOut">   Sign out </a> </li>
+        </ul>
+    </nav>

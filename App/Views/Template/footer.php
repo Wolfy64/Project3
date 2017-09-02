@@ -1,14 +1,13 @@
-<footer>
-    <p>
-        <ul>
-            <li>Contact</li>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Infos</li>
-        </ul>
-    </p>
+</div>
+
+<footer class="row bg-secondary text-white">
+    <ul class="list-inline-item">
+        <li class="list-inline-item">Contact</li>
+        <li class="list-inline-item">Facebook</li>
+        <li class="list-inline-item">Twitter</li>
+        <li class="list-inline-item">Infos</li>
+    </ul>
 </footer>
 
-</div>
 </body>
 </html>

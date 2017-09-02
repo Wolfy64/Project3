@@ -1,27 +1,34 @@
-<h1>Report Comments</h1>
+<div class="col-lg">
 
-<?php foreach ($data as $comment) { ?>
+    <?php foreach ($data as $comment) {; ?>
+        <table class="table table-sm table-striped table-responsive table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> Date          </th>
+                    <th> User          </th>
+                    <th> Comment       </th>
+                    <th> Manage        </th>
+                </tr>
+            </thead>
 
-    <table class="table table-striped table-responsive">
-    <tr>
-        <th scope="row"> Date          </th>
-        <th scope="row"> User          </th>
-        <th scope="row"> Comment       </th>
-        <th scope="row"> Delete        </th>
-    </tr>
-    <tr>
-        <td> <?= $comment->getDateContents() ?> </td>
-        <td> <?= $comment->getAuthor()       ?> </td>
-        <td> <?= $comment->getContents()     ?> </td>
-        <td> 
-            <a href="admin/cancel=<?= $comment->getID()?>">
-                <button>Cancel</button>
-            </a>
-            <a href="admin/delete=<?= $comment->getID()?>">
-                <button>Delete</button>
-            </a>
-         </td>
-    </tr>
-    </table>
+            <tbody>
+                <tr>
+                    <td> <?= $comment->getDateContents() ?> </td>
+                    <td> <?= $comment->getAuthor()       ?> </td>
+                    <td> <?= $comment->getContents()     ?> </td>
+                    <td rowspan="2"> 
+                        <a href="/admin?page=report&amp;action=cancel<?= $comment->getID()?>">
+                            <button type="button" class="btn btn-info btn-sm">Cancel</button>
+                        </a>
 
-<?php } ?>
+                        <a href="/admin?page=report&amp;action=delete<?= $comment->getID()?>">
+                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+    <?php } ?>
+</div>
+
