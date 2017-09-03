@@ -32,7 +32,7 @@ class Utils
     private static function getErrors()
     {
         foreach ( self::$errors as $key => $value ) {
-            echo $value . '</br>';
+            return $value;
         }
     }
 }
