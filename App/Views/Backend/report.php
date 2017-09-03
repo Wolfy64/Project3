@@ -1,34 +1,43 @@
 <div class="col-lg">
-
-    <?php foreach ($data as $comment) {; ?>
         <table class="table table-sm table-striped table-responsive table-bordered table-hover">
             <thead>
                 <tr>
-                    <th> Date          </th>
-                    <th> User          </th>
-                    <th> Comment       </th>
-                    <th> Manage        </th>
+                    <th class="text-center w-25">             Date    </th>
+                    <th class="text-center w-25">             User    </th>
+                    <th class="text-center w-75">             Comment </th>
+                    <th class="text-center w-25" colspan="2"> Manage  </th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr>
-                    <td> <?= $comment->getDateContents() ?> </td>
-                    <td> <?= $comment->getAuthor()       ?> </td>
-                    <td> <?= $comment->getContents()     ?> </td>
-                    <td rowspan="2"> 
-                        <a href="/admin?page=report&amp;action=cancel<?= $comment->getID()?>">
-                            <button type="button" class="btn btn-info btn-sm">Cancel</button>
-                        </a>
-
-                        <a href="/admin?page=report&amp;action=delete<?= $comment->getID()?>">
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                        </a>
-                    </td>
-                </tr>
+                <?php foreach ($data as $comment) : ?>
+                    <tr>
+                        <td class="text-center w-25"> <?= $comment->getDateContents() ?> </td>
+                        <td class="text-center w-25"> <?= $comment->getAuthor()       ?> </td>
+                        <td class="text-center w-75"> <?= $comment->getContents()     ?> </td>
+                        <td class="text-center w-25"> 
+                            <a href="/admin?page=report&amp;action=cancel<?= $comment->getID()?>">
+                                <button type="button" class="btn btn-info btn-sm">Cancel</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/admin?page=report&amp;action=delete<?= $comment->getID()?>">
+                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <th class="text-center w-25"> Date          </th>
+                    <th class="text-center w-25"> User          </th>
+                    <th class="text-center w-75"> Comment       </th>
+                    <th class="text-center w-25" colspan="2" > Manage        </th>
+                </tr>
+            </tfoot>
+            
         </table>
-    
-    <?php } ?>
 </div>
 

@@ -1,15 +1,18 @@
 /* style css */
 
-/*  */
+/* Nav Bar */
+.navbar{
+    background: #212121;
+}
 
-/* body{
-    height: 100%;
-} */
+/* HOMEPAGE */
 
-/* #cover{
-    background: #222 url('../img/cover.jpg') no-repeat;
-    background-size: cover;
+#home{
+    background: #222 url('../img/background2.jpg') no-repeat;
+    /* background-size: cover;
     color: white;
     height: 100%;
     text-align: center;
-} */
+    display: flex;
+    align-items: center; */
+}
