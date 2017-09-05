@@ -2,4 +2,6 @@
 
 require_once 'Controllers/Router.php';
 
-Router::loadPage();
+$router = new Router();
+$router->setRoute();
+$router->loadController();

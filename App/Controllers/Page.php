@@ -1,6 +1,8 @@
 <?php
 
-class Page
+require_once 'Controllers/Router.php';
+
+class Page extends Router
 {
     protected $head   = 'Views/Template/head.php';
     protected $header = 'Views/Template/header.php';
@@ -8,6 +10,11 @@ class Page
     protected $body   = 'Views/404.php';
     protected $footer = 'Views/Template/footer.php';
     protected $data = [];
+
+    public function __construct()
+    {
+        // $this->checkPage();
+    }
 
     /**
      * Build the template of the page
@@ -40,5 +47,15 @@ class Page
     public function addData($data)
     {
         return $this->data[] = $data;
+    }
+
+    public function checkPage($page){
+        if ( method_exists('', $page)){
+            echo 'Oui';
+            return True;
+        } else {
+            echo 'Non';
+            return False;
+        }
     }
 }

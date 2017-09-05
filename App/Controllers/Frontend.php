@@ -8,7 +8,7 @@ require_once 'Models/PostManager.php';
 
 require_once 'Models/Utils.php';
 
-class Controller extends Page
+class Frontend extends Page
 {
     protected $admin;
     protected $commentsManager;
@@ -18,6 +18,7 @@ class Controller extends Page
 
     public function __construct(string $method = 'index')
     {
+        parent::__construct();
         $this->commentsManager = new CommentsManager();
         $this->connection = new Connection();
         $this->postManager = new PostManager();
@@ -72,7 +73,7 @@ class Controller extends Page
      */
     public function connection()
     {
-        if ( Utils::checkRequest($_POST, ['user', 'password']) ) { // If True
+        if ( Utils::checkArray($_POST, ['user', 'password']) ) { // If True
             $user     = htmlspecialchars($_POST['user']);
             $password = htmlspecialchars($_POST['password']);
             
@@ -99,7 +100,7 @@ class Controller extends Page
     public function addComment()
     {
 
-        if ( Utils::checkRequest($_POST['comment'], ['idBlogAlaska', 'author', 'contents']) ){
+        if ( Utils::checkArray($_POST['comment'], ['idBlogAlaska', 'author', 'contents']) ){
 
             $data = [];
             foreach ($_POST['comment'] as $key => $value) {
@@ -119,7 +120,7 @@ class Controller extends Page
      */
     public function report()
     {
-        if ( Utils::checkRequest($_POST, ['report', 'idBlogAlaska']) ){
+        if ( Utils::checkArray($_POST, ['report', 'idBlogAlaska']) ){
             $idComment = intval($_POST['report']);
             $idPost    = intval($_POST['idBlogAlaska']);
 
@@ -138,7 +139,7 @@ class Controller extends Page
      */
     public function cancelReport()
     {
-        if ( Utils::checkRequest($_GET[], ['cancel']) ){
+        if ( Utils::checkArray($_GET[], ['cancel']) ){
             $idComment = intval($_POST['cancel']);
 
             $this->commentsManager->cancelReport($idComment);

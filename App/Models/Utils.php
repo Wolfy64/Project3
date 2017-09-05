@@ -5,20 +5,21 @@ class Utils
     static protected $errors = [];
 
     /**
-     * To check if the Method (POST/GET) exist or is null
-     * @param $method (POST,GET)
-     * @param array $data[param1 ,param2, ...] 
+     * To check if the value of Array exist or is null
+     * @param array $array
+     * @param array $param[param1 ,param2, ...] 
      * @return bool
      */
-    public static function checkRequest($method, array $data)
+    public static function checkArray($array, array $param)
     {
-        foreach ($data as $key => $value) {
+        var_dump($param);
+        foreach ($param as $key => $value) {
             
-            if ( !isset($method[$value]) || empty($method[$value]) ){
+            if ( !isset($array[$value]) || empty($array[$value]) ){
                 self::$errors[] = $value . ' is NULL !';
             }
         }
-
+        var_dump(self::$errors);
         if (  empty(self::$errors) ){
             return TRUE;
         } else {
