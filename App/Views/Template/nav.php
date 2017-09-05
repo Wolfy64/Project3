@@ -24,7 +24,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin"> ADMIN </a>
+                <a class="nav-link" href="/connection"> ADMIN </a>
             </li>
 
             <li class="nav-item">

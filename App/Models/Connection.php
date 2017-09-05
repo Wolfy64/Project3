@@ -76,16 +76,4 @@ class Connection extends SQLRequest
     {
         return $_SESSION['admin'] = TRUE;
     }
-
-    /**
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        if ( !isset($_SESSION['admin']) || $_SESSION['admin'] != TRUE ){
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
 }

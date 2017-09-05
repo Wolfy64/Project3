@@ -1,7 +1,7 @@
 <div class="col-g">
     <!-- Report Comments -->
     <p>
-        <a href="?page=report">
+        <a href="admin/report">
             You have <?= $data ?> comment(s) reported by users
         </a>
     </p>

@@ -7,9 +7,13 @@ class Router
 {
     protected $controller;
     protected $route;
+    protected $uriPage;
+
+    // SETTERS
 
     /**
-     * Set attribute $route from URI
+     * Set attribute $route from URI (Uniform Resource Identifier)
+     * If URI empty set Index
      * @return array $route
      */
     public function setRoute(){
@@ -21,28 +25,54 @@ class Router
 
         } else {
 
-            return $this->route = [''];
+            return $this->route = ['index'];
         }
 
     }
 
-    public function getRoute(){ return $this->route; }
+    /**
+     * Set controller from attribute $route
+     * @return string $controller;
+     */
+    public function setController()
+    {
+
+        if ( $this->route[0] != 'admin'){
+            return $this->controller = 'Frontend';
+        } else{
+            return $this->controller = 'Backend';
+        }
+
+    }
+
+    /**
+     * 
+     * @return string 
+     */
+    public function setUriPage()
+    {
+        $uriPage = $this->route;
+        return $this->uriPage = $this->uriPage = current($uriPage);
+    }
+
+    // METHODS
 
     /**
      * Load Controller from attribute $route and start session
      * @return new Object Controller
      */
-    public function loadController()
+    public function loadController(string $page = Null)
     {
+
         $this->sesssionStart();
-        var_dump($this->route);
-        if ( $this->route[0] != 'admin'){
-            $this->controller = 'Frontend';
+        if ( $page != Null ){
+
+             return $controller = new $this->controller($page);
         } else{
-            $this->controller = 'Backend';
+
+            return $controller = new $this->controller($this->uriPage);
         }
-        
-        return $controller = new $this->controller();
+
     }
 
     /**
@@ -53,5 +83,21 @@ class Router
     {
         return session_start();
     }
+
+    /**
+     * Check if the Page exist
+     * @return bool
+     */
+    public function checkPage()
+    {
+
+        if ( method_exists($this->controller, $this->uriPage) ){
+            return True;
+        } else {
+            return False;
+        }
+
+    }
+
 
 }

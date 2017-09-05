@@ -2,8 +2,10 @@
 
 require_once 'Controllers/Router.php';
 
-class Page extends Router
+class Page
 {
+    protected $commentsManager;
+
     protected $head   = 'Views/Template/head.php';
     protected $header = 'Views/Template/header.php';
     protected $nav    = 'Views/Template/nav.php';
@@ -11,9 +13,11 @@ class Page extends Router
     protected $footer = 'Views/Template/footer.php';
     protected $data = [];
 
-    public function __construct()
+    public function __construct($page)
     {
-        // $this->checkPage();
+        $this->commentsManager = new CommentsManager();
+        $this->$page();
+        var_dump($_SESSION);
     }
 
     /**
@@ -22,6 +26,7 @@ class Page extends Router
      */
     public function template(string $body, $data = null)
     {
+        var_dump($body);
         $this->setBody($body);
         $this->addData($data);
         require_once $this->head;
@@ -49,13 +54,21 @@ class Page extends Router
         return $this->data[] = $data;
     }
 
-    public function checkPage($page){
-        if ( method_exists('', $page)){
-            echo 'Oui';
-            return True;
-        } else {
-            echo 'Non';
-            return False;
-        }
+    /**
+     * Built the index page by default
+     */
+    public function index()
+    { 
+        $this->template('Frontend/home');
     }
+
+    /**
+     * Built the error page
+     *
+     */
+    public function error404()
+    {
+        $this->template('Errors/404');
+    }
+
 }
