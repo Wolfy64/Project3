@@ -102,13 +102,15 @@ class Router
      */
     public function loadController(string $page = Null)
     {
+        $controller = $this->controller;
+        // var_dump( $controller->isAdmin );
 
         if ( $page != Null ){
             // Load Controller
-             return $controller = new $this->controller($this, $page);
+             return new $this->controller($this, $page);
         } else{
             // Load Controller whith first parameter of URI (Page)
-            return $controller = new $this->controller($this, $this->uriPage);
+            return new $this->controller($this, $this->uriPage);
         }
 
     }
@@ -128,12 +130,5 @@ class Router
             return $_SESSION['admin'] = False;
         }
 
-    }
-
-    // ==== TEST ====
-    
-    public function addRoute($param)
-    {
-        $this->route[] = $param;
     }
 }

@@ -14,68 +14,74 @@ class Backend extends Page
         $this->commentsManager = new CommentsManager;
         $this->connection = new Connection();
         parent::__construct($router, $page);
-
     }
 
-
-
+    // PAGES
 
     /**
      * Built the admin page
      */
     public function home()
     {
-        
-        $_SESSION['admin'] = TRUE;
+        if ( $_SESSION['admin'] != True ){
+            return $this->template('Frontend/connection');
+        } else {
+            $data = $this->commentsManager->reportCount();
 
-        if ( isset($_SESSION['admin']) === TRUE ){
-
-            if ( isset($_GET['page']) ){
-                $action = htmlspecialchars($_GET['page']);
-
-                switch ($action) {
-                    case 'new':
-                        $this->template('Backend/new');
-                        break;
-
-                    case 'posts':
-                        $data = $this->postManager->readAllPost();
-                        $this->template('Backend/posts', $data);
-                        break;
-
-                    case 'report':
-                        $data = $this->commentsManager->showReport();
-                        $this->template('Backend/report', $data);
-                        break;
-                    
-                    default:
-                        $this->template('Errors/404');
-                        break;
-                }
-
-            } else {
-                $data = $this->commentsManager->reportCount();
-                $this->template('Backend/admin', $data);
-            }
+            return $this->template('Backend/admin', $data);
         }
     }
 
+    public function showReport()
+    {
+        $route = $this->router->getRoute();
+
+        if ( next($route) != 'showReport' ) {
+
+            return $this->template('Errors/404');
+        } else {
+            $data = $this->commentsManager->showReport();
+
+            return $this->template('Backend/showReport', $data);           
+        }
+    }
+    
     /**
      * Cancel comments reports 
      * @return Void
      */
     public function cancelReport()
     {
-        if ( Utils::checkArray($_GET[], ['cancel']) ){
-            $idComment = intval($_POST['cancel']);
-
-            $this->commentsManager->cancelReport($idComment);
-            // header('Location: /alaska?post=' . $idPost);
-  
-        } else {
-            $this->template('Errors/404');
-        }
+        $route = $this->router->getRoute();
         
+        if ( next($route) != 'cancelReport' ){
+            
+            return $this->template('Errors/404');
+        } else {
+
+            $idComment = intval( next($route) );
+            $this->commentsManager->cancelReport($idComment);
+            $data = $this->commentsManager->showReport();
+            
+            return $this->template('Backend/showReport', $data);          
+        }
+    }
+
+    public function deleteReport()
+    {
+        $route = $this->router->getRoute();
+
+        if ( next($route) != 'deleteReport' ){
+            
+            return $this->template('Errors/404');
+        } else {
+
+            $idComment = intval( next($route) );
+            $this->commentsManager->delete($idComment);
+            $data = $this->commentsManager->showReport();
+
+            return $this->template('Backend/showReport', $data);          
+        }
     }
 
     /**

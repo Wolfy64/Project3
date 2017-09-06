@@ -5,6 +5,30 @@ require_once 'Models/SQLRequest.php';
 
 class CommentsManager extends SQLRequest
 {
+
+    // CRUD SYSTEM
+
+    /**
+     * @param Object $data
+     * @return Void
+     */
+    public function create(Comments $data)
+    {
+        $author = $data->getAuthor(); // Notice: Only variables should be passed by reference...
+        $contents = $data->getContents();
+        $idBlogAlaska = $data->getIdBlogAlaska();
+
+        $sql = 'INSERT INTO commentsBlogAlaska(author, contents, dateContents, idBlogAlaska)
+                VALUES(:author, :contents, NOW(), :idBlogAlaska)';
+
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':author', $author, PDO::PARAM_STR); // Notice: Only variables should be passed by reference...
+        $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
+        $dbh->bindParam(':idBlogAlaska', $idBlogAlaska, PDO::PARAM_INT);
+
+        $dbh->execute();
+    }
+
     /**
      * Read all comments from $postId
      * @param int $postId
@@ -29,26 +53,20 @@ class CommentsManager extends SQLRequest
         return $commentsList;
     }
 
-    /**
-     * @param Object $data
-     * @return Void
-     */
-    public function create(Comments $data)
+    public function update()
     {
-        $author = $data->getAuthor(); // Notice: Only variables should be passed by reference...
-        $contents = $data->getContents();
-        $idBlogAlaska = $data->getIdBlogAlaska();
+        
+    }
 
-        $sql = 'INSERT INTO commentsBlogAlaska(author, contents, dateContents, idBlogAlaska)
-                VALUES(:author, :contents, NOW(), :idBlogAlaska)';
-
+    public function delete(int $idComment)
+    {
+        $sql = 'DELETE FROM commentsBlogAlaska WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
-        $dbh->bindParam(':author', $author, PDO::PARAM_STR); // Notice: Only variables should be passed by reference...
-        $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
-        $dbh->bindParam(':idBlogAlaska', $idBlogAlaska, PDO::PARAM_INT);
-
+        $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
     }
+
+    // OTHER METHODS
 
     /**
      * Report comments
@@ -57,20 +75,7 @@ class CommentsManager extends SQLRequest
      */
     public function report(int $idComment)
     {
-        $sql = 'UPDATE commentsBlogAlaska SET report = TRUE WHERE id = :id';
-        $dbh = $this->getDatabase()->prepare($sql);
-        $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
-        $dbh->execute();
-    }
-
-    /**
-     * Remove report comments
-     * @param int $idComment
-     * @return Void
-     */
-    public function cancelReport(int $idComment)
-    {
-        $sql = 'UPDATE commentsBlogAlaska SET report = FALSE WHERE id = :id';
+        $sql = 'UPDATE commentsBlogAlaska SET report = True WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
@@ -82,7 +87,7 @@ class CommentsManager extends SQLRequest
      */
     public function reportCount()
     {
-        $sql = 'SELECT COUNT(*) FROM commentsBlogAlaska WHERE report = 1';
+        $sql = 'SELECT COUNT(*) FROM commentsBlogAlaska WHERE report = True';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->execute();
         $result = intval($dbh->fetchColumn());
@@ -97,7 +102,7 @@ class CommentsManager extends SQLRequest
     public function showReport()
     {
         $reportList = [];
-        $sql = 'SELECT id, author, contents, dateContents FROM commentsBlogAlaska WHERE report = 1';
+        $sql = 'SELECT id, author, contents, dateContents FROM commentsBlogAlaska WHERE report = True';
         $dbh = $this->getDatabase()->query($sql);
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
@@ -106,5 +111,18 @@ class CommentsManager extends SQLRequest
         }
         
         return $reportList;
+    }
+
+    /**
+     * Remove report comments
+     * @param int $idComment
+     * @return Void
+     */
+    public function cancelReport(int $idComment)
+    {
+        $sql = 'UPDATE commentsBlogAlaska SET report = FALSE WHERE id = :id';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
+        $dbh->execute();
     }
 }

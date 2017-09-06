@@ -96,7 +96,7 @@ class Frontend extends Page
             $idPost    = intval($_POST['idBlogAlaska']);
 
             $this->commentsManager->report($idComment);
-            header('Location: /alaska?post=' . $idPost);
+            header('Location: /alaska/post/' . $idPost);
   
         } else {
             $this->template('Errors/404');
@@ -104,22 +104,5 @@ class Frontend extends Page
         
     }
 
-    /**
-     * @return bool
-     */
-    public function isAdmin()
-    {
-
-        if ( !isset($_SESSION['admin']) || $_SESSION['admin'] != TRUE ){
-
-            return $this->template('Frontend/connection');
-
-        } else {
-
-            return header("Location: /admin/home");
-
-        }
-
-    }
 }
 

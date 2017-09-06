@@ -50,7 +50,7 @@ class PostManager extends SQLRequest
      */
     public function delete()
     {
-
+        
     }
 
     // OTHER METHODS

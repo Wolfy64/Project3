@@ -5,13 +5,13 @@ require_once 'Models/Utils.php';
 
 class Page
 {
-    protected $commentsManager;
-
     protected $head;
     protected $header;
     protected $nav;
     protected $body;
     protected $footer;
+
+    protected $commentsManager;
     protected $data = [];
     protected $router;
 
@@ -23,6 +23,10 @@ class Page
         $this->$page();
     }
 
+    /**
+     * Set Template from Config
+     *
+     */
     public function setTemplate()
     {
         $data = Utils::getJSON('Config/template.json');
@@ -33,12 +37,13 @@ class Page
     }
 
     /**
-     * Build the template of the page
+     * Build page template
      * @param string $body
+     * @param $data = null
+     * @return Void
      */
     public function template(string $body, $data = null)
     {
-
         $this->setBody($body);
         $this->addData($data);
         require_once $this->head;
@@ -61,22 +66,45 @@ class Page
         }      
     }
 
+    /**
+     * Add $data for Page
+     * @param $data
+     * @return array $data
+     */
     public function addData($data)
     {
         return $this->data[] = $data;
     }
 
+    // PAGE
+
     /**
      * Built the index page by default
+     * @return Void
      */
     public function index()
     { 
-        $this->template('Frontend/home');
+        return $this->template('Frontend/home');
     }
 
     /**
-     * Built the error page
-     *
+     * @return bool
+     */
+    public function isAdmin() // A VOIR EN SESSION !!!!!!!!!!!!!!!!!!!!!
+    {
+        if ( !isset($_SESSION['admin']) || $_SESSION['admin'] != TRUE ){
+
+            return $this->template('Frontend/connection');
+
+        } else {
+            
+            return $this->template('Backend/admin'); // CETTE REDIRECTION
+        }
+    }
+
+    /**
+     * Built the 404 error page
+     * @return Void
      */
     public function error404()
     {
@@ -84,8 +112,8 @@ class Page
     }
 
     /**
-     * Built the error page
-     *
+     * Built the 500 error page
+     * @return Void
      */
     public function error500()
     {

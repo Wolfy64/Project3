@@ -28,7 +28,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/signOut"> SIGN OUT </a>
+                <a class="nav-link" href="admin/signOut"> SIGN OUT </a>
             </li>
 
         </ul>

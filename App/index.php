@@ -20,4 +20,4 @@ if ( $router->checkPage() ) {
 // var_dump($router->setController());
 // var_dump($router->setUriPage());
 // var_dump($router->checkPage());
-var_dump($_SESSION);
+// var_dump($_SESSION);

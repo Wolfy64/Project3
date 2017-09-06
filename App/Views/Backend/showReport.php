@@ -16,12 +16,12 @@
                         <td class="text-center w-25"> <?= $comment->getAuthor()       ?> </td>
                         <td class="text-center w-75"> <?= $comment->getContents()     ?> </td>
                         <td class="text-center w-25"> 
-                            <a href="/admin?page=report&amp;action=cancel<?= $comment->getID()?>">
+                            <a href="/admin/cancelReport/<?= $comment->getID()?>">
                                 <button type="button" class="btn btn-info btn-sm">Cancel</button>
                             </a>
                         </td>
                         <td>
-                            <a href="/admin?page=report&amp;action=delete<?= $comment->getID()?>">
+                            <a href="/admin/deleteReport/<?= $comment->getID()?>">
                                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
                             </a>
                         </td>
@@ -40,4 +40,3 @@
             
         </table>
 </div>
-
