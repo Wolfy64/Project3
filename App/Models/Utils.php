@@ -4,22 +4,31 @@ class Utils
 {
     static protected $errors = [];
 
+    // GETTERS
+
     /**
-     * To check if the value of Array exist or is null
+     * Read Errors
+     * @return array $errors
+     */
+    public static function getErrors(){ return self::$errors; }
+
+    // METHODS
+
+    /**
+     * Check if the value of Array exist or is null
      * @param array $array
      * @param array $param[param1 ,param2, ...] 
      * @return bool
      */
     public static function checkArray($array, array $param)
     {
-        var_dump($param);
         foreach ($param as $key => $value) {
             
             if ( !isset($array[$value]) || empty($array[$value]) ){
                 self::$errors[] = $value . ' is NULL !';
             }
         }
-        var_dump(self::$errors);
+
         if (  empty(self::$errors) ){
             return TRUE;
         } else {
@@ -28,12 +37,13 @@ class Utils
     }
 
     /**
-     * Read Errors
+     * Decode JSON file
+     * @param string $file
+     * @return array
      */
-    private static function getErrors()
+    public static function getJSON(string $file)
     {
-        foreach ( self::$errors as $key => $value ) {
-            return $value;
-        }
+        $file = file_get_contents('Config/template.json');
+        return json_decode($file, true);
     }
 }

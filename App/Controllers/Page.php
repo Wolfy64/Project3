@@ -1,23 +1,35 @@
 <?php
 
 require_once 'Controllers/Router.php';
+require_once 'Models/Utils.php';
 
 class Page
 {
     protected $commentsManager;
 
-    protected $head   = 'Views/Template/head.php';
-    protected $header = 'Views/Template/header.php';
-    protected $nav    = 'Views/Template/nav.php';
-    protected $body   = 'Views/404.php';
-    protected $footer = 'Views/Template/footer.php';
+    protected $head;
+    protected $header;
+    protected $nav;
+    protected $body;
+    protected $footer;
     protected $data = [];
+    protected $router;
 
-    public function __construct($page)
+    public function __construct(Router $router, $page)
     {
+        $this->setTemplate();
+        $this->router = $router;
         $this->commentsManager = new CommentsManager();
         $this->$page();
-        var_dump($_SESSION);
+    }
+
+    public function setTemplate()
+    {
+        $data = Utils::getJSON('Config/template.json');
+
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**
@@ -26,7 +38,7 @@ class Page
      */
     public function template(string $body, $data = null)
     {
-        var_dump($body);
+
         $this->setBody($body);
         $this->addData($data);
         require_once $this->head;
@@ -69,6 +81,15 @@ class Page
     public function error404()
     {
         $this->template('Errors/404');
+    }
+
+    /**
+     * Built the error page
+     *
+     */
+    public function error500()
+    {
+        $this->template('Errors/500');
     }
 
 }

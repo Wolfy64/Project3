@@ -4,20 +4,18 @@ require_once 'Controllers/Page.php';
 
 require_once 'Models/Connection.php';
 require_once 'Models/PostManager.php';
-
 require_once 'Models/Utils.php';
 
 class Frontend extends Page
 {
-    // protected $admin;
-    // protected $page;
+    protected $connection;
     protected $postManager;
 
-    public function __construct($page)
+    public function __construct(Router $router, $page)
     {
         $this->connection = new Connection();
         $this->postManager = new PostManager();
-        parent::__construct($page);
+        parent::__construct($router, $page);
     }
 
     // PAGES
@@ -27,22 +25,26 @@ class Frontend extends Page
      */
     public function alaska()
     {
-        if ( !isset($_GET['post']) ){
+        $route = $this->router->getRoute();
 
+        if ( next($route) != 'post' ){
             $data = $this->postManager->readAllPost();
-            $this->template('Frontend/alaskaList', $data);
 
-        } elseif ( !is_numeric($_GET['post']) ){
-            $this->template('Errors/404');
+            return $this->template('Frontend/alaskaList', $data);
+
+        } elseif( !is_numeric( next($route) ) ) {
+
+            return $this->template('Errors/404');
 
         } else {
-            $data = $this->postManager->read($_GET['post']);
+            $data = $this->postManager->read( current($route) );
 
             if ( $data === FALSE ){
-                $this->template('Errors/404');
+                return $this->template('Errors/404');
+
             } else {
-                $this->template('Frontend/alaskaPost', $data);
-            }
+                return $this->template('Frontend/alaskaPost', $data);
+            }        
         }
     }
 
@@ -67,7 +69,6 @@ class Frontend extends Page
      */
     public function addComment()
     {
-
         if ( Utils::checkArray($_POST['comment'], ['idBlogAlaska', 'author', 'contents']) ){
 
             $data = [];
@@ -76,7 +77,9 @@ class Frontend extends Page
             }
 
             $this->commentsManager->create( $comment = new Comments($data) );
-            header('Location: /alaska?post=' . $data['idBlogAlaska']);
+
+            return header('Location: /alaska/post/' . $data['idBlogAlaska']);
+
         } else {
             $this->template('Errors/404');
         }
@@ -113,7 +116,7 @@ class Frontend extends Page
 
         } else {
 
-            return $this->template('Backend/admin');
+            return header("Location: /admin/home");
 
         }
 

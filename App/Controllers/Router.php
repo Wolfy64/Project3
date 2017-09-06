@@ -9,6 +9,12 @@ class Router
     protected $route;
     protected $uriPage;
 
+    // GETTERS
+
+    public function getRoute(){ return $this->route; }
+
+    public function getUriPage(){ return $this->uriPage; }
+
     // SETTERS
 
     /**
@@ -38,39 +44,71 @@ class Router
     {
 
         if ( $this->route[0] != 'admin'){
+
             return $this->controller = 'Frontend';
         } else{
+
             return $this->controller = 'Backend';
         }
 
     }
 
     /**
-     * 
+     * Read the first parameter of attribute $route[] 
      * @return string 
      */
     public function setUriPage()
     {
         $uriPage = $this->route;
-        return $this->uriPage = $this->uriPage = current($uriPage);
+        $controller = $this->controller;
+
+        switch ($controller) {
+            case 'Frontend':
+                // Read the first parameter
+                return $this->uriPage = current($uriPage); 
+                break;
+
+            case 'Backend':
+                // Move the cursor to the next value and read the first parameter
+                return $this->uriPage = next($uriPage);
+                break;
+            
+            default:
+                return $this->loadController('error500');
+                break;
+        }
+        
     }
 
     // METHODS
 
     /**
-     * Load Controller from attribute $route and start session
+     * Check if the Page exist (Page = Method of Class Controller)
+     * @return bool
+     */
+    public function checkPage()
+    {
+        if ( method_exists($this->controller, $this->uriPage) ){
+            return True;
+        } else {
+            return False;
+        }
+
+    }
+
+    /**
+     * Load Controller from attribute $route
      * @return new Object Controller
      */
     public function loadController(string $page = Null)
     {
 
-        $this->sesssionStart();
         if ( $page != Null ){
-
-             return $controller = new $this->controller($page);
+            // Load Controller
+             return $controller = new $this->controller($this, $page);
         } else{
-
-            return $controller = new $this->controller($this->uriPage);
+            // Load Controller whith first parameter of URI (Page)
+            return $controller = new $this->controller($this, $this->uriPage);
         }
 
     }
@@ -81,23 +119,21 @@ class Router
      */
     public function sesssionStart()
     {
-        return session_start();
-    }
+        if (!isset($_SESSION)){
+            
+            return session_start();
 
-    /**
-     * Check if the Page exist
-     * @return bool
-     */
-    public function checkPage()
-    {
+        } elseif ( !isset($_SESSION['admin']) ){
 
-        if ( method_exists($this->controller, $this->uriPage) ){
-            return True;
-        } else {
-            return False;
+            return $_SESSION['admin'] = False;
         }
 
     }
 
-
+    // ==== TEST ====
+    
+    public function addRoute($param)
+    {
+        $this->route[] = $param;
+    }
 }

@@ -9,20 +9,25 @@ class Backend extends Page
     protected $connection;
     protected $commentsManager;
 
-    public function __construct($page)
+    public function __construct(Router $router, $page)
     {
         $this->commentsManager = new CommentsManager;
         $this->connection = new Connection();
-        parent::__construct($page);
+        parent::__construct($router, $page);
 
     }
+
+
 
 
     /**
      * Built the admin page
      */
-    private function adminPage()
+    public function home()
     {
+        
+        $_SESSION['admin'] = TRUE;
+
         if ( isset($_SESSION['admin']) === TRUE ){
 
             if ( isset($_GET['page']) ){
@@ -50,7 +55,6 @@ class Backend extends Page
 
             } else {
                 $data = $this->commentsManager->reportCount();
-                var_dump($data);
                 $this->template('Backend/admin', $data);
             }
         }

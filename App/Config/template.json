@@ -1,0 +1,8 @@
+{
+    "head"   : "Views/Template/head.php",
+    "header" : "Views/Template/header.php",
+    "nav"    : "Views/Template/nav.php",
+    "body"   : "Views/404.php",
+    "footer" : "Views/Template/footer.php"
+}
+    

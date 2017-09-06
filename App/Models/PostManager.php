@@ -14,7 +14,6 @@ class PostManager extends SQLRequest
      */
     public function create()
     {
-
     }
 
     /**

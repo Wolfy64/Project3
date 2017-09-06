@@ -1,15 +1,18 @@
 <?php
 
+require_once 'Config/config.php';
+
+
 /**
  * Create a static instance PDO
  */
 class PDOFactory
 {
-    private static $host = 'localhost';
-    private static $dbName = 'OC_Project-3';
-    private static $charset = 'utf8';
-    private static $user = 'root';
-    private static $password = 'root';
+    private static $host     = DBHOST;
+    private static $dbName   = DBNAME;
+    private static $charset  = DBCHARSET;
+    private static $user     = DBUSER;
+    private static $password = DBPASSWORD;
 
     /**
      * @return a PDO static instance of MySQL

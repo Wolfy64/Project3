@@ -38,9 +38,6 @@ class Frontend extends Page
           // display individual post
         }
 
-
-
-
         // if ( !isset($_GET['post']) ){
         //     $data = $this->postManager->readAllPost();
         //     $this->template('Frontend/alaskaList', $data);
