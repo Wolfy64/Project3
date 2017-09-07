@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Models/CommentsManager.php';
-require_once 'Models/Data.php';
+require_once '../Models/CommentsManager.php';
+require_once '../Models/Data.php';
 
 class Post extends Data
 {

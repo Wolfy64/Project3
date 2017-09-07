@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Controllers/Backend.php';
-require_once 'Controllers/Frontend.php';
+require_once '../Controllers/Backend.php';
+require_once '../Controllers/Frontend.php';
 
 class Router
 {
@@ -18,66 +18,60 @@ class Router
     // SETTERS
 
     /**
-     * Set attribute $route from URI (Uniform Resource Identifier)
-     * If URI empty set Index
-     * @return array $route
+     * Set $route propertie from URI (Uniform Resource Identifier)
+     * If URI empty set "Index"
+     * @return Void
      */
-    public function setRoute(){
-        
+    public function setRoute()
+    {
         if ( isset($_GET['uri']) ){
             $uri = htmlspecialchars($_GET['uri']); 
-
-            return $this->route = explode( '/', $uri );
+            $this->route = explode( '/', $uri );
 
         } else {
-
-            return $this->route = ['index'];
+            $this->route = ['index'];
         }
-
     }
 
     /**
-     * Set controller from attribute $route
+     * Set controller from propertie $route
      * @return string $controller;
      */
     public function setController()
     {
-
         if ( $this->route[0] != 'admin'){
+            $this->controller = 'Frontend';
 
-            return $this->controller = 'Frontend';
         } else{
-
-            return $this->controller = 'Backend';
+            $this->controller = 'Backend';
         }
-
     }
 
     /**
-     * Read the first parameter of attribute $route[] 
-     * @return string 
+     * Read the first parameter of propertie $route[]
+     * and set uriPage propertie
+     * @return Void
      */
     public function setUriPage()
     {
-        $uriPage = $this->route;
+        $route = $this->route;
         $controller = $this->controller;
 
         switch ($controller) {
             case 'Frontend':
-                // Read the first parameter
-                return $this->uriPage = current($uriPage); 
+                // Read the first parameter 
+                $this->uriPage = $route[0]; 
                 break;
 
             case 'Backend':
-                // Move the cursor to the next value and read the first parameter
-                return $this->uriPage = next($uriPage);
+                // Read the second parameter => /admin/[parameter]
+                $this->uriPage = $route[1];
                 break;
             
             default:
-                return $this->loadController('error500');
+                $this->loadController('error500');
                 break;
         }
-        
     }
 
     // METHODS
@@ -89,46 +83,26 @@ class Router
     public function checkPage()
     {
         if ( method_exists($this->controller, $this->uriPage) ){
-            return True;
+            return TRUE;
         } else {
-            return False;
+            return FALSE;
         }
-
     }
 
     /**
-     * Load Controller from attribute $route
+     * Load Controller from propertie $route
      * @return new Object Controller
      */
-    public function loadController(string $page = Null)
+    public function loadController(string $methodName = NULL)
     {
         $controller = $this->controller;
-        // var_dump( $controller->isAdmin );
 
-        if ( $page != Null ){
+        if ( $methodName != NULL ){
             // Load Controller
-             return new $this->controller($this, $page);
+             return new $controller($this, $methodName);
         } else{
             // Load Controller whith first parameter of URI (Page)
-            return new $this->controller($this, $this->uriPage);
+            return new $controller($this, $this->uriPage);
         }
-
-    }
-
-    /**
-     * Start session
-     * @return $_SESSION
-     */
-    public function sesssionStart()
-    {
-        if (!isset($_SESSION)){
-            
-            return session_start();
-
-        } elseif ( !isset($_SESSION['admin']) ){
-
-            return $_SESSION['admin'] = False;
-        }
-
     }
 }

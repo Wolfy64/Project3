@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Databases/PDOFactory.php';
+require_once '../Databases/PDOFactory.php';
 
 abstract class SQLRequest
 {

@@ -24,11 +24,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/connection"> ADMIN </a>
+                <a class="nav-link" href="/admin/signIn"> ADMIN </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="admin/signOut"> SIGN OUT </a>
+                <a class="nav-link" href="/admin/signOut"> SIGN OUT </a>
             </li>
 
         </ul>

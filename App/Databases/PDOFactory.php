@@ -1,24 +1,19 @@
 <?php
 
-require_once 'Config/config.php';
-
-
 /**
  * Create a static instance PDO
  */
 class PDOFactory
 {
-    private static $host     = DBHOST;
-    private static $dbName   = DBNAME;
-    private static $charset  = DBCHARSET;
-    private static $user     = DBUSER;
-    private static $password = DBPASSWORD;
 
     /**
-     * @return a PDO static instance of MySQL
+     * A PDO static instance of MySQL
+     * @return PDO $database
      */
     public static function getMysqlConnexion()
     {
+        // Load database config from config.ini
+        $config = parse_ini_file('../Config/config.ini');
         // Set PDO options
         $options = [
             PDO::ATTR_PERSISTENT => true, // Cached and re-used connection ->faster web application
@@ -27,12 +22,15 @@ class PDOFactory
 
         // Create PDO instance
         try{
-            $database = new PDO('mysql:host=' . self::$host .';dbname=' . self::$dbName . ';charset=' . self::$charset, 
-                                self::$user, 
-                                self::$password,
-                                $options
+            $database = new PDO('mysql:host=' . $config['host'] 
+                              . ';dbname='    . $config['dbName'] 
+                              . ';charset='   . $config['charset'],
+                                                $config['user'], 
+                                                $config['password'],
+                                                $options
                                 );
             return $database;
+
         } catch(PDOException $e){
             die('Database connection error: '. $e->getMessage());
         }        

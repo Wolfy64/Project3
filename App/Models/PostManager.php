@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Models/Post.php';
-require_once 'Models/SQLRequest.php';
+require_once '../Models/Post.php';
+require_once '../Models/SQLRequest.php';
 
 class PostManager extends SQLRequest
 {
@@ -53,7 +53,7 @@ class PostManager extends SQLRequest
         
     }
 
-    // OTHER METHODS
+    // OTHERS METHODS
 
     /**
      * @param void

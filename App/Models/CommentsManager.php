@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Models/Comments.php';
-require_once 'Models/SQLRequest.php';
+require_once '../Models/Comments.php';
+require_once '../Models/SQLRequest.php';
 
 class CommentsManager extends SQLRequest
 {
@@ -66,7 +66,7 @@ class CommentsManager extends SQLRequest
         $dbh->execute();
     }
 
-    // OTHER METHODS
+    // OTHERS METHODS
 
     /**
      * Report comments

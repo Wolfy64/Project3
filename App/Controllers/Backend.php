@@ -1,86 +1,116 @@
 <?php
 
-require_once 'Controllers/Page.php';
-require_once 'Models/Comments.php';
-require_once 'Models/Connection.php';
+require_once '../Controllers/Page.php';
+require_once '../Models/Comments.php';
+require_once '../Models/UserConnection.php';
+
 
 class Backend extends Page
 {
-    protected $connection;
-    protected $commentsManager;
-
-    public function __construct(Router $router, $page)
+    public function __construct(Router $router, string $methodName)
     {
-        $this->commentsManager = new CommentsManager;
-        $this->connection = new Connection();
-        parent::__construct($router, $page);
+        parent::__construct($router, $methodName);
+        $this->connectAdmin($methodName);
     }
 
-    // PAGES
+    // METHODS PAGES
 
     /**
-     * Built the admin page
+     * Built the admin home page
      */
     public function home()
     {
-        if ( $_SESSION['admin'] != True ){
-            return $this->template('Frontend/connection');
-        } else {
-            $data = $this->commentsManager->reportCount();
-
-            return $this->template('Backend/admin', $data);
-        }
+        $data = $this->commentsManager->reportCount();
+        $this->template('Backend/admin', $data);
     }
 
+    /**
+     * Built the admin showReport page
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "showReport"
+     * @return Void
+     */
     public function showReport()
     {
         $route = $this->router->getRoute();
 
-        if ( next($route) != 'showReport' ) {
+        if ( $route[1] != 'showReport' ) {
+            $this->template('Errors/404');
 
-            return $this->template('Errors/404');
         } else {
             $data = $this->commentsManager->showReport();
-
-            return $this->template('Backend/showReport', $data);           
+            $this->template('Backend/showReport', $data);           
         }
     }
+
+    // METHODS ACTIONS
     
     /**
-     * Cancel comments reports 
+     * Cancel comments reports
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "cancelReport" 
+     *   $route[2] = idPost => Integer
      * @return Void
      */
     public function cancelReport()
     {
         $route = $this->router->getRoute();
         
-        if ( next($route) != 'cancelReport' ){
-            
-            return $this->template('Errors/404');
-        } else {
+        if ( $route[1] != 'cancelReport' ){
+            $this->template('Errors/404');
 
-            $idComment = intval( next($route) );
+        } else {
+            $idComment = intval( $route[2]  );
             $this->commentsManager->cancelReport($idComment);
+
             $data = $this->commentsManager->showReport();
-            
-            return $this->template('Backend/showReport', $data);          
+            $this->template('Backend/showReport', $data);          
         }
     }
 
+    /**
+     * Delete comments reports
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "deleteReport" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
     public function deleteReport()
     {
         $route = $this->router->getRoute();
 
-        if ( next($route) != 'deleteReport' ){
-            
-            return $this->template('Errors/404');
+        if ( $route[1] != 'deleteReport' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idComment = intval( $route[2] );
+            $this->commentsManager->delete($idComment);
+
+            $data = $this->commentsManager->showReport();
+            $this->template('Backend/showReport', $data);          
+        }
+    }
+
+    // METHODS CONNECTION ADMIN
+
+    /**
+     * Check that connection to the Admin page is allowed
+     */
+    public function signIn()
+    {
+        $toCheck = ['user', 'password'];
+
+        if ( Utils::checkArray($_POST, $toCheck) ) { // If True
+            $user     = htmlspecialchars($_POST['user']);
+            $password = htmlspecialchars($_POST['password']);
+
+            $this->userConnection->verifyAccount($user, $password);
+            $this->isAdmin();
+            $this->template('Backend/signIn');
+
         } else {
 
-            $idComment = intval( next($route) );
-            $this->commentsManager->delete($idComment);
-            $data = $this->commentsManager->showReport();
-
-            return $this->template('Backend/showReport', $data);          
+            $this->template('Backend/signIn');
         }
     }
 
@@ -92,5 +122,39 @@ class Backend extends Page
     {
         session_destroy();
         $this->index();
+    }
+
+    /**
+     * Manage if user can acces to Admin section
+     * @param string $methodName
+     * @return Void
+     */
+    private function connectAdmin(string $methodName)
+    {
+        if ( $this->isAdmin() != TRUE && $methodName === 'signIn' ){ // If NOT true AND 'signIn'
+            $this->signIn();
+
+        } elseif( $this->isAdmin() === TRUE && $methodName === 'signIn') { // If true AND 'signIn'
+            $this->home();
+
+        } elseif( $this->isAdmin() === TRUE && $methodName != 'signIn' ) { // If true AND NOT 'signIn'
+            $this->$methodName();
+        } else{
+            $this->signIn();
+        }        
+    }
+
+    /**
+     * Check if user is Admin
+     * @return bool
+     */
+    private function isAdmin()
+    {
+        if ( !isset($_SESSION['admin']) || $_SESSION['admin'] != TRUE ){
+            return FALSE;
+
+        } else {
+            return TRUE;
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require 'Models/Data.php';
+require '../Models/Data.php';
 
 class Comments extends Data
 {

@@ -4,7 +4,7 @@ class Utils
 {
     static protected $errors = [];
 
-    // GETTERS
+    // GETTER
 
     /**
      * Read Errors
@@ -12,7 +12,7 @@ class Utils
      */
     public static function getErrors(){ return self::$errors; }
 
-    // METHODS
+    // METHOD
 
     /**
      * Check if the value of Array exist or is null
@@ -34,16 +34,5 @@ class Utils
         } else {
             return FALSE;
         }
-    }
-
-    /**
-     * Decode JSON file
-     * @param string $file
-     * @return array
-     */
-    public static function getJSON(string $file)
-    {
-        $file = file_get_contents('Config/template.json');
-        return json_decode($file, true);
     }
 }

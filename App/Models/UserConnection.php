@@ -1,8 +1,8 @@
 <?php
 
-include_once 'Models/SQLRequest.php';
+include_once '../Models/SQLRequest.php';
 
-class Connection extends SQLRequest
+class UserConnection extends SQLRequest
 {
     /**
      * Check if user and password are correct
