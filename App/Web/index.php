@@ -11,6 +11,9 @@ $router->setUriPage();
 // Ask Router if the request is valid
 if ( $router->checkPage() ) {
     $router->loadController();
+
 } else {
     $router->loadController('error404');
 }
+
+var_dump( $_SESSION );

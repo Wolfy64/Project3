@@ -8,7 +8,7 @@
     
     <!-- New Post -->
     <p>
-        <a href="?page=new">
+        <a href="newPost">
             Do you want publish a post today?
         </a>
     </p>

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- TinyMCE -->
-    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
         tinymce.init({ 
             selector: '#myTextarea'

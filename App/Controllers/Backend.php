@@ -43,6 +43,19 @@ class Backend extends Page
         }
     }
 
+    public function newPost()
+    {
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'newPost' ) {
+            $this->template('Errors/404');
+
+        } else {
+            // $data = $this->commentsManager->showReport();
+            $this->template('Backend/newPost');           
+        }
+    }
+
     // METHODS ACTIONS
     
     /**
@@ -100,13 +113,17 @@ class Backend extends Page
     {
         $toCheck = ['user', 'password'];
 
-        if ( Utils::checkArray($_POST, $toCheck) ) { // If True
+        if ( Utils::checkArray($_POST, $toCheck) ) { // If TRUE
             $user     = htmlspecialchars($_POST['user']);
             $password = htmlspecialchars($_POST['password']);
 
             $this->userConnection->verifyAccount($user, $password);
-            $this->isAdmin();
-            $this->template('Backend/signIn');
+
+            if ( $this->isAdmin() ){ // If TRUE
+                $this->home();
+            }else {
+                $this->template('Backend/signIn');
+            }
 
         } else {
 
@@ -121,7 +138,7 @@ class Backend extends Page
     public function signOut()
     {
         session_destroy();
-        $this->index();
+        $this->template('Frontend/home');
     }
 
     /**
