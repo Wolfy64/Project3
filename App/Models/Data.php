@@ -68,7 +68,6 @@ abstract class Data
 
     public function setContents(String $contents)
     {
-        $contents = htmlspecialchars($contents);
         $this->contents = $contents;
     }
 

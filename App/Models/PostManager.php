@@ -9,11 +9,24 @@ class PostManager extends SQLRequest
     // CRUD SYSTEM
 
     /**
-     * @param void
+     * @param array $data
      * @return void
      */
-    public function create()
+    public function create(Post $data)
     {
+        $title = $data->getTitle();
+        $author = $data->getAuthor();
+        $contents = $data->getContents();
+
+        $sql = 'INSERT INTO blogAlaska(title, author, contents, dateContents)
+                VALUES(:title, :author, :contents, NOW() )';
+
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':title', $title, PDO::PARAM_STR);
+        $dbh->bindParam(':author', $author, PDO::PARAM_STR);
+        $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
+
+        $dbh->execute();
     }
 
     /**

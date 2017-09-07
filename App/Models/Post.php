@@ -23,7 +23,9 @@ class Post extends Data
 
     public function setCommentsList()
     {
-        $this->commentsList = $this->commentsManager->read($this->id);
+        if ( $this->id != null ){
+            $this->commentsList = $this->commentsManager->read($this->id);
+        }
     }
 
     /**

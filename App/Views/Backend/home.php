@@ -15,8 +15,8 @@
     
     <!-- Show Post -->
     <p>
-        <a href="?page=posts">
-            You have XX published posts on your blog
+        <a href="managePost">
+            You have <?= $data ?> published posts on your blog
         </a>
     </p>
 </div>

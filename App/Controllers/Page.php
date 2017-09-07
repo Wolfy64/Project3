@@ -1,16 +1,19 @@
 <?php
 
 require_once '../Controllers/Router.php';
+require_once '../Models/PostManager.php';
 require_once '../Models/UserConnection.php';
 
 class Page
 {
+    protected $postManager;
     protected $commentsManager;
     protected $userConnection;
     protected $router;
 
     public function __construct(Router $router, string $methodName)
     {
+        $this->postManager = new PostManager();
         $this->commentsManager = new CommentsManager();
         $this->userConnection = new UserConnection();
         $this->router = $router;

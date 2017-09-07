@@ -22,7 +22,18 @@
     <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
         tinymce.init({ 
-            selector: '#myTextarea'
+            selector: '#postTitle',
+            toolbar: 'code',
+            branding: false,
+            menubar: false,
+            resize: false
+        });
+        tinymce.init({ 
+            selector: '#postContent',
+            plugins: 'lists link preview emoticons',
+            branding: false,
+            menubar: false,
+            toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify alignnone | outdent indent | blockquote bullist numlist link emoticons preview',
         });
     </script>
 

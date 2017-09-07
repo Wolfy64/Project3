@@ -69,11 +69,11 @@ class UserConnection extends SQLRequest
     }
 
     /**
-     * Set Admin
-     * @return $_SESSION
+     * Set Admin = TRUE
+     * @return Void
      */
     private function setAdmin()
     {
-        return $_SESSION['admin'] = TRUE;
+        $_SESSION['admin'] = TRUE;
     }
 }

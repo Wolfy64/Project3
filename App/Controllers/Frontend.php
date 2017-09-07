@@ -1,18 +1,14 @@
 <?php
 
 require_once '../Controllers/Page.php';
-
-require_once '../Models/PostManager.php';
 require_once '../Models/Utils.php';
 
 class Frontend extends Page
 {
-    protected $postManager;
 
     public function __construct(Router $router, string $methodName)
     {
         parent::__construct($router, $methodName);
-        $this->postManager = new PostManager();
         $this->$methodName();
     }
 

@@ -2,7 +2,6 @@
 
 require_once '../Controllers/Page.php';
 require_once '../Models/Comments.php';
-require_once '../Models/UserConnection.php';
 
 
 class Backend extends Page
@@ -21,7 +20,7 @@ class Backend extends Page
     public function home()
     {
         $data = $this->commentsManager->reportCount();
-        $this->template('Backend/admin', $data);
+        $this->template('Backend/home', $data);
     }
 
     /**
@@ -43,6 +42,17 @@ class Backend extends Page
         }
     }
 
+    public function managePost()
+    {
+        var_dump( 'Hello World' );
+    }
+
+    /**
+     * Built the admin newPost page
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "newPost"
+     * @return Void
+     */
     public function newPost()
     {
         $route = $this->router->getRoute();
@@ -51,7 +61,6 @@ class Backend extends Page
             $this->template('Errors/404');
 
         } else {
-            // $data = $this->commentsManager->showReport();
             $this->template('Backend/newPost');           
         }
     }
@@ -102,6 +111,24 @@ class Backend extends Page
             $data = $this->commentsManager->showReport();
             $this->template('Backend/showReport', $data);          
         }
+    }
+
+    /**
+     * Add a new post
+     * @return Void
+     */
+    public function addPost()
+    {
+        $toCheck = ['title','author', 'contents'];
+
+        if ( Utils::checkArray($_POST, $toCheck) ){
+
+            $this->postManager->create( $post = new Post($_POST) );
+            $this->template('Backend/home');
+
+        } else {
+            $this->template('Errors/404');
+        }        
     }
 
     // METHODS CONNECTION ADMIN

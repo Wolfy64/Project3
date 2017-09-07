@@ -14,7 +14,7 @@ class CommentsManager extends SQLRequest
      */
     public function create(Comments $data)
     {
-        $author = $data->getAuthor(); // Notice: Only variables should be passed by reference...
+        $author = $data->getAuthor();
         $contents = $data->getContents();
         $idBlogAlaska = $data->getIdBlogAlaska();
 
@@ -22,7 +22,7 @@ class CommentsManager extends SQLRequest
                 VALUES(:author, :contents, NOW(), :idBlogAlaska)';
 
         $dbh = $this->getDatabase()->prepare($sql);
-        $dbh->bindParam(':author', $author, PDO::PARAM_STR); // Notice: Only variables should be passed by reference...
+        $dbh->bindParam(':author', $author, PDO::PARAM_STR);
         $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
         $dbh->bindParam(':idBlogAlaska', $idBlogAlaska, PDO::PARAM_INT);
 
