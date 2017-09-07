@@ -61,9 +61,12 @@ class PostManager extends SQLRequest
      *
      *
      */
-    public function delete()
+    public function delete(int $idComment)
     {
-        
+        $sql = 'DELETE FROM blogAlaska WHERE id = :id';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
+        $dbh->execute();        
     }
 
     // OTHERS METHODS
@@ -84,5 +87,36 @@ class PostManager extends SQLRequest
         }
 
         return $postList;
+    }
+
+    /**
+     * Read a summary of $contents by default 100 characters
+     * @param integer $length by default 100
+     * @return $content
+     */
+    public function readSummary(int $length = 100)
+    {
+        $contents = $this->contents;
+        if ( strlen($contents) >= $length ){
+            $pos = strpos($contents, ' ', $length); // For not to cut a word
+            return substr($contents, 0, $pos) . ' ...';
+        } else {
+            return $contents;
+        }
+    }
+
+
+    /**
+     * Count numbers of post
+     * @return int
+     */
+    public function postCount()
+    {
+        $sql = 'SELECT COUNT(*) FROM blogAlaska';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->execute();
+        $result = intval($dbh->fetchColumn());
+
+        return $result;
     }
 }

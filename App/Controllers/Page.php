@@ -3,6 +3,7 @@
 require_once '../Controllers/Router.php';
 require_once '../Models/PostManager.php';
 require_once '../Models/UserConnection.php';
+require_once '../Models/Utils.php';
 
 class Page
 {

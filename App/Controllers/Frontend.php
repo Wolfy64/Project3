@@ -1,7 +1,6 @@
 <?php
 
 require_once '../Controllers/Page.php';
-require_once '../Models/Utils.php';
 
 class Frontend extends Page
 {

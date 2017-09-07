@@ -1,8 +1,6 @@
 <?php
 
 require_once '../Controllers/Page.php';
-require_once '../Models/Comments.php';
-
 
 class Backend extends Page
 {
@@ -19,7 +17,11 @@ class Backend extends Page
      */
     public function home()
     {
-        $data = $this->commentsManager->reportCount();
+
+        $data = ['reportCount' => $this->commentsManager->reportCount(),
+                 'postCount'   => $this->postManager->postCount()
+                ];
+
         $this->template('Backend/home', $data);
     }
 
@@ -42,9 +44,23 @@ class Backend extends Page
         }
     }
 
+    /**
+     * Built the admin showReport page
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "managePost"
+     * @return Void
+     */
     public function managePost()
     {
-        var_dump( 'Hello World' );
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'managePost' ) {
+            $this->template('Errors/404');
+
+        } else {
+            $data = $this->postManager->readAllPost();
+            $this->template('Backend/managePost', $data);           
+        }
     }
 
     /**
@@ -110,6 +126,29 @@ class Backend extends Page
 
             $data = $this->commentsManager->showReport();
             $this->template('Backend/showReport', $data);          
+        }
+    }
+
+    /**
+     * Delete comments reports
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "deletePost" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
+    public function deletePost()
+    {
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'deletePost' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idComment = intval( $route[2] );
+            $this->postManager->delete($idComment);
+
+            $data = $this->postManager->readAllPost();
+            $this->template('Backend/managePost', $data);          
         }
     }
 

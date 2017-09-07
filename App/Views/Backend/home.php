@@ -2,7 +2,7 @@
     <!-- Report Comments -->
     <p>
         <a href="showReport">
-            You have <?= $data ?> comment(s) reported by users
+            You have <?= $data['reportCount'] ?> comment(s) reported by users
         </a>
     </p>
     
@@ -16,7 +16,7 @@
     <!-- Show Post -->
     <p>
         <a href="managePost">
-            You have <?= $data ?> published posts on your blog
+            You have <?= $data['postCount'] ?> published posts on your blog
         </a>
     </p>
 </div>
