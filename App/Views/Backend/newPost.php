@@ -1,6 +1,6 @@
 <?php
     $title    = (isset($data)) ? $data['title'] : NULL ;
-    $author   = (isset($data)) ? $data['author'] : NULL ;
+    $author   = (isset($data)) ? $data['author'] : 'Jean Forteroche' ;
     $contents = (isset($data)) ? $data['contents'] : 'Hello Jean write your text here :-)' ;
 ?>
 

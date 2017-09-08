@@ -96,6 +96,20 @@ class CommentsManager extends SQLRequest
     }
 
     /**
+     * Count numbers of users comments
+     * @return int
+     */
+    public function commentCount()
+    {
+        $sql = 'SELECT COUNT(*) FROM commentsBlogAlaska';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->execute();
+        $result = intval($dbh->fetchColumn());
+
+        return $result;        
+    }
+
+    /**
      * @param void
      * @return array Object Comments
      */

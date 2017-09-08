@@ -18,8 +18,9 @@ class Backend extends Page
     public function home()
     {
 
-        $data = ['reportCount' => $this->commentsManager->reportCount(),
-                 'postCount'   => $this->postManager->postCount()
+        $data = ['reportCount'  => $this->commentsManager->reportCount(),
+                 'commentCount' => $this->commentsManager->commentCount(),
+                 'postCount'    => $this->postManager->postCount()
                 ];
 
         $this->template('Backend/home', $data);
@@ -129,6 +130,13 @@ class Backend extends Page
         }
     }
 
+    /**
+     * Update published post
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "updatePost" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
     public function updatePost()
     {
         $route = $this->router->getRoute();
@@ -140,8 +148,7 @@ class Backend extends Page
             $idPost = intval( $route[2] );
             $post = $this->postManager->readPost($idPost);
 
-            $this->newPost($post);
-            // $this->template('/Backend/newPost', $post);          
+            $this->newPost($post);       
         }
     }
 

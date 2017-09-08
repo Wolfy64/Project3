@@ -9,7 +9,7 @@
         </p>
 
         <a href="/alaska">
-            <button type="button" class="btn btn-success btn-lg">Go to read !</button>
+            <button type="button" class="btn btn-success btn-lg">Click to read !</button>
         </a>
         
     </div>
