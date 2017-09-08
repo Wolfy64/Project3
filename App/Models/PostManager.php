@@ -14,8 +14,8 @@ class PostManager extends SQLRequest
      */
     public function create(Post $data)
     {
-        $title = $data->getTitle();
-        $author = $data->getAuthor();
+        $title    = $data->getTitle();
+        $author   = $data->getAuthor();
         $contents = $data->getContents();
 
         $sql = 'INSERT INTO blogAlaska(title, author, contents, dateContents)
@@ -35,12 +35,12 @@ class PostManager extends SQLRequest
      */
     public function read(int $id)
     {
-        $sql = 'SELECT * FROM blogAlaska WHERE id = :id';
+        $sql = 'SELECT id, author, title, contents FROM blogAlaska WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
         $data = $dbh->fetch(PDO::FETCH_ASSOC);
-        
+
         if ( $data != FALSE){
             return new Post($data);
         } else {
@@ -52,9 +52,21 @@ class PostManager extends SQLRequest
      *
      *
      */
-    public function update()
+    public function update(Post $data)
     {
+        $idPost   = $data->getId();
+        $title    = $data->getTitle();
+        $author   = $data->getAuthor();
+        $contents = $data->getContents();        
 
+        $sql = 'UPDATE blogAlaska SET title = :title, author = :author, contents = :contents WHERE idPost = :idPost';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':idPost', $idPost, PDO::PARAM_INT);
+        $dbh->bindParam(':title', $title, PDO::PARAM_STR);
+        $dbh->bindParam(':author', $author, PDO::PARAM_STR);
+        $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
+        
+        $dbh->execute();
     }
 
     /**
@@ -90,6 +102,20 @@ class PostManager extends SQLRequest
     }
 
     /**
+     * @param $id
+     * @return object Post
+     */
+    public function readPost(int $id)
+    {
+        $sql = 'SELECT id, author, title, contents FROM blogAlaska WHERE id = :id';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':id', $id, PDO::PARAM_INT);
+        $dbh->execute();
+
+        return $dbh->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Read a summary of $contents by default 100 characters
      * @param integer $length by default 100
      * @return $content
@@ -104,7 +130,6 @@ class PostManager extends SQLRequest
             return $contents;
         }
     }
-
 
     /**
      * Count numbers of post

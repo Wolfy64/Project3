@@ -69,15 +69,15 @@ class Backend extends Page
      *   $route[1] = Action => "newPost"
      * @return Void
      */
-    public function newPost()
+    public function newPost(array $data = NULL)
     {
         $route = $this->router->getRoute();
 
-        if ( $route[1] != 'newPost' ) {
+        if ( $route[1] != ('newPost' || 'updatePost') ) {
             $this->template('Errors/404');
 
         } else {
-            $this->template('Backend/newPost');           
+            $this->template('Backend/newPost', $data);           
         }
     }
 
@@ -129,8 +129,24 @@ class Backend extends Page
         }
     }
 
+    public function updatePost()
+    {
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'updatePost' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idPost = intval( $route[2] );
+            $post = $this->postManager->readPost($idPost);
+
+            $this->newPost($post);
+            // $this->template('/Backend/newPost', $post);          
+        }
+    }
+
     /**
-     * Delete comments reports
+     * Delete a published post
      *   $route[0] = Page   => "admin"
      *   $route[1] = Action => "deletePost" 
      *   $route[2] = idPost => Integer

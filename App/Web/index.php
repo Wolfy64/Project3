@@ -15,5 +15,3 @@ if ( $router->checkPage() ) {
 } else {
     $router->loadController('error404');
 }
-
-var_dump( $_SESSION );
