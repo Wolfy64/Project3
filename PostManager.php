@@ -54,14 +54,14 @@ class PostManager extends SQLRequest
      */
     public function update(Post $data)
     {
-        $id       = $data->getId();
+        $idPost   = $data->getId();
         $title    = $data->getTitle();
         $author   = $data->getAuthor();
         $contents = $data->getContents();        
 
-        $sql = 'UPDATE blogAlaska SET title = :title, author = :author, contents = :contents WHERE id = :id';
+        $sql = 'UPDATE blogAlaska SET title = :title, author = :author, contents = :contents WHERE idPost = :idPost';
         $dbh = $this->getDatabase()->prepare($sql);
-        $dbh->bindParam(':id', $id, PDO::PARAM_INT);
+        $dbh->bindParam(':idPost', $idPost, PDO::PARAM_INT);
         $dbh->bindParam(':title', $title, PDO::PARAM_STR);
         $dbh->bindParam(':author', $author, PDO::PARAM_STR);
         $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
@@ -120,7 +120,7 @@ class PostManager extends SQLRequest
      * @param integer $length by default 100
      * @return $content
      */
-    public function readSummary($length = 100)
+    public function readSummary(int $length = 100)
     {
         $contents = $this->contents;
         if ( strlen($contents) >= $length ){

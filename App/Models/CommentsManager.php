@@ -55,16 +55,12 @@ class CommentsManager extends SQLRequest
 
     public function update(Comments $data)
     {
-        var_dump( $data );
-        exit;
-        $idomment   = $data->getId();
+        $id   = $data->getId();
         $contents = $data->getContents();        
 
-        $sql = 'UPDATE blogAlaska SET title = :title, author = :author, contents = :contents WHERE idPost = :idPost';
+        $sql = 'UPDATE commentsBlogAlaska SET contents = :contents WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
-        $dbh->bindParam(':idPost', $idPost, PDO::PARAM_INT);
-        $dbh->bindParam(':title', $title, PDO::PARAM_STR);
-        $dbh->bindParam(':author', $author, PDO::PARAM_STR);
+        $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
         
         $dbh->execute();        
@@ -125,7 +121,7 @@ class CommentsManager extends SQLRequest
      * @param void
      * @return array Object Comments
      */
-    public function showReport()
+    public function manageReport()
     {
         $reportList = [];
         $sql = 'SELECT id, author, contents, dateContents FROM commentsBlogAlaska WHERE report = True';

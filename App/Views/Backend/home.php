@@ -1,14 +1,14 @@
 <div class="col-g">
     <!-- Report Comments -->
     <p>
-        <a href="showReport">
+        <a href="manageReport">
             You have <?= $data['reportCount'] ?> comment(s) reported by users
         </a>
     </p>
     
     <!-- New Post -->
     <p>
-        <a href="newPost">
+        <a href="writePost">
             Do you want publish a post today?
         </a>
     </p>

@@ -10,7 +10,7 @@ class Backend extends Page
         $this->connectAdmin($methodName);
     }
 
-    // METHODS PAGES
+// METHODS PAGES
 
     /**
      * Built the admin home page
@@ -27,26 +27,26 @@ class Backend extends Page
     }
 
     /**
-     * Built the admin showReport page
+     * Built the admin manageReport page
      *   $route[0] = Page   => "admin"
-     *   $route[1] = Action => "showReport"
+     *   $route[1] = Action => "manageReport"
      * @return Void
      */
-    public function showReport()
+    public function manageReport()
     {
         $route = $this->router->getRoute();
 
-        if ( $route[1] != 'showReport' ) {
+        if ( $route[1] != 'manageReport' ) {
             $this->template('Errors/404');
 
         } else {
-            $data = $this->commentsManager->showReport();
-            $this->template('Backend/showReport', $data);           
+            $data = $this->commentsManager->manageReport();
+            $this->template('Backend/manageReport', $data);           
         }
     }
 
     /**
-     * Built the admin showReport page
+     * Built the admin manageReport page
      *   $route[0] = Page   => "admin"
      *   $route[1] = Action => "managePost"
      * @return Void
@@ -84,70 +84,47 @@ class Backend extends Page
     }
 
     /**
-     * Built the admin newPost page
+     * Built the admin writePost page
      *   $route[0] = Page   => "admin"
-     *   $route[1] = Action => "newPost"
+     *   $route[1] = Action => "writePost"
      * @return Void
      */
-    public function newPost(array $data = NULL)
+    public function writePost($data = NULL)
     {
         $route = $this->router->getRoute();
 
-        if ( $route[1] != ('newPost' || 'updatePost') ) {
+        if ( $route[1] != ('writePost' || 'updatePost') ) {
             $this->template('Errors/404');
 
         } else {
-            $this->template('Backend/newPost', $data);           
+            $this->template('Backend/writePost', $data);           
         }
     }
 
-    // METHODS ACTIONS
+// METHODS ACTIONS
+
+    // Add new post
+
+    /**
+     * Add a new post
+     * @return Void
+     */
+    public function addPost()
+    {
+        $toCheck = ['title','author', 'contents'];
+
+        if ( Utils::checkArray($_POST, $toCheck) ){
+
+            $this->postManager->create( $post = new Post($_POST) );
+            header('Location: /admin/home');
+            exit;
+
+        } else {
+            $this->template('Errors/404');
+        }        
+    }
     
-    /**
-     * Cancel comments reports
-     *   $route[0] = Page   => "admin"
-     *   $route[1] = Action => "cancelReport" 
-     *   $route[2] = idPost => Integer
-     * @return Void
-     */
-    public function cancelReport()
-    {
-        $route = $this->router->getRoute();
-        
-        if ( $route[1] != 'cancelReport' ){
-            $this->template('Errors/404');
-
-        } else {
-            $idComment = intval( $route[2]  );
-            $this->commentsManager->cancelReport($idComment);
-
-            $data = $this->commentsManager->showReport();
-            $this->template('Backend/showReport', $data);          
-        }
-    }
-
-    /**
-     * Delete comments reports
-     *   $route[0] = Page   => "admin"
-     *   $route[1] = Action => "deleteReport" 
-     *   $route[2] = idPost => Integer
-     * @return Void
-     */
-    public function deleteReport()
-    {
-        $route = $this->router->getRoute();
-
-        if ( $route[1] != 'deleteReport' ){
-            $this->template('Errors/404');
-
-        } else {
-            $idComment = intval( $route[2] );
-            $this->commentsManager->delete($idComment);
-
-            $data = $this->commentsManager->showReport();
-            $this->template('Backend/showReport', $data);          
-        }
-    }
+    // Manage published post
 
     /**
      * Update published post
@@ -156,7 +133,7 @@ class Backend extends Page
      *   $route[2] = idPost => Integer
      * @return Void
      */
-    public function updatePost() // A terminer !!!
+    public function updatePost()
     {
         $route = $this->router->getRoute();
 
@@ -165,9 +142,9 @@ class Backend extends Page
 
         } else {
             $idPost = intval( $route[2] );
-            $post = $this->postManager->readPost($idPost);
+            $data = $this->postManager->readPost($idPost);
 
-            $this->newPost($post);       
+            $this->writePost($data);       
         }
     }
 
@@ -189,10 +166,84 @@ class Backend extends Page
             $idComment = intval( $route[2] );
             $this->postManager->delete($idComment);
 
-            $data = $this->postManager->readAllPost();
-            $this->template('Backend/managePost', $data);          
+            header('Location: /admin/managePost');
+            exit;           
         }
     }
+
+    /**
+     * Update user comment
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "modifiedPost" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */    
+    public function modifiedPost()
+    {
+        $toCheck = ['id','title','author', 'contents'];
+
+        if ( Utils::checkArray($_POST, $toCheck) ){
+
+            $this->postManager->update( $post = new Post($_POST) );
+            header('Location: /admin/managePost');
+            exit;
+
+        } else {
+            $this->template('Errors/404');
+        }        
+    }
+
+
+    // Manage user report comment
+
+    /**
+     * Cancel comments reports
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "cancelReport" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
+    public function cancelReport()
+    {
+        $route = $this->router->getRoute();
+        
+        if ( $route[1] != 'cancelReport' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idComment = intval( $route[2]  );
+            $this->commentsManager->cancelReport($idComment);
+
+            header('Location: /admin/manageReport');
+            exit;
+         
+        }
+    }
+
+    /**
+     * Delete comments reports
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "deleteReport" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
+    public function deleteReport()
+    {
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'deleteReport' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idComment = intval( $route[2] );
+            $this->commentsManager->delete($idComment);
+
+            header('Location: /admin/manageReport');
+            exit;      
+        }
+    }
+
+    // Manage published user comment
 
     /**
      * Delete comments reports
@@ -204,7 +255,7 @@ class Backend extends Page
     public function deleteComment()
     {
         $route = $this->router->getRoute();
-        var_dump( 'Hello World' );
+
         if ( $route[1] != 'deleteComment' ){
             $this->template('Errors/404');
 
@@ -212,8 +263,8 @@ class Backend extends Page
             $idComment = intval( $route[2] );
             $this->commentsManager->delete($idComment);
 
-            $data = $this->commentsManager->readAll();
-            $this->template('Backend/manageComment', $data);          
+            header('Location: /admin/manageComment');
+            exit;          
         }
     }
 
@@ -224,7 +275,7 @@ class Backend extends Page
      *   $route[2] = idPost => Integer
      * @return Void
      */
-    public function updateComment() // A terminer !!!
+    public function updateComment() 
     {
         $route = $this->router->getRoute();
 
@@ -246,41 +297,22 @@ class Backend extends Page
      *   $route[2] = idPost => Integer
      * @return Void
      */
-    public function modifiedComment()
+    public function modifiedComment() // A terminer !!!
     {
-        var_dump( 'Hello World' );
         $toCheck = ['id', 'contents'];
 
         if ( Utils::checkArray($_POST, $toCheck) ){
 
             $this->commentsManager->update( $post = new Comments($_POST) );
-            $this->template('Backend/updateComment');
+            header('Location: /admin/manageComment');
+            exit;
 
         } else {
             $this->template('Errors/404');
-        }        
- 
+        }  
     }
 
-    /**
-     * Add a new post
-     * @return Void
-     */
-    public function addPost()
-    {
-        $toCheck = ['title','author', 'contents'];
-
-        if ( Utils::checkArray($_POST, $toCheck) ){
-
-            $this->postManager->create( $post = new Post($_POST) );
-            $this->template('Backend/home');
-
-        } else {
-            $this->template('Errors/404');
-        }        
-    }
-
-    // METHODS CONNECTION ADMIN
+// METHODS CONNECTION ADMIN
 
     /**
      * Check that connection to the Admin page is allowed
@@ -296,7 +328,9 @@ class Backend extends Page
             $this->userConnection->verifyAccount($user, $password);
 
             if ( $this->isAdmin() ){ // If TRUE
-                $this->home();
+                header('Location: /admin/home');
+                exit;
+
             }else {
                 $this->template('Backend/signIn');
             }
@@ -314,7 +348,8 @@ class Backend extends Page
     public function signOut()
     {
         session_destroy();
-        $this->template('Frontend/home');
+        header('Location: /');
+        exit;
     }
 
     /**
@@ -328,7 +363,8 @@ class Backend extends Page
             $this->signIn();
 
         } elseif( $this->isAdmin() === TRUE && $methodName === 'signIn') { // If true AND 'signIn'
-            $this->home();
+            header('Location: /admin/home');
+            exit;
 
         } elseif( $this->isAdmin() === TRUE && $methodName != 'signIn' ) { // If true AND NOT 'signIn'
             $this->$methodName();

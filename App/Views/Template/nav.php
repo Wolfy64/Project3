@@ -1,3 +1,10 @@
+<?php
+    $sign = ( isset($_SESSION['admin']) ) ? 'SIGN OUT' : 'SIGN IN';
+    $hrefSign = ( isset($_SESSION['admin']) ) ? '/admin/signOut' : '/admin/signIn';
+    $admin = ( isset($_SESSION['admin']) ) ? 'ADMIN' : NULL;
+?>
+
+
 <nav class="navbar navbar-expand-sm sticky-top">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,11 +31,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin/signIn"> ADMIN </a>
+                <a class="nav-link" href="/admin/home"> <?= $admin ?> </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin/signOut"> SIGN OUT </a>
+                <a class="nav-link" href="/admin/signOut"> <?= $sign ?> </a>
             </li>
 
         </ul>
