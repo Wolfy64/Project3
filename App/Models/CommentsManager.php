@@ -53,9 +53,21 @@ class CommentsManager extends SQLRequest
         return $commentsList;
     }
 
-    public function update()
+    public function update(Comments $data)
     {
+        var_dump( $data );
+        exit;
+        $idomment   = $data->getId();
+        $contents = $data->getContents();        
+
+        $sql = 'UPDATE blogAlaska SET title = :title, author = :author, contents = :contents WHERE idPost = :idPost';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':idPost', $idPost, PDO::PARAM_INT);
+        $dbh->bindParam(':title', $title, PDO::PARAM_STR);
+        $dbh->bindParam(':author', $author, PDO::PARAM_STR);
+        $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
         
+        $dbh->execute();        
     }
 
     public function delete(int $idComment)
@@ -156,5 +168,19 @@ class CommentsManager extends SQLRequest
         }
 
         return $postList;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function readComment(int $id)
+    {
+        $sql = 'SELECT id, author, contents FROM commentsBlogAlaska WHERE id = :id';
+        $dbh = $this->getDatabase()->prepare($sql);
+        $dbh->bindParam(':id', $id, PDO::PARAM_INT);
+        $dbh->execute();
+
+        return $dbh->fetch(PDO::FETCH_ASSOC);       
     }
 }

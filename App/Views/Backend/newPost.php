@@ -4,8 +4,6 @@
     $contents = (isset($data)) ? $data['contents'] : 'Hello Jean write your text here :-)' ;
 ?>
 
-
-<!-- TinyMce -->
 <form method="post" action="addPost">
     <input type="text" name="title" placeholder="e.g My title" value="<?= $title ?>" required>
     <textarea id="postContent" name="contents"><?= $contents ?></textarea>
@@ -13,5 +11,3 @@
 
     <button type="submmit">Published</button>
 </form>
-
-<?php

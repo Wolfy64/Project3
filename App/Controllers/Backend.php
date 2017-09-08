@@ -156,7 +156,7 @@ class Backend extends Page
      *   $route[2] = idPost => Integer
      * @return Void
      */
-    public function updatePost()
+    public function updatePost() // A terminer !!!
     {
         $route = $this->router->getRoute();
 
@@ -215,6 +215,51 @@ class Backend extends Page
             $data = $this->commentsManager->readAll();
             $this->template('Backend/manageComment', $data);          
         }
+    }
+
+    /**
+     * Update user comment
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "updateComment" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
+    public function updateComment() // A terminer !!!
+    {
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'updateComment' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idComment = intval( $route[2] );
+            $data = $this->commentsManager->readComment($idComment);
+
+            $this->template('Backend/updateComment', $data);       
+        }
+    }
+
+    /**
+     * Update published post
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "modifiedComment" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
+    public function modifiedComment()
+    {
+        var_dump( 'Hello World' );
+        $toCheck = ['id', 'contents'];
+
+        if ( Utils::checkArray($_POST, $toCheck) ){
+
+            $this->commentsManager->update( $post = new Comments($_POST) );
+            $this->template('Backend/updateComment');
+
+        } else {
+            $this->template('Errors/404');
+        }        
+ 
     }
 
     /**
