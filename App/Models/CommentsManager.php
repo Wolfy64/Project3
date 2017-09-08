@@ -87,7 +87,7 @@ class CommentsManager extends SQLRequest
      */
     public function reportCount()
     {
-        $sql = 'SELECT COUNT(*) FROM commentsBlogAlaska WHERE report = True';
+        $sql = 'SELECT COUNT(*) FROM commentsBlogAlaska WHERE report = TRUE';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->execute();
         $result = intval($dbh->fetchColumn());
@@ -138,5 +138,23 @@ class CommentsManager extends SQLRequest
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
+    }
+
+    /**
+     * Read all blog comments
+     * @return array Object Comment
+     */
+    public function readAll()
+    {
+        $commentList = [];
+        $sql  = 'SELECT * FROM commentsBlogAlaska';
+        $dbh  = $this->getDatabase()->query($sql);
+        $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ( $data as $comment ) {
+            $postList[] = new Comments($comment);
+        }
+
+        return $postList;
     }
 }

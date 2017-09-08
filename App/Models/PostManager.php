@@ -103,7 +103,7 @@ class PostManager extends SQLRequest
 
     /**
      * @param $id
-     * @return object Post
+     * @return array
      */
     public function readPost(int $id)
     {

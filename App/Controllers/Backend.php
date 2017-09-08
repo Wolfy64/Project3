@@ -65,6 +65,25 @@ class Backend extends Page
     }
 
     /**
+     * Built the admin manageComment page
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "manageComment"
+     * @return Void
+     */
+    public function manageComment()
+    {
+        $route = $this->router->getRoute();
+
+        if ( $route[1] != 'manageComment' ) {
+            $this->template('Errors/404');
+
+        } else {
+            $data = $this->commentsManager->readAll();
+            $this->template('Backend/manageComment', $data);           
+        }  
+    }
+
+    /**
      * Built the admin newPost page
      *   $route[0] = Page   => "admin"
      *   $route[1] = Action => "newPost"
@@ -172,6 +191,29 @@ class Backend extends Page
 
             $data = $this->postManager->readAllPost();
             $this->template('Backend/managePost', $data);          
+        }
+    }
+
+    /**
+     * Delete comments reports
+     *   $route[0] = Page   => "admin"
+     *   $route[1] = Action => "deleteComment" 
+     *   $route[2] = idPost => Integer
+     * @return Void
+     */
+    public function deleteComment()
+    {
+        $route = $this->router->getRoute();
+        var_dump( 'Hello World' );
+        if ( $route[1] != 'deleteComment' ){
+            $this->template('Errors/404');
+
+        } else {
+            $idComment = intval( $route[2] );
+            $this->commentsManager->delete($idComment);
+
+            $data = $this->commentsManager->readAll();
+            $this->template('Backend/manageComment', $data);          
         }
     }
 
