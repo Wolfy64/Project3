@@ -57,15 +57,19 @@ class UserConnection extends SQLRequest
     }
 
     /**
-     * Creates a password hash in database
+     * Update a password hash in database
      * @param $password
      */
-    public function passHach(string $password)
+    public function passHach(string $user, string $password)
     {
-        $passwordHach = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12 ]);
-        $sql = 'INSERT INTO password FROM userBlog';
+        $passHash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12 ]);
+
+        $sql = 'UPDATE usersBlog SET password = :password WHERE user = :user';
         $dbh = $this->getDatabase()->prepare($sql);
-        // A finir pour creer ou modifier le mdp de l'écrivain;
+        $dbh->bindParam(':user', $user, PDO::PARAM_STR);
+        $dbh->bindParam(':password', $passHash, PDO::PARAM_STR);
+
+        $dbh->execute();
     }
 
     /**

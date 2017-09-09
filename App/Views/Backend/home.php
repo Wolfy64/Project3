@@ -26,4 +26,11 @@
             You have <?= $data['commentCount'] ?> users comments on your blog
         </a>
     </p>
+
+    <!-- Settings -->
+    <p>
+        <a href="settings">
+            Settings
+        </a>
+    </p>
 </div>

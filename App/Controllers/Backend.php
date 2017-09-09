@@ -17,7 +17,6 @@ class Backend extends Page
      */
     public function home()
     {
-
         $data = ['reportCount'  => $this->commentsManager->reportCount(),
                  'commentCount' => $this->commentsManager->commentCount(),
                  'postCount'    => $this->postManager->postCount()
@@ -99,6 +98,11 @@ class Backend extends Page
         } else {
             $this->template('Backend/writePost', $data);           
         }
+    }
+
+    public function settings()
+    {
+        $this->template('Backend/settings');
     }
 
 // METHODS ACTIONS
@@ -297,7 +301,7 @@ class Backend extends Page
      *   $route[2] = idPost => Integer
      * @return Void
      */
-    public function modifiedComment() // A terminer !!!
+    public function modifiedComment()
     {
         $toCheck = ['id', 'contents'];
 
@@ -310,6 +314,31 @@ class Backend extends Page
         } else {
             $this->template('Errors/404');
         }  
+    }
+
+    // Settings
+
+    public function newPassword()
+    {
+        $toCheck = ['user', 'pass', 'pass2'];
+
+        if ( Utils::checkArray($_POST, $toCheck) ){
+            if ( $_POST['pass'] != $_POST['pass2'] ){
+                echo 'the two passwords are not identical';
+
+            } else {
+                $user = $_POST['user'];
+                $password = $_POST['pass'];
+                
+                $this->userConnection->passHach($user, $password);
+                header('Location: /admin/home');
+                exit;
+            }
+
+        } else {
+            $this->template('Errors/404');
+        }  
+
     }
 
 // METHODS CONNECTION ADMIN
