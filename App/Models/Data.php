@@ -59,7 +59,7 @@ abstract class Data
     public function setTitle(String $title)
     {
         $title = htmlspecialchars($title);
-        if ( strlen($title) <= 100 ){
+        if ( strlen($title) <= 255 ){
             $this->title = $title;
         }else{
             throw new Exception('$title must be <= 100 character');
