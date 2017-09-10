@@ -2,7 +2,7 @@
 
 require '../Models/Data.php';
 
-class Comments extends Data
+class Comment extends Data
 {
     protected $idBlogAlaska;
 

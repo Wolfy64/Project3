@@ -4,7 +4,7 @@
 
         <div class="col-12">
             
-            <!-- Report Comments -->
+            <!-- Report Comment -->
             <a href="manageReport">
 
                 <button type="button" class="btn-admin amber">
@@ -32,15 +32,15 @@
         
             </a>
         
-            <!-- Show Comments -->
+            <!-- Show Comment -->
             <a href="manageComment">
         
                 <button type="" class="btn-admin blue">
                     <p>
-                        <i class="fa fa-comments-o fa-3x"></i>
+                        <i class="fa fa-comment-o fa-3x"></i>
                     </p>
                     <p>
-                        <?= $data['commentCount'] ?> users comments
+                        <?= $data['commentCount'] ?> users comment
                     </p>
                 </button>
         

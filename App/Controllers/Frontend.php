@@ -65,7 +65,7 @@ class Frontend extends Page
         }
     }
 
-    // METHODS COMMENTS
+    // METHODS COMMENT
 
     /**
      * Add Comment from $_POST
@@ -82,7 +82,7 @@ class Frontend extends Page
                 $data += [$key => htmlspecialchars($value)];
             }
 
-            $this->commentsManager->create(new Comments($data) );
+            $this->commentManager->create(new Comment($data) );
             header('Location: /alaska/post/' . $data['idBlogAlaska']);
             exit;
 
@@ -103,7 +103,7 @@ class Frontend extends Page
             $idComment = intval($_POST['report']);
             $idPost    = intval($_POST['idBlogAlaska']);
 
-            $this->commentsManager->report($idComment);
+            $this->commentManager->report($idComment);
             header('Location: /alaska/post/' . $idPost);
             exit;
 

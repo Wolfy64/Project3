@@ -15,8 +15,8 @@
             </p>
         </article>
         
-        <!-- Show Comments -->
-        <?php foreach ($data->getCommentsList() as $comment) { ?>
+        <!-- Show Comment -->
+        <?php foreach ($data->getCommentList() as $comment) { ?>
         
             <div class="border border-light bg-light rounded m-3 p-2">
                 <p> Posted by <?= $comment->getAuthor() ?> on <?= $comment->getDateContents() ?> </p>
@@ -28,7 +28,7 @@
             </div>
         <?php } ?>
         
-        <!-- Add Comments -->
+        <!-- Add Comment -->
         <div class="border border-light rounded m-3 p-2">
 
 

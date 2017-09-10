@@ -1,30 +1,30 @@
 <?php
 
-require_once '../Models/CommentsManager.php';
+require_once '../Models/CommentManager.php';
 require_once '../Models/Data.php';
 
 class Post extends Data
 {
-    protected $commentsList;
-    protected $commentsManager;
+    protected $commentList;
+    protected $commentManager;
 
     public function __construct($data)
     { 
         parent::__construct($data);
-        $this->commentsManager = new CommentsManager();
-        $this->setCommentsList(); 
+        $this->commentManager = new CommentManager();
+        $this->setCommentList(); 
     }    
 
     // GETTERS
 
-    public function getCommentsList(){ return $this->commentsList;}
+    public function getCommentList(){ return $this->commentList;}
 
     // SETTERS
 
-    public function setCommentsList()
+    public function setCommentList()
     {
         if ( $this->id != null ){
-            $this->commentsList = $this->commentsManager->read($this->id);
+            $this->commentList = $this->commentManager->read($this->id);
         }
     }
 

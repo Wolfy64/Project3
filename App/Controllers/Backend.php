@@ -17,8 +17,8 @@ class Backend extends Page
      */
     public function home()
     {
-        $data = ['reportCount'  => $this->commentsManager->reportCount(),
-                 'commentCount' => $this->commentsManager->commentCount(),
+        $data = ['reportCount'  => $this->commentManager->reportCount(),
+                 'commentCount' => $this->commentManager->commentCount(),
                  'postCount'    => $this->postManager->postCount()
                 ];
 
@@ -39,7 +39,7 @@ class Backend extends Page
             $this->template('Errors/404');
 
         } else {
-            $data = $this->commentsManager->manageReport();
+            $data = $this->commentManager->manageReport();
             $this->template('Backend/manageReport', $data);           
         }
     }
@@ -77,7 +77,7 @@ class Backend extends Page
             $this->template('Errors/404');
 
         } else {
-            $data = $this->commentsManager->readAll();
+            $data = $this->commentManager->readAll();
             $this->template('Backend/manageComment', $data);           
         }  
     }
@@ -201,7 +201,7 @@ class Backend extends Page
     // Manage user report comment
 
     /**
-     * Cancel comments reports
+     * Cancel comment reports
      *   $route[0] = Page   => "admin"
      *   $route[1] = Action => "cancelReport" 
      *   $route[2] = idPost => Integer
@@ -216,7 +216,7 @@ class Backend extends Page
 
         } else {
             $idComment = intval( $route[2]  );
-            $this->commentsManager->cancelReport($idComment);
+            $this->commentManager->cancelReport($idComment);
 
             header('Location: /admin/manageReport');
             exit;
@@ -225,7 +225,7 @@ class Backend extends Page
     }
 
     /**
-     * Delete comments reports
+     * Delete comment reports
      *   $route[0] = Page   => "admin"
      *   $route[1] = Action => "deleteReport" 
      *   $route[2] = idPost => Integer
@@ -240,7 +240,7 @@ class Backend extends Page
 
         } else {
             $idComment = intval( $route[2] );
-            $this->commentsManager->delete($idComment);
+            $this->commentManager->delete($idComment);
 
             header('Location: /admin/manageReport');
             exit;      
@@ -250,7 +250,7 @@ class Backend extends Page
     // Manage published user comment
 
     /**
-     * Delete comments reports
+     * Delete comment reports
      *   $route[0] = Page   => "admin"
      *   $route[1] = Action => "deleteComment" 
      *   $route[2] = idPost => Integer
@@ -265,7 +265,7 @@ class Backend extends Page
 
         } else {
             $idComment = intval( $route[2] );
-            $this->commentsManager->delete($idComment);
+            $this->commentManager->delete($idComment);
 
             header('Location: /admin/manageComment');
             exit;          
@@ -288,7 +288,7 @@ class Backend extends Page
 
         } else {
             $idComment = intval( $route[2] );
-            $data = $this->commentsManager->readComment($idComment);
+            $data = $this->commentManager->readComment($idComment);
 
             $this->template('Backend/updateComment', $data);       
         }
@@ -307,7 +307,7 @@ class Backend extends Page
 
         if ( Utils::checkArray($_POST, $toCheck) ){
 
-            $this->commentsManager->update( $post = new Comments($_POST) );
+            $this->commentManager->update( $post = new Comment($_POST) );
             header('Location: /admin/manageComment');
             exit;
 

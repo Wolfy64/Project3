@@ -8,14 +8,14 @@ require_once '../Models/Utils.php';
 class Page
 {
     protected $postManager;
-    protected $commentsManager;
+    protected $commentManager;
     protected $userConnection;
     protected $router;
 
     public function __construct(Router $router, string $methodName)
     {
         $this->postManager = new PostManager();
-        $this->commentsManager = new CommentsManager();
+        $this->commentManager = new CommentManager();
         $this->userConnection = new UserConnection();
         $this->router = $router;
     }

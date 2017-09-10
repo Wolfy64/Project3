@@ -1,7 +1,7 @@
 <div class="col-lg">
     
         <p>
-            <h3 class="text-center">Manage comments</h3>
+            <h3 class="text-center">Manage comment</h3>
         </p>
 
         <table class="table table-striped table-bordered table-hover">
