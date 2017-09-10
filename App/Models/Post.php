@@ -35,7 +35,7 @@ class Post extends Data
      */
     public function readSummary(int $length = 100)
     {
-        $contents = $this->contents;
+        $contents = htmlentities( $this->contents );
         if ( strlen($contents) >= $length ){
             $pos = strpos($contents, ' ', $length); // For not to cut a word
             return substr($contents, 0, $pos) . ' ...';
