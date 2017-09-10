@@ -307,7 +307,12 @@ class Backend extends Page
 
         if ( Utils::checkArray($_POST, $toCheck) ){
 
-            $this->commentManager->update( $post = new Comment($_POST) );
+            $data = [];
+            foreach ($_POST as $key => $value) {
+                $data += [$key => htmlspecialchars($value)];
+            }
+
+            $this->commentManager->update( new Comment($data) );
             header('Location: /admin/manageComment');
             exit;
 
