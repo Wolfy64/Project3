@@ -1,12 +1,13 @@
 <div class="container">
+    
     <div class="row">
 
         <div class="col-12">
             
             <!-- Report Comments -->
             <a href="manageReport">
-        
-                <button type="" class="btn-admin btn-warning">
+
+                <button type="button" class="btn-admin amber">
                     <p>
                         <i class="fa fa-exclamation-circle fa-3x"></i>
                     </p>
@@ -14,13 +15,13 @@
                         <?= $data['reportCount'] ?> comment(s) reported
                     </p>
                 </button>
-        
+                
             </a>
         
             <!-- Show Post -->
             <a href="managePost">
         
-                <button type="" class="btn-admin btn-success">
+                <button type="" class="btn-admin green">
                     <p>
                         <i class="fa fa-newspaper-o fa-3x"></i>
                     </p>
@@ -34,7 +35,7 @@
             <!-- Show Comments -->
             <a href="manageComment">
         
-                <button type="" class="btn-admin btn-primary">
+                <button type="" class="btn-admin blue">
                     <p>
                         <i class="fa fa-comments-o fa-3x"></i>
                     </p>
@@ -52,7 +53,7 @@
             <!-- New Post -->
             <a href="writePost">
         
-                <button type="" class="btn-admin btn-secondary">
+                <button type="" class="btn-admin indigo">
                     <p>
                         <i class="fa fa-pencil fa-3x"></i>
                     </p>
@@ -66,7 +67,7 @@
             <!-- Settings -->
             <a href="settings">
         
-                <button type="" class="btn-admin btn-dark">
+                <button type="" class="btn-admin blue-grey">
                     <p>
                         <i class="fa fa-cog fa-3x"></i>
                     </p>
@@ -80,7 +81,7 @@
             <!-- Sign Out -->
             <a href="/admin/signOut">
         
-                <button type="" class="btn-admin btn-danger">
+                <button type="" class="btn-admin red">
                     <p>
                         <i class="fa fa-sign-out fa-3x"></i>
                     </p>
@@ -95,7 +96,4 @@
         
     </div>
 
-
-
-    
 </div>

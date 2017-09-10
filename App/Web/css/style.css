@@ -9,10 +9,14 @@ html{
     width: auto;
 }
 
+/* Font text */
 p{
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.1em;
 }
+
+/* Colors custom */
+
 
 
 /* HOMEPAGE */
@@ -22,10 +26,22 @@ p{
     height: 1024px;
 }
 
+#about {
+    background-color: #222;
+    color: whitesmoke
+}
+
+.btn-outline-light:hover {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #f8f9fa;
+}
+
 .jumbotron{
     background-color: rgba(52, 58, 64, 0.84);
     color: whitesmoke;
 }
+
 
 /* header */
 /* header {
@@ -47,10 +63,12 @@ p{
     background-color: rgba(29, 26, 26, 0.84);
 } */
 
-h3{
+h3, display-3{
     font-family: 'Kaushan Script',
     cursive;
 }
+
+/* Dashboard */
 
 .btn-admin{
     /* background-color: rgba(19, 18, 18, 0.89); */
@@ -67,6 +85,30 @@ h3{
     height: 200px;
     margin: 3%;
     justify-content: center;
+}
+
+.amber{
+    background-color: #FFAB00;
+}
+
+.green{
+    background-color: #4CAF50;
+}
+
+.blue{
+    background-color: #2196F3;
+}
+
+.indigo{
+    background-color: #3F51B5;
+}
+
+.blue-grey{
+    background-color: #263238;
+}
+
+.red{
+    background-color: #B71C1C;
 }
 
 .btn-admin:hover{

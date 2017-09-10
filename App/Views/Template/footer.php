@@ -1,14 +1,14 @@
-<footer>
-    <!-- <div class="container"> -->
-
-        <ul class="list-inline-item">
-            <li class="list-inline-item">Contact</li>
-            <li class="list-inline-item">Facebook</li>
-            <li class="list-inline-item">Twitter</li>
-            <li class="list-inline-item">Infos</li>
-        </ul>
-        
-    <!-- </div> -->
+<footer >
+    <div class="container">
+        <div class="col-12 text-center">
+            <p>
+                Blog created for a student project
+            </p>
+            <p>
+                PHP OOP MVC BOOSTRAP 4.0
+            </p>
+        </div>
+    </div>
 </footer>
 
 </body>

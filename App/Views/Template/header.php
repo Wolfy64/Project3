@@ -1,7 +1,3 @@
-<?php
-    $admin = ( isset($_SESSION['admin']) ) ? 'DASHBOARD' : 'NULL';
-?>
-
 <header class="col-lg-12">
 
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -19,19 +15,20 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"> ABOUT </a>
+                    <a class="nav-link" href="/#about"> ABOUT </a>
                 </li>
 
                 <li class="nav-item active">
                     <a class="nav-link" href="/alaska"> THE BOOK </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"> CONTACT </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/home"> <?= $admin ?> </a>
-                </li>
+                <?php if ( isset($_SESSION['admin']) ){ ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/home"> DASHBOARD </a>
+                    </li>
+
+                <?php }; ?>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/signIn"> <i class="fa fa-user-circle fa-lg"></i> </a>
