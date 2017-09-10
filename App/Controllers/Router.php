@@ -99,7 +99,7 @@ class Router
 
         if ( $methodName != NULL ){
             // Load Controller
-             return new $controller($this, $methodName);
+            return new $controller($this, $methodName);
         } else{
             // Load Controller whith first parameter of URI (Page)
             return new $controller($this, $this->uriPage);

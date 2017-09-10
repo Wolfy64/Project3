@@ -1,13 +1,8 @@
-/* style css */
+/* Style css */
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
-
-/* body */
-html{
-    width: auto;
-}
 
 /* Font text */
 p{
@@ -15,15 +10,17 @@ p{
     font-size: 1.1em;
 }
 
-/* Colors custom */
-
-
-
 /* HOMEPAGE */
 
 #home{
     background: #222 url('../img/homepage.jpg') no-repeat center;
     height: 1024px;
+}
+
+.jumbotron{
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #about {
