@@ -5,14 +5,35 @@
     $action   = (isset($data)) ? '/admin/modifiedPost' : 'addPost';
 ?>
 
-<form method="post" action="<?= $action ?>">
-    <input type="text" name="title" placeholder="e.g My title" value="<?= $title ?>" required>
-    <textarea id="postContent" name="contents"><?= $contents ?></textarea>
-    <input type="text" name="author" value="<?= $author ?>" required>
+<div class="container">
 
-    <?php if ( isset($data) ){ ?>
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
-    <?php } ?>
+    <p>
+        <h3 class="text-center">Write a post</h3>
+    </p>
+    
+    <form method="post" action="<?= $action ?>">
 
-    <button type="submmit">Published</button>
-</form>
+        <div class="form-group">
+            <p>
+                <input class="form-control" type="text" name="title" placeholder="Title" value="<?= $title ?>" required>
+            </p>
+
+            <p>
+                <textarea id="postContent" name="contents"><?= $contents ?></textarea>
+            </p>
+
+            <p>
+                <input class="form-control" type="text" name="author" value="<?= $author ?>" required>
+            </p>
+        
+            <?php if ( isset($data) ){ ?>
+                <input type="hidden" name="id" value="<?= $data['id'] ?>">
+            <?php } ?>
+        
+            <button class="btn btn-light" type="submmit">Published</button>
+
+        </div>
+
+    </form>
+
+</div>

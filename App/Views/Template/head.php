@@ -18,6 +18,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
 
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/2c5a94bf03.js"></script>
+
     <!-- TinyMCE -->
     <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
@@ -41,11 +44,6 @@
 </head>
 
 <body>
-
-<section class="container">
-    
-
-
 
 
 

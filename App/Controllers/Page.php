@@ -41,9 +41,8 @@ class Page
 
         require_once $config['head'];
         require_once $config['header'];
-        require_once $config['nav'];;
         require_once $bodyFile;
-        require_once $config['footer'];;
+        require_once $config['footer'];
 
         // Set $data[] propertie dynamically
         $this->data[] = $data;

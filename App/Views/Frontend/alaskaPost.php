@@ -1,45 +1,60 @@
-<div class="col-lg">
-    <article class="border border-secondary bg-light rounded m-3 p-2">
-        <h3>             <?= $data->getTitle();       ?> </h3>
-        <p> Published on <?= $data->getDateContents() ?> </p>
-        <p>              <?= $data->getAuthor();      ?> </p>
-        <p>              <?= $data->getContents();    ?> </p>
-        <p> <a href="#comment">Add Comment</a>           </p>
-    </article>
-    
-    <!-- Show Comments -->
-    
-    <?php foreach ($data->getCommentsList() as $comment) { ?>
-    
-        <div class="border border-light bg-light rounded m-3 p-2">
-            <p> <?= $comment->getTitle()        ?> </p>
-            <p> <?= $comment->getDateContents() ?> </p>
-            <p> <?= $comment->getAuthor()       ?> </p>
-            <p> <?= $comment->getContents()     ?> </p>
-            <form action="/report" method="post">
-                <button value='<?= $comment->getId() ?>' type="submit" name="report"> Report </button>
-                <input type="hidden" name="idBlogAlaska" value="<?= $data->getID() ?>">
-            </form>
-        </div>
-    <?php } ?>
-    
-    <!-- Add Comments -->
-    
-    <form action="/addComment" method="post">
-      <fieldset id="comment">
-        <legend>Something to say?</legend>
-        <p>
-            <label>Nickname</label><br>
-            <input type="text" name="comment[author]" placeholder="e.g Jean" required>
-        </p>
-        <p>
-            <label>Your message</label><br>
-            <textarea rows="5" cols="40" name="comment[contents]" placeholder="e.g My name is Jean" required></textarea>
-        </p>
-        <input type="hidden" name="comment[idBlogAlaska]" value="<?= $data->getID() ?>">
+<div class="container">
+
+    <div class="col-lg">
+
+        <!-- Show Post -->
+        <article class="border border-secondary bg-light rounded m-3 p-2">
+            <h3>             <?= $data->getTitle();       ?> </h3>
+            <p> Published on <?= $data->getDateContents() ?> </p>
+            <p>              <?= $data->getAuthor();      ?> </p>
+            <p>              <?= $data->getContents();    ?> </p>
+            <p> 
+                <a href="#comment">
+                    <button type="button" class="btn btn-outline-dark btn-sm">Add Comment</button>   
+                </a>           
+            </p>
+        </article>
         
-        <button type="submit">Add your comment</button>
-        <button type="reset">Reset</button>
-      </fieldset>
-    </form>
+        <!-- Show Comments -->
+        <?php foreach ($data->getCommentsList() as $comment) { ?>
+        
+            <div class="border border-light bg-light rounded m-3 p-2">
+                <p> Posted by <?= $comment->getAuthor() ?> on <?= $comment->getDateContents() ?> </p>
+                <p> <?= $comment->getContents()     ?> </p>
+                <form action="/report" method="post">
+                    <button class="btn btn-dark btn-sm " value='<?= $comment->getId() ?>' type="submit" name="report"> <i class="fa fa-flag fa-lg" color="red"></i> </button>
+                    <input type="hidden" name="idBlogAlaska" value="<?= $data->getID() ?>">
+                </form>
+            </div>
+        <?php } ?>
+        
+        <!-- Add Comments -->
+        <div class="border border-light rounded m-3 p-2">
+
+
+            <form action="/addComment" method="post">
+
+                <div class="form-group">  
+                    <label id="comment">Something to say?</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="comment[author]" placeholder="Nickname" required>
+                </div>
+                
+                <div class="form-group">
+                    <textarea class="form-control" name="comment[contents]" placeholder="Write your comment" required></textarea>
+                </div>
+
+                <input type="hidden" name="comment[idBlogAlaska]" value="<?= $data->getID() ?>">
+                
+                <button type="submit" class="btn btn-light">Add your comment</button>
+                <button type="reset" class="btn btn-light">Reset</button>
+    
+            </form>
+
+        </div>
+
+    </div>
+    
 </div>

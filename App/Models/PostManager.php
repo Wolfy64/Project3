@@ -35,7 +35,7 @@ class PostManager extends SQLRequest
      */
     public function read(int $id)
     {
-        $sql = 'SELECT id, author, title, contents FROM blogAlaska WHERE id = :id';
+        $sql = 'SELECT id, author, dateContents, title, contents FROM blogAlaska WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();

@@ -1,12 +1,14 @@
-</section>
+<footer>
+    <!-- <div class="container"> -->
 
-<footer class="row">
-    <ul class="list-inline-item">
-        <li class="list-inline-item">Contact</li>
-        <li class="list-inline-item">Facebook</li>
-        <li class="list-inline-item">Twitter</li>
-        <li class="list-inline-item">Infos</li>
-    </ul>
+        <ul class="list-inline-item">
+            <li class="list-inline-item">Contact</li>
+            <li class="list-inline-item">Facebook</li>
+            <li class="list-inline-item">Twitter</li>
+            <li class="list-inline-item">Infos</li>
+        </ul>
+        
+    <!-- </div> -->
 </footer>
 
 </body>
