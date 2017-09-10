@@ -82,7 +82,7 @@ class Frontend extends Page
                 $data += [$key => htmlspecialchars($value)];
             }
 
-            $this->commentsManager->create( $comment = new Comments($data) );
+            $this->commentsManager->create(new Comments($data) );
             header('Location: /alaska/post/' . $data['idBlogAlaska']);
             exit;
 
