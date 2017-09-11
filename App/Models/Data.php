@@ -4,7 +4,6 @@ abstract class Data
 {
     protected $id;
     protected $author;
-    protected $title;
     protected $contents;
     protected $dateContents;
 
@@ -29,8 +28,6 @@ abstract class Data
 
     public function getAuthor(){ return $this->author; }
 
-    public function getTitle(){ return $this->title; }
-
     public function getContents(){ return $this->contents; }
 
     public function getDateContents(){ return $this->dateContents; }
@@ -53,16 +50,6 @@ abstract class Data
             $this->author = $author;
         }else{
             throw new Exception('$author must be <= 100 character');
-        }
-    }
-
-    public function setTitle(String $title)
-    {
-        $title = htmlspecialchars($title);
-        if ( strlen($title) <= 255 ){
-            $this->title = $title;
-        }else{
-            throw new Exception('$title must be <= 100 character');
         }
     }
 

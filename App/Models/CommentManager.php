@@ -90,7 +90,7 @@ class CommentManager extends SQLRequest
     }
 
     /**
-     * Count numbers of report
+     * Count number of reports
      * @return int
      */
     public function reportCount()
@@ -104,7 +104,7 @@ class CommentManager extends SQLRequest
     }
 
     /**
-     * Count numbers of users comment
+     * Count number of users comments
      * @return int
      */
     public function commentCount()
@@ -118,10 +118,11 @@ class CommentManager extends SQLRequest
     }
 
     /**
+     * Read all comments reported
      * @param void
      * @return array Object Comment
      */
-    public function manageReport()
+    public function readAllReport()
     {
         $reportList = [];
         $sql = 'SELECT id, author, contents, dateContents FROM commentBlogAlaska WHERE report = True';
@@ -136,7 +137,7 @@ class CommentManager extends SQLRequest
     }
 
     /**
-     * Remove report comment
+     * Cancel the state "report" for a comment reported
      * @param int $idComment
      * @return Void
      */
@@ -170,7 +171,7 @@ class CommentManager extends SQLRequest
      * @param $id
      * @return array
      */
-    public function readComment(int $id)
+    public function readCommentToUpdate(int $id)
     {
         $sql = 'SELECT id, author, contents FROM commentBlogAlaska WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);

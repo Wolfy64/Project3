@@ -39,7 +39,7 @@ class Backend extends Page
             $this->template('Errors/404');
 
         } else {
-            $data = $this->commentManager->manageReport();
+            $data = $this->commentManager->readAllReport();
             $this->template('Backend/manageReport', $data);           
         }
     }
@@ -288,7 +288,7 @@ class Backend extends Page
 
         } else {
             $idComment = intval( $route[2] );
-            $data = $this->commentManager->readComment($idComment);
+            $data = $this->commentManager->readCommentToUpdate($idComment);
 
             $this->template('Backend/updateComment', $data);       
         }

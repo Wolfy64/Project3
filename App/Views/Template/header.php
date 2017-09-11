@@ -17,11 +17,11 @@
                         </li>
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/#about"> ABOUT </a>
+                            <a class="nav-link" href="/alaska"> THE BOOK </a>
                         </li>
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/alaska"> THE BOOK </a>
+                            <a class="nav-link" href="/#about"> ABOUT </a>
                         </li>
 
                         <?php if ( isset($_SESSION['admin']) ){ ?>
