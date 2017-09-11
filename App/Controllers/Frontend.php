@@ -55,7 +55,7 @@ class Frontend extends Page
     {
         $route = $this->router->getRoute();
 
-        // IF there 3 paramaters AND alaska/post/integer AND this post exist
+        // IF there are 3 paramaters AND alaska/post/integer AND this post exists (true)
         if ( count($route) === 3 && $route[1] === 'post' && is_numeric($route[2]) && $this->postManager->read($route[2]) ){
             
             $data = $this->postManager->read($route[2]);
