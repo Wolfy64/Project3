@@ -1,9 +1,13 @@
-<div clas="container">
-    <div class="col-6 mx-auto">
-        <h3 class="display-4">Page 404</h3>
-    </div>
+<div clas="view hm-black-strong">
+    <div class="full-bg-img flex center">
+        <div class= "container text-center">
 
-    <div class="col-6 mx-auto"> 
-        <img src="/img/oops.jpg" class="img-fluid" alt="Responsive image">
+            <h3 class="display-4">Error 404</h3>
+
+            <div class="col-6 mx-auto"> 
+                <img src="/img/error.jpg" class="img-fluid" alt="Responsive image">
+            </div>
+            
+        </div>
     </div>
 </div>

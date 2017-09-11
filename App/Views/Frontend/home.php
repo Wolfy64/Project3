@@ -2,7 +2,7 @@
     <div class="full-bg-img flex center">
         <div class= "container">
 
-            <div id= 'home' class="row text-center">
+            <div id= 'home' class="row text-center rounded-top">
             
                 <!--First column-->
                 <div class="col-lg-12">
@@ -64,7 +64,7 @@
 
             </div>
 
-            <div id="about" class="row text-center">
+            <div id="about" class="row text-center rounded-bottom">
                 <!--Second column-->
                 <div class="col-lg-6">
                                     
