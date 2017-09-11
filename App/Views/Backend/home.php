@@ -42,7 +42,7 @@
                                 <i class="fa fa-comment-o fa-3x"></i>
                             </p>
                             <p>
-                                <?= $data['commentCount'] ?> users comment
+                                <?= $data['commentCount'] ?> user comments
                             </p>
                         </button>
                 

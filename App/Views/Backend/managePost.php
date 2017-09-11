@@ -33,15 +33,5 @@
                     </tr>
                 <?php endforeach ?>
             </tbody>
-
-            <tfoot>
-                <tr>
-                    <th class="text-center">              Date   </th>
-                    <th class="text-center">              Author </th>
-                    <th class="text-center">              Title  </th>
-                    <th class="text-center" colspan="2" > Manage </th>
-                </tr>
-            </tfoot>
-            
         </table>
 </div>

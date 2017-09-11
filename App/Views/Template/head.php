@@ -33,7 +33,7 @@
         });
     </script>
 
-    <title>Single ticket to Alaska</title>
+    <title>One-Way ticket to Alaska</title>
 </head>
 
 <body>
