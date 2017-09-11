@@ -16,15 +16,15 @@ class CommentManager extends SQLRequest
     {
         $author = $data->getAuthor();
         $contents = $data->getContents();
-        $idBlogAlaska = $data->getIdBlogAlaska();
+        $idP3blog = $data->getIdP3blog();
 
-        $sql = 'INSERT INTO commentBlogAlaska(author, contents, dateContents, idBlogAlaska)
-                VALUES(:author, :contents, NOW(), :idBlogAlaska)';
+        $sql = 'INSERT INTO P3Comment(author, contents, dateContents, idP3blog)
+                VALUES(:author, :contents, NOW(), :idP3blog)';
 
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':author', $author, PDO::PARAM_STR);
         $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
-        $dbh->bindParam(':idBlogAlaska', $idBlogAlaska, PDO::PARAM_INT);
+        $dbh->bindParam(':idP3blog', $idP3blog, PDO::PARAM_INT);
 
         $dbh->execute();
     }
@@ -38,10 +38,10 @@ class CommentManager extends SQLRequest
     {
         $commentList = [];
         $sql = 'SELECT *
-                FROM blogAlaska
-                INNER JOIN commentBlogAlaska
-                ON commentBlogAlaska.idBlogAlaska = blogAlaska.id
-                WHERE blogAlaska.id = :id';
+                FROM P3Blog
+                INNER JOIN P3Comment
+                ON P3Comment.idP3Blog = P3Blog.id
+                WHERE P3Blog.id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $postId, PDO::PARAM_INT);
         $dbh->execute();
@@ -58,7 +58,7 @@ class CommentManager extends SQLRequest
         $id   = $data->getId();
         $contents = $data->getContents();        
 
-        $sql = 'UPDATE commentBlogAlaska SET contents = :contents WHERE id = :id';
+        $sql = 'UPDATE P3Comment SET contents = :contents WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
@@ -68,7 +68,7 @@ class CommentManager extends SQLRequest
 
     public function delete(int $idComment)
     {
-        $sql = 'DELETE FROM commentBlogAlaska WHERE id = :id';
+        $sql = 'DELETE FROM P3Comment WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
@@ -83,7 +83,7 @@ class CommentManager extends SQLRequest
      */
     public function report(int $idComment)
     {
-        $sql = 'UPDATE commentBlogAlaska SET report = True WHERE id = :id';
+        $sql = 'UPDATE P3Comment SET report = True WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
@@ -95,7 +95,7 @@ class CommentManager extends SQLRequest
      */
     public function reportCount()
     {
-        $sql = 'SELECT COUNT(*) FROM commentBlogAlaska WHERE report = TRUE';
+        $sql = 'SELECT COUNT(*) FROM P3Comment WHERE report = TRUE';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->execute();
         $result = intval($dbh->fetchColumn());
@@ -109,7 +109,7 @@ class CommentManager extends SQLRequest
      */
     public function commentCount()
     {
-        $sql = 'SELECT COUNT(*) FROM commentBlogAlaska';
+        $sql = 'SELECT COUNT(*) FROM P3Comment';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->execute();
         $result = intval($dbh->fetchColumn());
@@ -125,7 +125,7 @@ class CommentManager extends SQLRequest
     public function readAllReport()
     {
         $reportList = [];
-        $sql = 'SELECT id, author, contents, dateContents FROM commentBlogAlaska WHERE report = True';
+        $sql = 'SELECT id, author, contents, dateContents FROM P3Comment WHERE report = True';
         $dbh = $this->getDatabase()->query($sql);
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
@@ -143,7 +143,7 @@ class CommentManager extends SQLRequest
      */
     public function cancelReport(int $idComment)
     {
-        $sql = 'UPDATE commentBlogAlaska SET report = FALSE WHERE id = :id';
+        $sql = 'UPDATE P3Comment SET report = FALSE WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();
@@ -156,7 +156,7 @@ class CommentManager extends SQLRequest
     public function readAll()
     {
         $commentList = [];
-        $sql  = 'SELECT * FROM commentBlogAlaska';
+        $sql  = 'SELECT * FROM P3Comment';
         $dbh  = $this->getDatabase()->query($sql);
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
@@ -173,7 +173,7 @@ class CommentManager extends SQLRequest
      */
     public function readCommentToUpdate(int $id)
     {
-        $sql = 'SELECT id, author, contents FROM commentBlogAlaska WHERE id = :id';
+        $sql = 'SELECT id, author, contents FROM P3Comment WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();

@@ -28,7 +28,7 @@ class UserConnection extends SQLRequest
      */
     private function dbUser(string $user)
     {
-        $sql = 'SELECT id, user FROM usersBlog WHERE user = :user';
+        $sql = 'SELECT id, user FROM P3User WHERE user = :user';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':user', $user, PDO::PARAM_STR);
         $dbh->execute();
@@ -44,7 +44,7 @@ class UserConnection extends SQLRequest
     private function dbPassword($userId, string $password)
     {
         if ( $userId != FALSE ){
-            $sql = 'SELECT password FROM usersBlog WHERE id = :id';
+            $sql = 'SELECT password FROM P3User WHERE id = :id';
             $dbh = $this->getDatabase()->prepare($sql);
             $dbh->bindParam(':id', $userId, PDO::PARAM_INT);
             $dbh->execute();
@@ -64,7 +64,7 @@ class UserConnection extends SQLRequest
     {
         $passHash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12 ]);
 
-        $sql = 'UPDATE usersBlog SET password = :password WHERE user = :user';
+        $sql = 'UPDATE P3User SET password = :password WHERE user = :user';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':user', $user, PDO::PARAM_STR);
         $dbh->bindParam(':password', $passHash, PDO::PARAM_STR);

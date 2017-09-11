@@ -4,20 +4,20 @@ require '../Models/Data.php';
 
 class Comment extends Data
 {
-    protected $idBlogAlaska;
+    protected $idP3blog;
 
     // GETTERS
 
-    public function getIdBlogAlaska(){ return $this->idBlogAlaska; }
+    public function getIdP3blog(){ return $this->idP3blog; }
     
     // SETTERS
 
-    public function setIdBlogAlaska(Int $idBlogAlaska)
+    public function setIdP3blog(Int $idP3blog)
     {
-        if ( $idBlogAlaska > 0 ){
-            $this->idBlogAlaska = $idBlogAlaska;
+        if ( $idP3blog > 0 ){
+            $this->idP3blog = $idP3blog;
         } else{
-            throw new Exception('$idBlogAlaska must be an integer > 0');
+            throw new Exception('$idP3blog must be an integer > 0');
         }
     }
 }
