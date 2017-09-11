@@ -16,15 +16,15 @@ class CommentManager extends SQLRequest
     {
         $author = $data->getAuthor();
         $contents = $data->getContents();
-        $idP3blog = $data->getIdP3blog();
+        $idP3blog = $data->getIdP3Blog();
 
-        $sql = 'INSERT INTO P3Comment(author, contents, dateContents, idP3blog)
-                VALUES(:author, :contents, NOW(), :idP3blog)';
+        $sql = 'INSERT INTO P3Comment(author, contents, dateContents, idP3Blog)
+                VALUES(:author, :contents, NOW(), :idP3Blog)';
 
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':author', $author, PDO::PARAM_STR);
         $dbh->bindParam(':contents', $contents, PDO::PARAM_STR);
-        $dbh->bindParam(':idP3blog', $idP3blog, PDO::PARAM_INT);
+        $dbh->bindParam(':idP3Blog', $idP3blog, PDO::PARAM_INT);
 
         $dbh->execute();
     }

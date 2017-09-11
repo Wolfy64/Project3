@@ -74,7 +74,7 @@ class Frontend extends Page
      */
     public function addComment()
     {
-        $toCheck = ['idP3blog', 'author', 'contents'];
+        $toCheck = ['idP3Blog', 'author', 'contents'];
 
         if ( Utils::checkArray($_POST['comment'], $toCheck) ){
 
@@ -84,7 +84,7 @@ class Frontend extends Page
             }
 
             $this->commentManager->create(new Comment($data) );
-            header('Location: /alaska/post/' . $data['idP3blog']);
+            header('Location: /alaska/post/' . $data['idP3Blog']);
             exit;
 
         } else {
@@ -98,11 +98,11 @@ class Frontend extends Page
      */
     public function report()
     {
-        $toCheck = ['report', 'idP3blog'];
+        $toCheck = ['report', 'idP3Blog'];
 
         if ( Utils::checkArray($_POST, $toCheck) ){
             $idComment = intval($_POST['report']);
-            $idPost    = intval($_POST['idP3blog']);
+            $idPost    = intval($_POST['idP3Blog']);
 
             $this->commentManager->report($idComment);
             header('Location: /alaska/post/' . $idPost);
