@@ -48,13 +48,14 @@ class Frontend extends Page
      * Built the post page
      *   $route[0] = Page   => "postList"
      *   $route[1] = Action => "post"
-     *   $route[1] = IdPost => Integer
+     *   $route[2] = IdPost => Integer
      * @return Void
      */
-    public function post() // alaska vs postList
+    public function post()
     {
         $route = $this->router->getRoute();
 
+        // IF there 3 paramaters AND alaska/post/integer AND this post exist
         if ( count($route) === 3 && $route[1] === 'post' && is_numeric($route[2]) && $this->postManager->read($route[2]) ){
             
             $data = $this->postManager->read($route[2]);
@@ -68,7 +69,7 @@ class Frontend extends Page
     // METHODS COMMENT
 
     /**
-     * Add Comment from $_POST
+     * Add Comment from $_POST['comment']
      * @return Void
      */
     public function addComment()

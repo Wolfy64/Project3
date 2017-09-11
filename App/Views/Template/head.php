@@ -25,13 +25,6 @@
     <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
         tinymce.init({ 
-            selector: '#postTitle',
-            toolbar: 'code',
-            branding: false,
-            menubar: false,
-            resize: false
-        });
-        tinymce.init({ 
             selector: '#postContent',
             plugins: 'lists link preview emoticons',
             branding: false,

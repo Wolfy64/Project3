@@ -14,6 +14,7 @@ class PDOFactory
     {
         // Load database config from config.ini
         $config = parse_ini_file('../Config/config.ini');
+        
         // Set PDO options
         $options = [
             PDO::ATTR_PERSISTENT => true, // Cached and re-used connection ->faster web application

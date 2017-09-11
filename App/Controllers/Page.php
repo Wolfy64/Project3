@@ -14,7 +14,7 @@ class Page
 
     public function __construct(Router $router, string $methodName)
     {
-        $this->postManager = new PostManager();
+        $this->postManager    = new PostManager();
         $this->commentManager = new CommentManager();
         $this->userConnection = new UserConnection();
         $this->router = $router;
