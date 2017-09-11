@@ -18,7 +18,7 @@ class PostManager extends SQLRequest
         $author   = $data->getAuthor();
         $contents = $data->getContents();
 
-        $sql = 'INSERT INTO P3blog(title, author, contents, dateContents)
+        $sql = 'INSERT INTO P3Blog(title, author, contents, dateContents)
                 VALUES(:title, :author, :contents, NOW() )';
 
         $dbh = $this->getDatabase()->prepare($sql);
@@ -35,7 +35,7 @@ class PostManager extends SQLRequest
      */
     public function read(int $id)
     {
-        $sql = 'SELECT id, author, dateContents, title, contents FROM P3blog WHERE id = :id';
+        $sql = 'SELECT id, author, dateContents, title, contents FROM P3Blog WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
@@ -59,7 +59,7 @@ class PostManager extends SQLRequest
         $author   = $data->getAuthor();
         $contents = $data->getContents();        
 
-        $sql = 'UPDATE P3blog SET title = :title, author = :author, contents = :contents WHERE id = :id';
+        $sql = 'UPDATE P3Blog SET title = :title, author = :author, contents = :contents WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->bindParam(':title', $title, PDO::PARAM_STR);
@@ -75,7 +75,7 @@ class PostManager extends SQLRequest
      */
     public function delete(int $idComment)
     {
-        $sql = 'DELETE FROM P3blog WHERE id = :id';
+        $sql = 'DELETE FROM P3Blog WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $idComment, PDO::PARAM_INT);
         $dbh->execute();        
@@ -90,7 +90,7 @@ class PostManager extends SQLRequest
     public function readAllPost()
     {
         $postList = [];
-        $sql  = 'SELECT * FROM P3blog';
+        $sql  = 'SELECT * FROM P3Blog';
         $dbh  = $this->getDatabase()->query($sql);
         $data = $dbh->fetchAll(PDO::FETCH_ASSOC);
 
@@ -107,7 +107,7 @@ class PostManager extends SQLRequest
      */
     public function readPost(int $id)
     {
-        $sql = 'SELECT id, author, title, contents FROM P3blog WHERE id = :id';
+        $sql = 'SELECT id, author, title, contents FROM P3Blog WHERE id = :id';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->bindParam(':id', $id, PDO::PARAM_INT);
         $dbh->execute();
@@ -137,7 +137,7 @@ class PostManager extends SQLRequest
      */
     public function postCount()
     {
-        $sql = 'SELECT COUNT(*) FROM P3blog';
+        $sql = 'SELECT COUNT(*) FROM P3Blog';
         $dbh = $this->getDatabase()->prepare($sql);
         $dbh->execute();
         $result = intval($dbh->fetchColumn());
