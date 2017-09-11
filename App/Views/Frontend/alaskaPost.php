@@ -23,7 +23,7 @@
                 <p> <?= $comment->getContents()     ?> </p>
                 <form action="/report" method="post">
                     <button class="btn btn-dark btn-sm " value='<?= $comment->getId() ?>' type="submit" name="report"> <i class="fa fa-flag fa-lg" color="red"></i> </button>
-                    <input type="hidden" name="idP3blog" value="<?= $data->getID() ?>">
+                    <input type="hidden" name="idP3Blog" value="<?= $data->getID() ?>">
                 </form>
             </div>
         <?php } ?>
@@ -46,7 +46,7 @@
                     <textarea class="form-control" name="comment[contents]" placeholder="Write your comment" required></textarea>
                 </div>
 
-                <input type="hidden" name="comment[idP3blog]" value="<?= $data->getID() ?>">
+                <input type="hidden" name="comment[idP3Blog]" value="<?= $data->getID() ?>">
                 
                 <button type="submit" class="btn btn-light">Add your comment</button>
                 <button type="reset" class="btn btn-light">Reset</button>
