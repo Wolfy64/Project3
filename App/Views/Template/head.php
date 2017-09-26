@@ -38,5 +38,15 @@
 
 <body>
 
+<!-- Show Flash message -->
+<?php if (isset($_SESSION['message'])) { ?>
 
+    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        Message: <strong class="text-justify"><?= $_SESSION['message'] ?></strong>
+    </div>
+
+<?php unset( $_SESSION['message'] ); } ?>
 

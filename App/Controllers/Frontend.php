@@ -83,6 +83,8 @@ class Frontend extends Page
                 $data += [$key => htmlspecialchars($value)];
             }
 
+            $_SESSION['message'] = 'Your comment has been added';
+
             $this->commentManager->create(new Comment($data) );
             header('Location: /alaska/post/' . $data['idP3Blog']);
             exit;
@@ -103,6 +105,8 @@ class Frontend extends Page
         if ( Utils::checkArray($_POST, $toCheck) ){
             $idComment = intval($_POST['report']);
             $idPost    = intval($_POST['idP3Blog']);
+
+            $_SESSION['message'] = 'Your comment has been reported';
 
             $this->commentManager->report($idComment);
             header('Location: /alaska/post/' . $idPost);

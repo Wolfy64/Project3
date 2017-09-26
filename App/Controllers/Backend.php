@@ -119,6 +119,8 @@ class Backend extends Page
 
         if ( Utils::checkArray($_POST, $toCheck) ){
 
+            $_SESSION['message'] = 'Your post has been added';
+
             $this->postManager->create( $post = new Post($_POST) );
             header('Location: /admin/home');
             exit;
@@ -148,6 +150,8 @@ class Backend extends Page
             $idPost = intval( $route[2] );
             $data = $this->postManager->readPost($idPost);
 
+            $_SESSION['message'] = 'Your comment has been updated';
+
             $this->writePost($data);       
         }
     }
@@ -162,6 +166,8 @@ class Backend extends Page
     public function deletePost()
     {
         $route = $this->router->getRoute();
+
+        $_SESSION['message'] = 'Your comment has been deleted';
 
         if ( $route[1] != 'deletePost' ){
             $this->template('Errors/404');
@@ -187,6 +193,8 @@ class Backend extends Page
         $toCheck = ['id','title','author', 'contents'];
 
         if ( Utils::checkArray($_POST, $toCheck) ){
+
+            $_SESSION['message'] = 'Your comment has been modified';
 
             $this->postManager->update( $post = new Post($_POST) );
             header('Location: /admin/managePost');
@@ -218,6 +226,8 @@ class Backend extends Page
             $idComment = intval( $route[2]  );
             $this->commentManager->cancelReport($idComment);
 
+            $_SESSION['message'] = 'User report has been canceled';
+
             header('Location: /admin/manageReport');
             exit;
          
@@ -241,6 +251,8 @@ class Backend extends Page
         } else {
             $idComment = intval( $route[2] );
             $this->commentManager->delete($idComment);
+
+            $_SESSION['message'] = 'User report has been deleted';
 
             header('Location: /admin/manageReport');
             exit;      
@@ -267,6 +279,8 @@ class Backend extends Page
             $idComment = intval( $route[2] );
             $this->commentManager->delete($idComment);
 
+            $_SESSION['message'] = 'User comment has been deleted';
+
             header('Location: /admin/manageComment');
             exit;          
         }
@@ -290,6 +304,8 @@ class Backend extends Page
             $idComment = intval( $route[2] );
             $data = $this->commentManager->readCommentToUpdate($idComment);
 
+            $_SESSION['message'] = 'User comment has been updated';
+
             $this->template('Backend/updateComment', $data);       
         }
     }
@@ -312,6 +328,8 @@ class Backend extends Page
                 $data += [$key => htmlspecialchars($value)];
             }
 
+            $_SESSION['message'] = 'User comment has been modified';
+
             $this->commentManager->update( new Comment($data) );
             header('Location: /admin/manageComment');
             exit;
@@ -329,11 +347,16 @@ class Backend extends Page
 
         if ( Utils::checkArray($_POST, $toCheck) ){
             if ( $_POST['pass'] != $_POST['pass2'] ){
-                echo 'the two passwords are not identical';
+
+                $_SESSION['message'] = 'The two password are not identical';
+                header('Location: /admin/settings');
+                exit;
 
             } else {
                 $user = $_POST['user'];
                 $password = $_POST['pass'];
+
+                $_SESSION['message'] = 'Your password has been updated';
                 
                 $this->userConnection->passHach($user, $password);
                 header('Location: /admin/home');
@@ -366,6 +389,7 @@ class Backend extends Page
                 exit;
 
             }else {
+                $_SESSION['message'] = 'User or password incorrect';
                 $this->template('Backend/signIn');
             }
 
