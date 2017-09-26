@@ -150,8 +150,6 @@ class Backend extends Page
             $idPost = intval( $route[2] );
             $data = $this->postManager->readPost($idPost);
 
-            $_SESSION['message'] = 'Your comment has been updated';
-
             $this->writePost($data);       
         }
     }
@@ -303,8 +301,6 @@ class Backend extends Page
         } else {
             $idComment = intval( $route[2] );
             $data = $this->commentManager->readCommentToUpdate($idComment);
-
-            $_SESSION['message'] = 'User comment has been updated';
 
             $this->template('Backend/updateComment', $data);       
         }
