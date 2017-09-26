@@ -104,7 +104,7 @@
                                 <textarea name="message" class="form-control" rows="10" placeholder="Message"></textarea>
                             </p>
 
-                            <button type="button" class="btn btn-outline-light">Send Message</button>
+                            <button type="button" class="btn btn-outline-light" disabled>Send Message</button>
 
                         </div>
 
