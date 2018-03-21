@@ -1,2 +1,6 @@
+# Config
+/App/Config/config.ini
+
+# Others 
 .DS_Store
 .vs_code
