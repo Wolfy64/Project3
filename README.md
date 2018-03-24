@@ -1,36 +1,34 @@
-# Projet-3
+# Create a blog for a writer
+## States
+You have just landed a contract with Jean Forteroche, actor and writer. He is currently working on his next novel, "Single Ticket for Alaska". He wants to innovate and publish it by episode online on his own website.
 
-## Enoncé : créez un blog pour un écrivain
+Only problem: Jean does not like WordPress and wants to have his own blog tool, offering simpler features. So you will have to develop a blog engine in PHP and MySQL.
 
-Vous venez de décrocher un contrat avec Jean Forteroche, acteur et écrivain. Il travaille actuellement sur son prochain roman, "Billet simple pour l'Alaska". Il souhaite innover et le publier par épisode en ligne sur son propre site.
+You will develop a simple blog application in PHP and with a MySQL database. It must provide a frontend interface *(ticket reading)* and a backend interface *(ticket administration for writing)*. 
+We must find all the elements of a CRUD:
+You will develop a simple blog application in PHP and with a MySQL database.
+It must provide a frontend interface *(ticket reading)* and a backend interface *(ticket administration for writing)*.
+We must find all the elements of a CRUD:
 
-Seul problème : Jean n'aime pas WordPress et souhaite avoir son propre outil de blog, offrant des fonctionnalités plus simples. Vous allez donc devoir développer un moteur de blog en PHP et MySQL.
+ - **Create:** creating tickets
+ - **Read:** reading tickets
+ - **Update:** ticket update
+ - **Delete:** deleting tickets
 
-Vous développerez une application de blog simple en PHP et avec une base de données MySQL. Elle doit fournir une interface frontend (lecture des billets) et une interface backend (administration des billets pour l'écriture). On doit y retrouver tous les éléments d'un CRUD :
+Each ticket must allow the addition of comments, which can be moderated in the administration interface if necessary.
+Readers should be able to **"post"** comments so that they can be easily traced back into the admin interface for moderation.
 
-* Create : création de billets
-* Read : lecture de billets
-* Update : mise à jour de billets
-* Delete : suppression de billets  
+The administration interface will be protected by password. The writing of tickets will be in a WYSIWYG interface based on TinyMCE, so that John does not need to write his story in HTML *(we understand that he does not really want!)*.
 
-Chaque billet doit permettre l'ajout de commentaires, qui pourront être modérés dans l'interface d'administration au besoin.
-Les lecteurs doivent pouvoir "signaler" les commentaires pour que ceux-ci remontent plus facilement dans l'interface d'administration pour être modérés.
+You will develop in PHP without using a framework to familiarize yourself with the basic concepts of programming. The code will be built on an MVC architecture. You will develop as much as possible in object-oriented (at least, the model must be constructed as an object).
 
-L'interface d'administration sera protégée par mot de passe. La rédaction de billets se fera dans une interface WYSIWYG basée sur **TinyMCE**, pour que Jean n'ait pas besoin de rédiger son histoire en HTML (on comprend qu'il n'ait pas très envie !).
+### Skills to validate
 
-Vous développerez en PHP sans utiliser de framework pour vous familiariser avec les concepts de base de la programmation. Le code sera construit sur une architecture MVC. Vous développerez autant que possible en orienté objet (au minimum, le modèle doit être construit sous forme d'objet).
-
-## Ressources complémentaires
-
-En plus des cours du parcours, vous pouvez consulter les ressources suivantes pour vous aider :
-
-* [*UML 2 par la pratique - Études de cas et exercices corrigés*](https://openclassrooms.com/ebooks/uml-2-par-la-pratique-etudes-de-cas-et-exercices-corriges)
-* [*Chapitre "Fonctions d'aggrégation" du cours MySQL*](https://openclassrooms.com/courses/administrez-vos-bases-de-donnees-avec-mysql/fonctions-d-agregation)
-
-## Fichiers à fournir
-
-Code HTML, CSS, PHP et JavaScript
-Export de la base de données MySQL
-Soutenance
-
-Pour cette soutenance, vous vous positionnerez comme un développeur présentant pendant 25 minutes son travail à son collègue plus senior dans l’agence web afin de vérifier que le projet peut être présenté tel quel à Jean Forteroche. Cette étape sera suivie de 5 minutes de questions/réponses.
+Support and argue its proposals
+Organize the code in PHP language
+Retrieve the entry of a user form in PHP
+Analyze data used by the site or application
+Build a database
+Create a website, from conception to delivery
+Insert or modify database data
+Retrieve data from a database
